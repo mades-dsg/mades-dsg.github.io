@@ -1,0 +1,10 @@
+# Render Blueprint: realtime server for Case Storm (chat, online, battles)
+services:
+  - type: web
+    name: case-storm
+    runtime: node
+    plan: free
+    rootDir: case-storm
+    buildCommand: echo "no build"
+    startCommand: node server.js
+    healthCheckPath: /
