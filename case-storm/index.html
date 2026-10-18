@@ -54,9 +54,9 @@ h2 small,.mut{font-family:var(--f);font-size:12px;color:var(--mut);font-weight:5
 .top .nav a.on{color:var(--teal)}
 .top .nav a.on::after{content:'';position:absolute;left:16px;right:16px;bottom:0;height:2px;background:var(--teal)}
 .top-r{display:flex;align-items:center;gap:8px;padding:0 14px}
-.bal{display:flex;align-items:center;gap:4px;height:36px;padding:0 12px;background:rgba(0,0,0,.35);border:1px solid var(--line2);font-size:15px;font-variant-numeric:tabular-nums}
-.bal b{font-weight:700}
-.bal.up{animation:up .6s}.bal.down{animation:down .6s}.bal.flash{animation:shk .45s}
+.cs-wallet{display:flex;align-items:center;gap:4px;height:36px;padding:0 12px;background:rgba(0,0,0,.35);border:1px solid var(--line2);font-size:15px;font-variant-numeric:tabular-nums}
+.cs-wallet b{font-weight:700}
+.cs-wallet.up{animation:up .6s}.cs-wallet.down{animation:down .6s}.cs-wallet.flash{animation:shk .45s}
 @keyframes up{30%{border-color:var(--green);color:#9df5be}}@keyframes down{30%{border-color:var(--red)}}
 @keyframes shk{25%,75%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
 .bonus{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;background:rgba(0,0,0,.35);border:1px solid var(--line2);font-family:var(--fc);font-weight:700;font-size:13px;text-transform:uppercase;color:var(--mut);font-variant-numeric:tabular-nums}
@@ -566,7 +566,7 @@ body.rushb .view{animation:rush .3s linear 8}
 .icon-btn{display:flex;align-items:center;justify-content:center;color:var(--mut);transition:color .15s,border-color .15s}.icon-btn:hover{color:#fff;border-color:var(--teal)}
 .icon-btn .ico{width:18px;height:18px}
 .bonus .ico{width:17px;height:17px}
-.bal{color:#fff}.bal b{font-family:var(--fc);font-size:16px;letter-spacing:.3px}
+.cs-wallet{color:#fff}.cs-wallet b{font-family:var(--fc);font-size:16px;letter-spacing:.3px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .btn .ico{width:16px;height:16px}
 .mnav a .ico{width:20px;height:20px}
@@ -628,9 +628,9 @@ img.grey{filter:grayscale(1) brightness(.6)}
 .ava.me{border-color:var(--teal);color:var(--teal)}
 body.shake-screen{animation:shk .45s}
 @media (max-width:700px){.net-banner{flex-wrap:wrap}.set-row{flex-direction:column;align-items:stretch}.bn-card{grid-template-columns:1fr}.bn-card>.ico{display:none}}
-.bal,.bal b,.mn{white-space:nowrap}
+.cs-wallet,.cs-wallet b,.mn{white-space:nowrap}
 .top .nav a{white-space:nowrap}@media (max-width:1400px){.top .nav a{padding:0 10px;font-size:14px}}@media (max-width:1250px){.top .nav a .ico{display:none}}
-@media (max-width:600px){.logo{width:auto;padding:0 10px;background:none;border:0}.logo span{font-size:17px}.top-r{gap:5px;padding:0 8px}.me-btn em,#snd{display:none}.me-btn{padding:0 6px}.bonus{padding:0 9px}.bonus span{display:none}.bal{padding:0 9px}.bal b{font-size:14px}}
+@media (max-width:600px){.logo{width:auto;padding:0 10px;background:none;border:0}.logo span{font-size:17px}.top-r{gap:5px;padding:0 8px}.me-btn em,#snd{display:none}.me-btn{padding:0 6px}.bonus{padding:0 9px}.bonus span{display:none}.cs-wallet{padding:0 9px}.cs-wallet b{font-size:14px}}
 .pf-set{float:right}@media (max-width:600px){#setBtn{display:none}.top{overflow:hidden}.top .nav{display:none}.logo span{font-size:15px}.logo-mark{width:20px;height:20px}}
 @media (max-width:600px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cc{min-width:0}}html{overflow-x:hidden}#toasts{max-width:calc(100vw - 20px)}
 
@@ -662,8 +662,8 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 .top .nav a+a::before{content:'';position:absolute;left:0;top:50%;height:24px;margin-top:-12px;width:1px;background:rgba(255,255,255,.22)}
 .top .nav a.on{color:var(--teal)}.top .nav a.on::after{left:22px;right:22px;height:3px;background:var(--teal);box-shadow:0 0 12px var(--teal)}
 .top .nav a:hover{color:#fff;text-shadow:0 0 14px rgba(255,255,255,.35)}
-.bal,.bonus,.me-btn,.icon-btn{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.12);border-radius:3px}
-.bal b{font-family:var(--fc);font-weight:500;font-size:19px;color:#7fdc9c}
+.cs-wallet,.bonus,.me-btn,.icon-btn{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.12);border-radius:3px}
+.cs-wallet b{font-family:var(--fc);font-weight:500;font-size:19px;color:#7fdc9c}
 .bonus{font-family:var(--fc);font-weight:500;font-size:15px}
 .bonus.ready{background:linear-gradient(#ffcc5c,#e09a22);color:#2a1a00;border-color:#ffd77a}
 
@@ -812,7 +812,7 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 .top{gap:0}
 .top .nav{flex:1 1 auto;min-width:0;overflow:hidden;justify-content:center}
 .top-r{flex:none;margin-left:auto;position:relative;z-index:2}
-.bal{flex:none}
+.cs-wallet{flex:none}
 @media (max-width:1200px){.top .nav a{font-size:14px;padding:0 8px}.top .nav a+a::before{display:none}.logo-word{font-size:17px}.top-r{gap:6px}}
 .top .nav{justify-content:safe center}@media (max-width:1180px){.bonus span{display:none}.bonus{padding:0 10px}.me-btn em{max-width:70px}}
 .pf-promo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:14px 0 6px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:4px}
@@ -825,6 +825,9 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 .more-grid .ico{width:26px;height:26px;color:var(--teal)}.more-grid b{font-family:var(--fc);font-weight:500;font-size:17px;text-transform:uppercase}.more-grid span{font-size:12px;color:var(--mut)}
 .mnav a[data-more]{cursor:pointer}
 @media (max-width:600px){.modal.sheet{align-self:flex-end;width:100%;border-radius:12px 12px 0 0}.pf-promo .bet-row{max-width:none}}
+.cs-wallet{display:flex!important;visibility:visible!important;flex:none!important;min-width:64px}
+.item.xs{height:58px}.item.xs .item-name{left:80px;right:96px;top:50%;bottom:auto;transform:translateY(-50%);line-height:1.15}.item.xs .item-name b{font-size:13px}.item.xs .item-name span{font-size:11px}.item.xs .item-price{left:auto;right:10px;top:50%;bottom:auto;transform:translateY(-50%);font-family:var(--fc);font-size:15px}.item.xs:hover{transform:none}@media (max-width:600px){.item.xs .item-name{left:58px;right:70px}.item.xs .item-price{font-size:13px;right:6px}}
+.bgfx{filter:blur(14px) saturate(.75) brightness(.6);transform:scale(1.1)}.bgfx::after{background:linear-gradient(180deg,rgba(38,43,50,.55),rgba(38,43,50,.72) 55%,rgba(30,34,40,.88))}
 
 </style>
 </head>
@@ -3487,7 +3490,7 @@ const THREE = __m_three_module_min;
 const { paintPattern, drawIcon, shade, rgba } = __m_art;
 const { hashStr } = __m_data;
 
-const W = 2.6, D = 1.5, BH = 0.92, LH = 0.5, R = 0.24, BV = 0.06;
+const W = 2.5, D = 1.4, BH = 1.12, LH = 0.52, R = 0.2, BV = 0.06;
 
 function rrShape(w, h, r, hole) {
   const s = hole ? new THREE.Path() : new THREE.Shape(); const x = -w / 2, y = -h / 2;
@@ -3607,6 +3610,42 @@ function labelTexture(def) {
     noiseOverlay(g, w, h, 7, 0.5);
   });
 }
+function medallionTexture(def) {
+  // big round emblem on the front face, like the art plates on caser / CS2 case prints
+  return canvasTex(512, 512, (g, w, h) => {
+    const cx = w / 2, cy = h / 2, R0 = w * 0.47;
+    g.clearRect(0, 0, w, h);
+    const rim = g.createLinearGradient(0, 0, 0, h); rim.addColorStop(0, '#f6dc8e'); rim.addColorStop(0.5, '#a8771f'); rim.addColorStop(1, '#5a3b0c');
+    g.beginPath(); g.arc(cx, cy, R0, 0, 6.283); g.fillStyle = rim; g.fill();
+    g.beginPath(); g.arc(cx, cy, R0 * 0.88, 0, 6.283);
+    const disc = g.createRadialGradient(cx, cy * 0.8, 10, cx, cy, R0); disc.addColorStop(0, shade(def.accent, -0.15)); disc.addColorStop(0.55, shade(def.body, -0.35)); disc.addColorStop(1, shade(def.body, -0.7));
+    g.fillStyle = disc; g.fill();
+    g.save(); g.clip(); g.globalAlpha = 0.18; g.strokeStyle = '#fff'; g.lineWidth = 2; for (let r = 40; r < R0; r += 22) { g.beginPath(); g.arc(cx, cy, r, 0, 6.283); g.stroke(); } g.restore(); g.globalAlpha = 1;
+    g.shadowColor = 'rgba(0,0,0,.7)'; g.shadowBlur = 18; g.shadowOffsetY = 6;
+    drawIcon(g, def.emblem, cx, cy, w * 0.5, def.accent, false);
+    g.shadowColor = 'transparent';
+    g.lineWidth = 4; g.strokeStyle = 'rgba(0,0,0,.45)'; g.beginPath(); g.arc(cx, cy, R0 * 0.88, 0, 6.283); g.stroke();
+    for (let i = 0; i < 8; i++) { const a = i / 8 * 6.283 + 0.39; g.beginPath(); g.arc(cx + Math.cos(a) * R0 * 0.94, cy + Math.sin(a) * R0 * 0.94, 7, 0, 6.283); g.fillStyle = '#3d2a08'; g.fill(); }
+    noiseOverlay(g, w, h, hashStr(def.id + 'med'), 0.35);
+  });
+}
+function ventTexture() {
+  return canvasTex(256, 256, (g, w, h) => {
+    g.fillStyle = '#1c1e22'; g.fillRect(0, 0, w, h);
+    for (let y = 22; y < h - 10; y += 26) for (let x = 18; x < w - 18; x += 56) {
+      g.fillStyle = '#050506'; g.beginPath(); g.roundRect(x, y, 44, 12, 6); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = 2; g.beginPath(); g.moveTo(x + 4, y + 13); g.lineTo(x + 40, y + 13); g.stroke();
+    }
+    noiseOverlay(g, w, h, 5, 0.4);
+  });
+}
+function stencilLogoTexture(def) {
+  return canvasTex(512, 96, (g, w, h) => {
+    g.clearRect(0, 0, w, h); g.font = `64px ${STENCIL}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillStyle = 'rgba(0,0,0,.35)'; g.fillText('CASE STORM', w / 2 + 2, h / 2 + 3);
+    g.fillStyle = 'rgba(255,255,255,.55)'; g.fillText('CASE STORM', w / 2, h / 2);
+  });
+}
 function mulberryLite(a) { return () => { a = (a * 1664525 + 1013904223) | 0; return ((a >>> 0) % 10000) / 10000; }; }
 
 function buildCase(def) {
@@ -3614,7 +3653,8 @@ function buildCase(def) {
   const shellMat = new THREE.MeshPhysicalMaterial({ map: artTexture(def, 1024, 512, false), roughness: 0.62, metalness: 0.08, clearcoat: 0.35, clearcoatRoughness: 0.45 });
   shellMat.map.wrapS = shellMat.map.wrapT = THREE.RepeatWrapping; shellMat.map.repeat.set(0.36, 0.7); shellMat.map.offset.set(0.1, 0.15);
   const ribMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(def.body).multiplyScalar(0.55), roughness: 0.7, metalness: 0.1 });
-  const steel = new THREE.MeshStandardMaterial({ color: 0x8d939b, metalness: 0.95, roughness: 0.38 });
+  const steelMat = () => new THREE.MeshStandardMaterial({ color: 0x8d939b, metalness: 0.95, roughness: 0.38 });
+  const steel = def.price >= 18 ? new THREE.MeshStandardMaterial({ color: 0xc9a24a, metalness: 1, roughness: 0.3 }) : steelMat();
   const gun = new THREE.MeshStandardMaterial({ color: 0x2a2d32, metalness: 0.85, roughness: 0.45 });
   const rubber = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.9, metalness: 0 });
   const innerMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
@@ -3623,9 +3663,24 @@ function buildCase(def) {
   { const rib = new THREE.Mesh(ring(W + 0.025, D + 0.025, R + 0.01, 0.05, 0.04), ribMat); rib.position.y = 0.3; g.add(rib); }
   const seam = new THREE.Mesh(ring(W + 0.03, D + 0.03, R + 0.012, 0.08, 0.06), gun); seam.position.y = BH - 0.06; g.add(seam);
   const inner = new THREE.Mesh(new THREE.ShapeGeometry(rrShape(W - 0.16, D - 0.16, R - 0.08)), innerMat); inner.rotation.x = -Math.PI / 2; inner.position.y = BH + 0.004; g.add(inner);
-  // front label sticker
-  const label = new THREE.Mesh(new THREE.PlaneGeometry(1.05, 0.41), new THREE.MeshStandardMaterial({ map: labelTexture(def), roughness: 0.8 }));
-  label.position.set(-0.35, BH * 0.43, D / 2 + 0.004); g.add(label);
+  // front: big emblem medallion + stencil logo (caser-style), label sticker on the left side, vent grille on the right
+  const premium = def.price >= 18;
+  const medMat = new THREE.MeshPhysicalMaterial({ map: medallionTexture(def), transparent: true, roughness: 0.4, metalness: 0.35, clearcoat: 0.6, clearcoatRoughness: 0.3 });
+  const med = new THREE.Mesh(new THREE.CircleGeometry(0.34, 48), medMat); med.position.set(0, 0.47, D / 2 + 0.006); g.add(med);
+  const medRing = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.022, 10, 48), premium ? new THREE.MeshStandardMaterial({ color: 0xd9a83a, metalness: 1, roughness: 0.3 }) : steelMat()); medRing.position.copy(med.position); medRing.position.z += 0.004; g.add(medRing);
+  const logo = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.116), new THREE.MeshStandardMaterial({ map: stencilLogoTexture(def), transparent: true, roughness: 0.9 }));
+  logo.position.set(0, 0.13, D / 2 + 0.005); g.add(logo);
+  const label = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.33), new THREE.MeshStandardMaterial({ map: labelTexture(def), roughness: 0.8 }));
+  label.rotation.y = -Math.PI / 2; label.position.set(-W / 2 - 0.004, BH * 0.5, 0); g.add(label);
+  const vent = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.5), new THREE.MeshStandardMaterial({ map: ventTexture(), roughness: 0.6, metalness: 0.5 }));
+  vent.rotation.y = Math.PI / 2; vent.position.set(W / 2 + 0.004, BH * 0.5, 0); g.add(vent);
+  // padlock hanging from the hasp under the lid seam
+  const lockG = new THREE.Group(); lockG.position.set(0, BH - 0.05, D / 2 + 0.05); lockG.scale.setScalar(0.8); g.add(lockG);
+  const brass = new THREE.MeshStandardMaterial({ color: premium ? 0xe0b14a : 0xb08a3e, metalness: 1, roughness: 0.32 });
+  const lockBody = new THREE.Mesh(shell(0.2, 0.07, 0.17, 0.03, 0.015, 2), brass); lockBody.position.set(0, -0.12, -0.03); lockG.add(lockBody);
+  const shackle = new THREE.Mesh(new THREE.TorusGeometry(0.065, 0.017, 10, 24, Math.PI), steelMat()); shackle.position.set(0, 0.04, 0); lockG.add(shackle);
+  const hasp = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.12, 0.03), gun); hasp.position.set(0, 0.06, -0.04); lockG.add(hasp);
+  const key = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.01, 12), gun); key.rotation.x = Math.PI / 2; key.position.set(0, -0.05, 0.01); lockG.add(key);
   // lid
   const lidPivot = new THREE.Group(); lidPivot.position.set(0, BH, -D / 2); g.add(lidPivot);
   const lid = new THREE.Group(); lid.position.z = D / 2; lidPivot.add(lid);
@@ -3655,7 +3710,7 @@ function buildCase(def) {
   // latches
   const latches = [];
   for (const sx of [-1, 1]) {
-    const lg = new THREE.Group(); lg.position.set(sx * 0.82, BH - 0.02, D / 2 + 0.02); g.add(lg);
+    const lg = new THREE.Group(); lg.position.set(sx * 0.78, BH - 0.02, D / 2 + 0.02); g.add(lg);
     const plate = new THREE.Mesh(shell(0.28, 0.06, 0.32, 0.03, 0.012, 2), gun); plate.position.set(0, -0.3, -0.02); lg.add(plate);
     const lever = new THREE.Group(); lg.add(lever);
     const lm = new THREE.Mesh(shell(0.22, 0.05, 0.36, 0.03, 0.012, 2), steel); lm.position.set(0, -0.2, 0.03); lever.add(lm);
@@ -3822,9 +3877,9 @@ class CaseStage {
   }
   renderThumb(def, w = 420, h = 340) {
     this.renderer.setPixelRatio(1); this.renderer.setSize(w, h, false);
-    this.camera.aspect = w / h; this.camera.position.set(0, 3.3, 5.7); this.camera.fov = 30; this.camera.updateProjectionMatrix();
-    this.setCase(def); this.holder.rotation.y = -0.5; this.holder.position.y = 0.04;
-    this.camera.lookAt(0, 0.66, 0);
+    this.camera.aspect = w / h; this.camera.position.set(0, 2.5, 6.1); this.camera.fov = 30; this.camera.updateProjectionMatrix();
+    this.setCase(def); this.holder.rotation.y = -0.38; this.holder.position.y = 0.0;
+    this.camera.lookAt(0, 0.78, 0);
     this.renderer.render(this.scene, this.camera);
     return this.renderer.domElement.toDataURL('image/png');
   }
@@ -3858,7 +3913,7 @@ function renderThumbsAsync(cases, onThumb, onDone) {
     const c = cases[i++]; const t0 = performance.now();
     try { onThumb(c.id, st.renderThumb(c, 340, 276)); } catch (e) { console.warn('thumb', c.id, e); }
     const dt = performance.now() - t0;
-    if (i > 1 && dt > 450) { dead = true; window.__slowGL = true; } // software rendering: keep 2D art, stay responsive
+    if (i > 1 && dt > 450 && !window.__forceGL) { dead = true; window.__slowGL = true; } // software rendering: keep 2D art, stay responsive
     const idle = window.requestIdleCallback || (f => setTimeout(f, 40));
     idle(next, { timeout: 300 });
   };
@@ -3967,8 +4022,27 @@ S.loan = 0; delete S.ach.loan;
 S.inv = S.inv.filter(it => SKIN[it.s]); if (S.best && !SKIN[S.best.s]) S.best = null;
 if (S.rates) setRates(S.rates);
 setMuted(!!S.muted); setVolume(S.vol ?? 0.55);
-let saveT = 0;
-function save() { clearTimeout(saveT); saveT = setTimeout(() => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) { } }, 250); }
+// Saving: written right away (no delay that a refresh could cut off), flushed again when the tab closes,
+// and kept in sync between tabs so an old tab can never overwrite newer progress.
+let saveQ = false, saveFail = false;
+function writeSave() {
+  saveQ = false;
+  try {
+    const cur = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
+    if (cur && (cur.rev || 0) > (S.rev || 0)) { adoptSave(cur); return; } // another tab saved newer progress
+    S.rev = (S.rev || 0) + 1; localStorage.setItem(SAVE_KEY, JSON.stringify(S)); saveFail = false;
+  } catch (e) { if (!saveFail) { saveFail = true; setTimeout(() => toast('Не удалось сохранить прогресс: браузер запретил хранилище сайта', 'err'), 50); } }
+}
+function save() { if (!saveQ) { saveQ = true; queueMicrotask(writeSave); } }
+function adoptSave(other) {
+  const keep = { adminKey: S.adminKey };
+  S = Object.assign(S, other, keep);
+  const w = document.getElementById('walletAmt'); if (w) w.textContent = moneyTxt(S.bal);
+  try { renderLevel(); updateInvBadge(); if (!busy && current.name && current.name !== 'battle') go(current.name, current.arg, false, true); } catch (e) { }
+}
+window.addEventListener('storage', e => { if (e.key !== SAVE_KEY || !e.newValue) return; try { const o = JSON.parse(e.newValue); if ((o.rev || 0) > (S.rev || 0)) adoptSave(o); } catch (x) { } });
+window.addEventListener('pagehide', () => { if (saveQ) writeSave(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && saveQ) writeSave(); });
 
 // ---------- money formatting ----------
 function fmtNum(v, dec) { const s = v.toFixed(dec); const [a, b] = s.split('.'); return a.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (b ? ',' + b : ''); }
@@ -3982,7 +4056,7 @@ async function loadRates() {
     if (d && d.rates && d.rates.RUB) { S.rates = { RUB: d.rates.RUB, EUR: d.rates.EUR }; S.ratesAt = Date.now(); setRates(S.rates); save(); refreshMoney(); }
   } catch (e) { }
 }
-function refreshMoney() { const b = $('#bal'); if (b) b.textContent = moneyTxt(S.bal); if (current.name) go(current.name, current.arg, false, true); }
+function refreshMoney() { const b = $('#walletAmt'); if (b) b.textContent = moneyTxt(S.bal); if (current.name) go(current.name, current.arg, false, true); }
 
 // ---------- ranks ----------
 const RANKS = ['Сильвер I', 'Сильвер II', 'Сильвер III', 'Сильвер IV', 'Сильвер Элита', 'Сильвер Элита Мастер', 'Голд Нова I', 'Голд Нова II', 'Голд Нова III', 'Голд Нова Мастер', 'Калаш I', 'Калаш II', 'Калаш с лаврами', 'Бляха', 'Беркут', 'Беркут-магистр', 'Суприм', 'Глобал Элита'];
@@ -4026,12 +4100,12 @@ function confirmBox(html, yes) {
 // ---------- balance / xp ----------
 function setBal(v, anim = true) {
   const from = S.bal; S.bal = Math.max(0, round2(v)); save();
-  const el = $('#bal'); if (!el) return;
+  const el = $('#walletAmt'); if (!el) return;
   if (!anim) { el.textContent = moneyTxt(S.bal); return; }
   const t0 = performance.now(), d = 500;
   const step = now => { const k = Math.min(1, (now - t0) / d); el.textContent = moneyTxt(from + (S.bal - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
-  const pill = $('.bal'); pill.classList.remove('up', 'down'); void pill.offsetWidth; pill.classList.add(S.bal >= from ? 'up' : 'down');
+  const pill = $('.cs-wallet'); pill.classList.remove('up', 'down'); void pill.offsetWidth; pill.classList.add(S.bal >= from ? 'up' : 'down');
   if (S.bal >= 150) unlock('rich'); if (S.bal < 0.05 && S.inv.length === 0) unlock('broke');
 }
 function earn(v) {
@@ -4041,7 +4115,7 @@ function spend(v) {
   if (S.bal + 1e-6 < v) { toast('Не хватает баланса. Продай скины или забери бонус', 'err'); flashBal(); return false; }
   setBal(S.bal - v); addXp(v); return true;
 }
-function flashBal() { const b = $('.bal'); b && (b.classList.remove('flash'), void b.offsetWidth, b.classList.add('flash')); }
+function flashBal() { const b = $('.cs-wallet'); b && (b.classList.remove('flash'), void b.offsetWidth, b.classList.add('flash')); }
 function addXp(v) {
   const before = levelFromXp(S.xp).lvl; S.xp = round2(S.xp + v); const L = levelFromXp(S.xp);
   if (L.lvl > before) { const rw = round2(0.6 * L.lvl); setBal(S.bal + rw); toast(`<b>Новое звание: ${esc(rankOf(L.lvl))}</b><br>Награда ${money(rw)}`, 'gold'); sfx.level(); }
@@ -4984,15 +5058,38 @@ function settingsModal() {
 
 // =================== shell ===================
 function makeBackground() {
-  const W = 640, H = 400; const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
-  const sky = g.createLinearGradient(0, 0, 0, H * 0.6); sky.addColorStop(0, '#9fb6c8'); sky.addColorStop(1, '#e2d9c4'); g.fillStyle = sky; g.fillRect(0, 0, W, H);
-  const wall = (x, y, w, h, col) => { g.fillStyle = col; g.fillRect(x, y, w, h); g.fillStyle = 'rgba(0,0,0,.12)'; g.fillRect(x + w - 8, y, 8, h); g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(x, y, w, 4); };
-  wall(0, 90, 170, 230, '#c8b089'); wall(150, 140, 120, 180, '#b39b74'); wall(420, 70, 230, 250, '#cdb68f'); wall(300, 170, 140, 150, '#a88f68');
-  g.fillStyle = '#5d4c37'; g.beginPath(); g.moveTo(470, 320); g.lineTo(470, 200); g.arc(520, 200, 50, Math.PI, 0); g.lineTo(570, 320); g.fill();
-  g.fillStyle = '#3e5f7a'; g.fillRect(40, 140, 40, 50); g.fillRect(100, 140, 40, 50); g.fillStyle = '#7a5a2e'; g.fillRect(320, 250, 60, 60); g.fillRect(350, 220, 45, 40);
-  const grd = g.createLinearGradient(0, 300, 0, H); grd.addColorStop(0, '#b59e78'); grd.addColorStop(1, '#8a7558'); g.fillStyle = grd; g.beginPath(); g.moveTo(0, 318); g.lineTo(W, 300); g.lineTo(W, H); g.lineTo(0, H); g.fill();
-  const img = g.getImageData(0, 0, W, H); for (let i = 0; i < img.data.length; i += 4) { const n = (Math.random() - 0.5) * 18; img.data[i] += n; img.data[i + 1] += n; img.data[i + 2] += n; } g.putImageData(img, 0, 0);
-  document.documentElement.style.setProperty('--bgimg', `url(${c.toDataURL('image/jpeg', 0.82)})`);
+  // painted backdrop in the spirit of CS2 "Train": rail yard, wagons, warehouses, overcast sky. Shown heavily blurred.
+  const W = 960, H = 540; const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  let seed = 7; const rnd = () => { seed = (seed * 1664525 + 1013904223) | 0; return ((seed >>> 0) % 10000) / 10000; };
+  const sky = g.createLinearGradient(0, 0, 0, H * 0.55); sky.addColorStop(0, '#8c9aa6'); sky.addColorStop(1, '#c9cbc4'); g.fillStyle = sky; g.fillRect(0, 0, W, H);
+  // far industrial buildings
+  const bld = (x, y, w, h, col, win) => { g.fillStyle = col; g.fillRect(x, y, w, h); if (win) { g.fillStyle = 'rgba(40,46,52,.55)'; for (let yy = y + 14; yy < y + h - 20; yy += 26) for (let xx = x + 10; xx < x + w - 16; xx += 22) g.fillRect(xx, yy, 12, 16); } g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(x + w - 10, y, 10, h); };
+  bld(0, 120, 210, 210, '#7d5a48', true); bld(190, 170, 160, 160, '#8e8f8a', true); bld(330, 95, 140, 235, '#6e4c3c', true); bld(600, 140, 200, 190, '#8a8c88', true); bld(780, 105, 180, 225, '#74513f', true);
+  g.fillStyle = '#5d6166'; g.fillRect(470, 60, 26, 270); g.fillRect(455, 60, 56, 14); // chimney
+  // catenary poles and wires
+  g.strokeStyle = '#3c4044'; g.lineWidth = 6; for (let x = 40; x < W; x += 230) { g.beginPath(); g.moveTo(x, 340); g.lineTo(x, 150); g.lineTo(x + 70, 150); g.stroke(); }
+  g.lineWidth = 1.5; g.beginPath(); g.moveTo(0, 168); g.lineTo(W, 160); g.stroke();
+  // ground & gravel
+  const grd = g.createLinearGradient(0, 330, 0, H); grd.addColorStop(0, '#7b776c'); grd.addColorStop(1, '#4e4a42'); g.fillStyle = grd; g.fillRect(0, 330, W, H - 330);
+  // wagons
+  const wagon = (x, y, w, h, col, stripe) => {
+    g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x + 8, y + h, w - 16, 14);
+    g.fillStyle = col; g.fillRect(x, y, w, h); g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(x, y, w, 6);
+    for (let xx = x + 14; xx < x + w - 10; xx += 28) { g.fillStyle = 'rgba(0,0,0,.18)'; g.fillRect(xx, y + 8, 3, h - 16); }
+    if (stripe) { g.fillStyle = stripe; g.fillRect(x, y + h * 0.62, w, h * 0.1); }
+    g.fillStyle = 'rgba(0,0,0,.4)'; g.fillRect(x + w * 0.4, y + 14, w * 0.2, h - 22);
+    g.fillStyle = '#1d1f22'; for (const wx of [x + 40, x + 80, x + w - 80, x + w - 40]) { g.beginPath(); g.arc(wx, y + h + 10, 13, 0, 6.28); g.fill(); }
+  };
+  wagon(-60, 268, 420, 92, '#3f5c4a', '#c9b45a'); wagon(520, 262, 470, 98, '#3b4f6b', '#d8d2c2');
+  // tanker in the middle distance
+  g.fillStyle = '#2f3134'; g.beginPath(); g.roundRect(340, 286, 210, 56, 28); g.fill(); g.fillStyle = 'rgba(255,255,255,.07)'; g.fillRect(352, 292, 186, 6);
+  // rails in perspective
+  g.strokeStyle = '#2a2622'; for (let i = 0; i < 26; i++) { const t = i / 25, y = 380 + t * t * 170, half = 120 + t * 520; g.lineWidth = 3 + t * 9; g.beginPath(); g.moveTo(W / 2 - half, y); g.lineTo(W / 2 + half, y); g.stroke(); }
+  g.strokeStyle = '#9a958a'; g.lineWidth = 5; for (const k of [-1, 1]) for (const off of [0.35, 0.75]) { g.beginPath(); g.moveTo(W / 2 + k * 70 * off, 380); g.lineTo(W / 2 + k * 620 * off, H); g.stroke(); }
+  // gravel noise + haze
+  const img = g.getImageData(0, 0, W, H); for (let i = 0; i < img.data.length; i += 4) { const n = (rnd() - 0.5) * 22; img.data[i] += n; img.data[i + 1] += n; img.data[i + 2] += n; } g.putImageData(img, 0, 0);
+  const haze = g.createLinearGradient(0, 0, 0, H); haze.addColorStop(0, 'rgba(200,205,205,.25)'); haze.addColorStop(0.6, 'rgba(200,205,205,0)'); g.fillStyle = haze; g.fillRect(0, 0, W, H);
+  document.documentElement.style.setProperty('--bgimg', `url(${c.toDataURL('image/jpeg', 0.8)})`);
 }
 function moreSheet() {
   sfx.tab();
@@ -5014,7 +5111,7 @@ function shell() {
     </nav>
     <div class="top-r">
       <button class="bonus" id="bonusBtn" title="Бонус">${ico('gift')}<span></span></button>
-      <div class="bal" title="Баланс"><b id="bal">${moneyTxt(S.bal)}</b></div>
+      <div class="cs-wallet" title="Баланс"><b id="walletAmt">${moneyTxt(S.bal)}</b></div>
       <a class="me-btn" data-go="inventory" title="Профиль и инвентарь"><span id="rankSlot"></span><em>${esc(S.name)}</em><i class="inv-badge"></i></a>
       <button class="icon-btn" id="snd" title="Звук">${S.muted ? ico('mute') : ico('sound')}</button>
       <button class="icon-btn" id="setBtn" title="Настройки">${ico('gear')}</button>
