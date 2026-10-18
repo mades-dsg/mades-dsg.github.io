@@ -801,6 +801,20 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
   .cc-cd{font-size:11px}.tag{font-size:11px}
 }
 .onl-w{font-style:normal}
+.pf-id{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;background:rgba(0,0,0,.25);border:1px dashed rgba(255,255,255,.2);border-radius:3px;font-size:12px;color:var(--mut)}
+.pf-id b{color:var(--teal);font-family:var(--fc);font-size:14px;letter-spacing:.5px}.pf-id:hover{border-color:var(--teal)}.pf-id .ico{width:13px;height:13px}
+.pid-big{font-family:var(--fc);color:var(--teal);font-size:18px;letter-spacing:.5px}
+.admin{display:grid;grid-template-columns:1fr 1fr;gap:14px}.adm-card{padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:4px}.adm-card.wide{grid-column:1/-1}
+.adm-card h2{display:flex;align-items:center;gap:8px}.adm-card .btn-green{width:100%;margin-top:12px}.adm-res{margin-top:10px;font-size:13px;line-height:1.5}
+.adm-list{display:flex;flex-wrap:wrap;gap:8px}.adm-p{display:flex;flex-direction:column;align-items:flex-start;padding:8px 12px;background:rgba(0,0,0,.25);border:1px solid var(--line2);border-radius:3px}.adm-p:hover{border-color:var(--teal)}.adm-p span{font-family:var(--fc);color:var(--teal);font-size:13px}
+@media (max-width:700px){.admin{grid-template-columns:1fr}}
+/* balance must always stay visible */
+.top{gap:0}
+.top .nav{flex:1 1 auto;min-width:0;overflow:hidden;justify-content:center}
+.top-r{flex:none;margin-left:auto;position:relative;z-index:2}
+.bal{flex:none}
+@media (max-width:1200px){.top .nav a{font-size:14px;padding:0 8px}.top .nav a+a::before{display:none}.logo-word{font-size:17px}.top-r{gap:6px}}
+.top .nav{justify-content:safe center}@media (max-width:1180px){.bonus span{display:none}.bonus{padding:0 10px}.me-btn em{max-width:70px}}
 
 </style>
 </head>
@@ -3894,7 +3908,7 @@ return{get setMuted(){return setMuted;},get setVolume(){return setVolume;},get s
 
 const __m_main=(function(){
 // ===== CASE STORM — app =====
-const { RARITIES, WEARS, SKINS, SKIN, CASES, CASE_BY_ID, AUTHOR, rollCase, makeItem, fillerSkin, priceOf, VARIANTS, variantNear, levelFromXp, skinTitle, skinSub, skinFull, round2, CUR, setRates, seeded } = __m_data;
+const { RARITIES, WEARS, SKINS, SKIN, CASES, CASE_BY_ID, AUTHOR, rollCase, makeItem, fillerSkin, priceOf, VARIANTS, variantNear, levelFromXp, skinTitle, skinSub, skinFull, round2, CUR, setRates, seeded, hashStr } = __m_data;
 const { skinSrc, caseImgSrc } = __m_images;
 const { CaseStage, renderThumbsAsync, hasWebGL } = __m_case3d;
 const { sfx, setMuted, setVolume } = __m_audio;
@@ -3919,6 +3933,11 @@ const BONUS_CD = 10 * 60 * 1000, DAILY_CD = 22 * 3600 * 1000;
 let S = { bal: 15, inv: [], xp: 0, opened: 0, best: null, bonusAt: 0, dailyAt: 0, battles: 0, bwins: 0, upg: 0, upgWin: 0, upgLoseStreak: 0, contracts: 0, muted: false, vol: 0.55, fast: false, name: 'Игрок', ach: {}, promo: {}, loan: 0, quests: null, mines: 0, flips: 0, cur: 'RUB', server: '', cid: '', myLobby: null, rates: null };
 try { const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); if (s) S = Object.assign(S, s); } catch (e) { }
 if (!S.cid) S.cid = 'u' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+const PID_ABC = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+function makePid(cid) { let a = hashStr(cid), b = hashStr(cid + '#storm'), out = ''; for (let i = 0; i < 8; i++) { const v = i < 4 ? a : b; out += PID_ABC[(v >>> ((i % 4) * 5)) & 31]; } return 'CS-' + out; }
+if (!S.pid) S.pid = makePid(S.cid);
+if (!S.giftsGot) S.giftsGot = {};
+S.loan = 0; delete S.ach.loan;
 S.inv = S.inv.filter(it => SKIN[it.s]); if (S.best && !SKIN[S.best.s]) S.best = null;
 if (S.rates) setRates(S.rates);
 setMuted(!!S.muted); setVolume(S.vol ?? 0.55);
@@ -3990,11 +4009,10 @@ function setBal(v, anim = true) {
   if (S.bal >= 150) unlock('rich'); if (S.bal < 0.05 && S.inv.length === 0) unlock('broke');
 }
 function earn(v) {
-  if (S.loan > 0 && v > 0) { const pay = Math.min(S.loan, round2(v * 0.3)); S.loan = round2(S.loan - pay); v -= pay; if (S.loan <= 0) toast('Долг Лёхе погашен. Лёха доволен', 'gold'); }
   setBal(S.bal + v);
 }
 function spend(v) {
-  if (S.bal + 1e-6 < v) { toast('Не хватает баланса. Продай скины, забери бонус или займи у Лёхи', 'err'); flashBal(); return false; }
+  if (S.bal + 1e-6 < v) { toast('Не хватает баланса. Продай скины или забери бонус', 'err'); flashBal(); return false; }
   setBal(S.bal - v); addXp(v); return true;
 }
 function flashBal() { const b = $('.bal'); b && (b.classList.remove('flash'), void b.offsetWidth, b.classList.add('flash')); }
@@ -4028,7 +4046,7 @@ const ACH = [
   ['upg', 'Апгрейдер', 'Выиграй апгрейд', 1], ['miracle', 'Чудо в перьях', 'Выиграй апгрейд с шансом ниже 10%', 5], ['unlucky', 'Невезунчик', 'Проиграй 5 апгрейдов подряд', 2],
   ['battle', 'Батлер', 'Выиграй батл у живого игрока', 2], ['crazy', 'Всё наоборот', 'Выиграй батл в обратном режиме', 2], ['contract', 'Нотариус', 'Подпиши контракт', 0.5],
   ['sapper', 'Сапёр', 'Забери x5 и больше в «Минёре»', 3], ['flip', 'Контра или терры', 'Выиграй 3 флипа подряд', 1], ['rich', 'Олигарх', 'Накопи баланс 150 $', 5],
-  ['broke', 'Банкрот', 'Останься без денег и скинов', 1], ['loan', 'Должник Лёхи', 'Займи у Лёхи', 0], ['promo', 'Халявщик', 'Активируй промокод', 0.3], ['chat', 'Общительный', 'Напиши в общий чат', 0.2],
+  ['broke', 'Банкрот', 'Останься без денег и скинов', 1], ['promo', 'Халявщик', 'Активируй промокод', 0.3], ['chat', 'Общительный', 'Напиши в общий чат', 0.2],
 ];
 function unlock(id) {
   if (S.ach[id]) return; const a = ACH.find(x => x[0] === id); if (!a) return;
@@ -4050,7 +4068,7 @@ function ensureQuests() {
 }
 function quest(id, amount = 1) { ensureQuests(); for (const q of S.quests.list) if (q.id === id && !q.done) { q.have = Math.min(q.need, round2(q.have + amount)); if (q.have >= q.need) { q.done = true; toast(`Задание выполнено: <b>${esc(q.text)}</b> — награда ждёт в «Наградах»`, 'gold'); } } save(); }
 
-// ---------- bonus / daily / loan ----------
+// ---------- bonus / daily ----------
 const bonusAmount = () => round2(0.3 + levelFromXp(S.xp).lvl * 0.05);
 const bonusLeft = () => Math.max(0, S.bonusAt + BONUS_CD - Date.now());
 const dailyLeft = () => Math.max(0, S.dailyAt + DAILY_CD - Date.now());
@@ -4067,11 +4085,6 @@ function tickTimers() {
   $$('[data-timer="daily"]').forEach(el => { const l = dailyLeft(); el.disabled = l > 0; el.innerHTML = l > 0 ? `${ico('timer')} ${hhmm(l)}` : 'Открыть бесплатно'; });
 }
 setInterval(tickTimers, 1000);
-function takeLoan() {
-  if (S.loan > 0) { toast(`Лёха: «Сначала верни ${moneyTxt(S.loan)}»`); return; }
-  S.loan = 6.25; setBal(S.bal + 5); unlock('loan'); save();
-  toast(`Лёха занял ${money(5)}. Вернёшь ${money(6.25)} — 30% с каждой продажи уйдёт ему`, 'gold');
-}
 
 // =================== NETWORK (real players) ===================
 const NET = { es: null, ok: false, online: 0, chat: [], feed: [], top: [], lobbies: [] };
@@ -4080,12 +4093,17 @@ function netBase() { if (S.server) return S.server.replace(/\/+$/, ''); if (/^ht
 function netConnect() {
   if (NET.es) { NET.es.close(); NET.es = null; }
   const base = netBase(); if (!base) { setNet(false); return; }
-  let es; try { es = new EventSource(`${base}/events?id=${encodeURIComponent(S.cid)}&name=${encodeURIComponent(S.name)}`); } catch (e) { setNet(false); return; }
+  let es; try { es = new EventSource(`${base}/events?id=${encodeURIComponent(S.cid)}&pid=${S.pid}&name=${encodeURIComponent(S.name)}`); } catch (e) { setNet(false); return; }
   NET.es = es;
   es.addEventListener('hello', e => {
     const d = JSON.parse(e.data); setNet(true); NET.online = d.online; NET.chat = d.chat || []; NET.feed = d.feed || []; NET.top = d.top || []; NET.lobbies = d.lobbies || [];
     renderOnline(); renderChat(); renderFeed(); renderLobbies();
     if (S.myLobby && !NET.lobbies.some(l => l.id === S.myLobby.id)) { setBal(S.bal + S.myLobby.cost); toast(`Лобби закрыто, ${moneyTxt(S.myLobby.cost)} возвращено`); S.myLobby = null; save(); }
+  });
+  es.addEventListener('gift', e => {
+    const g = JSON.parse(e.data); post('ack', { pid: S.pid, gid: g.id });
+    if (S.giftsGot[g.id]) return; S.giftsGot[g.id] = Date.now(); setBal(S.bal + g.usd); save();
+    sfx.win(5); toast(`${ico('gift')} <b>Подарок от администрации: +${money(g.usd)}</b>${g.note ? '<br>' + esc(g.note) : ''}`, 'gold');
   });
   es.addEventListener('online', e => { NET.online = JSON.parse(e.data); renderOnline(); });
   es.addEventListener('chat', e => { const m = JSON.parse(e.data); NET.chat.push(m); if (NET.chat.length > 80) NET.chat.shift(); appendChat(m); });
@@ -4112,7 +4130,7 @@ function shareDrop(it, cs) { if (!NET.ok) { pushFeed({ name: S.name, skin: it.s,
 
 // ---------- chat ----------
 let chatUnread = 0;
-function msgHTML(m) { const me = m.from === S.cid; return `<div class="msg${me ? ' me' : ''}"><div class="msg-ava">${esc((m.name || '?')[0])}</div><div class="msg-body"><b>${rankBadge(m.lvl || 1)} ${esc(m.name)}</b><span>${esc(m.text)}</span></div></div>`; }
+function msgHTML(m) { const me = m.from === S.cid; return `<div class="msg${me ? ' me' : ''}"${m.pid ? ` title="ID ${m.pid}"` : ''}><div class="msg-ava">${esc((m.name || '?')[0])}</div><div class="msg-body"><b>${rankBadge(m.lvl || 1)} ${esc(m.name)}</b><span>${esc(m.text)}</span></div></div>`; }
 function renderChat() { const box = $('#chatMsgs'); if (!box) return; box.innerHTML = NET.chat.map(msgHTML).join(''); box.scrollTop = box.scrollHeight; }
 function appendChat(m) {
   const box = $('#chatMsgs'); if (!box) return; box.insertAdjacentHTML('beforeend', msgHTML(m)); while (box.children.length > 80) box.firstChild.remove(); box.scrollTop = box.scrollHeight;
@@ -4120,7 +4138,7 @@ function appendChat(m) {
 }
 async function sendChat(text) {
   if (!NET.ok) { toast('Чат работает, когда сайт открыт с сервера', 'err'); return; }
-  const [code, d] = await post('chat', { id: S.cid, name: S.name, text, lvl: levelFromXp(S.xp).lvl });
+  const [code, d] = await post('chat', { id: S.cid, pid: S.pid, name: S.name, text, lvl: levelFromXp(S.xp).lvl });
   if (code !== 200) toast(d.error || 'Сообщение не отправлено', 'err'); else unlock('chat');
 }
 
@@ -4163,7 +4181,7 @@ function go(name, arg, push = true, keepScroll = false) {
   (views[name] || views.cases)(v, arg);
   if (push) { try { history.pushState({ name, arg }, '', '#' + name + (arg ? '/' + encodeURIComponent(arg) : '')); } catch (e) { } }
 }
-function parseHash() { const h = (location.hash || '').slice(1).split('/'); const valid = ['cases', 'case', 'battles', 'upgrade', 'contracts', 'games', 'rewards', 'inventory']; return valid.includes(h[0]) ? { name: h[0], arg: h[1] ? decodeURIComponent(h[1]) : null } : { name: 'cases', arg: null }; }
+function parseHash() { const h = (location.hash || '').slice(1).split('/'); const valid = ['cases', 'case', 'battles', 'upgrade', 'contracts', 'games', 'rewards', 'inventory', 'admin']; return valid.includes(h[0]) ? { name: h[0], arg: h[1] ? decodeURIComponent(h[1]) : null } : { name: 'cases', arg: null }; }
 window.addEventListener('popstate', e => { const s = e.state || parseHash(); if (!busy && s.name !== 'battle') go(s.name, s.arg, false); });
 
 const caseImg = c => c.official ? caseImgSrc(c.img) : (THUMBS[c.id] || '');
@@ -4400,7 +4418,7 @@ views.inventory = v => {
   v.innerHTML = `
   <div class="profile">
     <div class="pf-ava">${esc((S.name[0] || 'И').toUpperCase())}</div>
-    <div class="pf-main"><button class="btn btn-dark btn-sm pf-set" id="pfSet">${ico('gear')} Настройки</button><input class="pf-name" id="pfName" value="${esc(S.name)}" maxlength="16" aria-label="Ник"><div class="pf-rank">${rankBadge(L.lvl)}<span>${esc(rankOf(L.lvl))}</span></div><div class="xp"><i style="width:${L.cur / L.need * 100}%"></i></div><small class="mut">До следующего звания: ${moneyTxt(L.need - L.cur)} оборота</small></div>
+    <div class="pf-main"><button class="btn btn-dark btn-sm pf-set" id="pfSet">${ico('gear')} Настройки</button><input class="pf-name" id="pfName" value="${esc(S.name)}" maxlength="16" aria-label="Ник"><div class="pf-rank">${rankBadge(L.lvl)}<span>${esc(rankOf(L.lvl))}</span></div><div class="xp"><i style="width:${L.cur / L.need * 100}%"></i></div><small class="mut">До следующего звания: ${moneyTxt(L.need - L.cur)} оборота</small><button class="pf-id" id="pfId" title="Скопировать ID">Твой ID: <b>${S.pid}</b> ${ico('copy')}</button></div>
     <div class="pf-stats">
       <div><b>${fmtNum(S.opened, 0)}</b><span>кейсов</span></div><div><b>${S.bwins}/${S.battles}</b><span>батлы</span></div>
       <div><b>${S.upgWin}/${S.upg}</b><span>апгрейды</span></div><div><b>${S.contracts}</b><span>контракты</span></div><div><b>${Object.keys(S.ach).length}/${ACH.length}</b><span>ачивки</span></div>
@@ -4419,6 +4437,7 @@ views.inventory = v => {
   <div class="item-grid inv-grid" id="invGrid"></div>`;
   $('#invSort').value = invSort;
   $('#pfSet').addEventListener('click', settingsModal);
+  $('#pfId').addEventListener('click', () => { try { navigator.clipboard.writeText(S.pid); toast('ID скопирован'); } catch (e) { toast('Твой ID: ' + S.pid); } sfx.click(); });
   $('#pfName').addEventListener('change', e => { S.name = e.target.value.trim().slice(0, 16) || 'Игрок'; save(); netConnect(); });
   $('#invSort').addEventListener('change', e => { invSort = e.target.value; renderInv(); });
   $('#invF').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; invFilter = b.dataset.f; $$('#invF button').forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); renderInv(); });
@@ -4576,7 +4595,7 @@ async function doUpgrade() {
   setBusy(false); UP.sel = [];
   const sk = tgt.skin;
   const m = modal(`<div class="preview ${win ? '' : 'lose'} r${sk.rarity}" style="--rc:${win ? rc(sk.rarity) : '#ff4d5e'}">
-    <div class="drop-title">${win ? 'Апгрейд зашёл' : 'Мимо'}</div><div class="drop-joke">${win ? pick(['Красава', 'Риск окупился']) : pick(['Почти!', 'Лёха говорит: «бывает»'])}</div>
+    <div class="drop-title">${win ? 'Апгрейд зашёл' : 'Мимо'}</div><div class="drop-joke">${win ? pick(['Красава', 'Риск окупился']) : pick(['Почти!', 'Бывает'])}</div>
     <img data-sk="${esc(sk.id)}" data-big="1" src="${skinSrc(sk, true)}" class="${win ? '' : 'grey'}">
     <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))} · ${WEARS[tgt.w].short}</span></div>
     <div class="drop-price">${money(tgt.price)}</div>
@@ -4862,7 +4881,6 @@ views.rewards = v => {
     <div class="rw-card">${ico('gift')}<h3>Бонус</h3><p>${money(bonusAmount())} каждые 10 минут. Чем выше звание, тем больше.</p><button class="btn btn-green" data-timer="bonus"></button></div>
     <div class="rw-card">${ico('crate')}<h3>Бесплатный кейс</h3><p>Раз в сутки — кейс «Студент» за счёт заведения.</p><button class="btn btn-green" data-timer="daily" data-free></button></div>
     <div class="rw-card">${ico('star')}<h3>Промокод</h3><p>Нашёл код? Вводи.</p><div class="bet-row"><input class="inp" id="promo" placeholder="Например, RUSHB" maxlength="16"><button class="btn btn-dark" id="promoGo">OK</button></div></div>
-    <div class="rw-card loan">${ico('coin')}<h3>Займ у Лёхи</h3><p>${S.loan > 0 ? `Долг: <b>${moneyTxt(S.loan)}</b>. 30% от каждой продажи уходит Лёхе.` : `${money(5)} сразу, вернёшь ${money(6.25)} автоматически с продаж.`}</p><button class="btn btn-dark" id="loanGo" ${S.loan > 0 ? 'disabled' : ''}>${S.loan > 0 ? 'Долг не погашен' : 'Занять'}</button></div>
   </div>
   <section><h2>Задания на сегодня</h2><div class="quests">${S.quests.list.map((q, i) => `<div class="quest ${q.done ? 'done' : ''}"><div><b>${esc(q.text)}</b><div class="xp"><i style="width:${q.have / q.need * 100}%"></i></div><small>${q.id === 'sell' ? moneyTxt(q.have) + ' / ' + moneyTxt(q.need) : q.have + ' / ' + q.need}</small></div><button class="btn ${q.claimed ? 'btn-dark' : 'btn-green'} btn-sm" data-q="${i}" ${!q.done || q.claimed ? 'disabled' : ''}>${q.claimed ? 'Получено' : money(q.reward)}</button></div>`).join('')}</div></section>
   <section><h2>Достижения <small>${Object.keys(S.ach).length} из ${ACH.length}</small></h2><div class="achs">${ACH.map(a => `<div class="ach ${S.ach[a[0]] ? 'got' : ''}">${S.ach[a[0]] ? ico('trophy') : ico('lock')}<div><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>${a[3] ? `<em>+${moneyTxt(a[3])}</em>` : ''}</div>`).join('')}</div></section>`;
@@ -4878,7 +4896,39 @@ views.rewards = v => {
     if (PROMOS[c]) { S.promo[c] = 1; setBal(S.bal + PROMOS[c]); unlock('promo'); sfx.win(4); toast(`Промокод ${esc(c)}: +${money(PROMOS[c])}`, 'gold'); save(); }
     else toast('Такого кода нет', 'err');
   };
-  $('#loanGo').onclick = () => { takeLoan(); go('rewards', null, false); };
+};
+
+// =================== ADMIN (hidden: #admin) ===================
+views.admin = v => {
+  const c = CUR[S.cur] || CUR.RUB;
+  v.innerHTML = `<div class="page-head"><h1>Админка</h1><p>Выдача виртуального баланса игрокам по ID. Ключ хранится на сервере в настройках Render (ADMIN_KEY).</p></div>
+  <div class="admin">
+    <section class="adm-card"><h2>${ico('lock')} Ключ</h2><div class="bet-row"><input class="inp" id="adKey" type="password" placeholder="ADMIN_KEY" value="${esc(S.adminKey || '')}" autocomplete="off"><button class="btn btn-dark" id="adLoad">${ico('refresh')} Обновить</button></div><small class="mut" id="adState">${NET.ok ? 'Сервер на связи' : 'Нет связи с сервером'}</small></section>
+    <section class="adm-card"><h2>${ico('gift')} Выдать деньги</h2>
+      <label class="set-row col"><span>ID игрока</span><input class="inp" id="adPid" placeholder="CS-XXXXXXXX" maxlength="11"></label>
+      <label class="set-row col"><span>Сумма, ${c.sym}</span><input class="inp" id="adSum" type="number" min="0" step="any" placeholder="например, 500"></label>
+      <label class="set-row col"><span>Сообщение игроку (необязательно)</span><input class="inp" id="adNote" maxlength="80" placeholder="Победитель конкурса!"></label>
+      <button class="btn btn-green" id="adGo">${ico('gift')} Выдать</button><div class="adm-res" id="adRes"></div></section>
+    <section class="adm-card wide"><h2>${ico('online')} Сейчас на сайте</h2><div class="adm-list" id="adList"><span class="mut">Введи ключ и нажми «Обновить»</span></div></section>
+  </div>`;
+  const key = () => { S.adminKey = $('#adKey').value.trim(); save(); return S.adminKey; };
+  const load = async () => {
+    const [code, d] = await post('admin/online', { key: key() });
+    if (code !== 200) { $('#adList').innerHTML = `<span class="neg">${esc(d.error || 'Ошибка')}</span>`; return; }
+    $('#adState').textContent = `Сервер на связи · ожидают доставки: ${d.pending}`;
+    $('#adList').innerHTML = d.players.length ? d.players.map(p => `<button class="adm-p" data-pid="${esc(p.pid)}"><b>${esc(p.name)}</b><span>${esc(p.pid)}</span></button>`).join('') : '<span class="mut">Никого нет (игроки со старой версией сайта без ID тоже не видны)</span>';
+  };
+  $('#adLoad').onclick = load;
+  $('#adList').addEventListener('click', e => { const b = e.target.closest('[data-pid]'); if (b) { $('#adPid').value = b.dataset.pid; sfx.click(); } });
+  $('#adGo').onclick = async () => {
+    const pid = $('#adPid').value.trim().toUpperCase(); const amt = +$('#adSum').value; const usd = round2(amt / c.rate);
+    if (!/^CS-[0-9A-Z]{8}$/.test(pid)) { toast('ID должен быть вида CS-XXXXXXXX', 'err'); return; }
+    if (!(usd >= 0.01)) { toast('Укажи сумму', 'err'); return; }
+    const [code, d] = await post('admin/gift', { key: key(), pid, usd, note: $('#adNote').value.trim() });
+    if (code !== 200) { $('#adRes').innerHTML = `<span class="neg">${esc(d.error || 'Ошибка')}</span>`; sfx.error(); return; }
+    sfx.cash(); $('#adRes').innerHTML = d.online ? `<span class="pos">Выдано ${money(usd)} игроку ${esc(pid)} — он уже получил уведомление</span>` : `<span class="pos">Подарок ${money(usd)} для ${esc(pid)} ждёт на сервере</span><br><small class="mut">Игрок сейчас не на сайте. Получит при следующем заходе, если сервер до этого не перезапустится.</small>`;
+  };
+  if (S.adminKey) load();
 };
 
 // =================== settings ===================
@@ -4888,6 +4938,7 @@ function settingsModal() {
     <label class="set-row"><span>Громкость</span><input type="range" id="setVol" min="0" max="1" step="0.05" value="${S.vol ?? 0.55}"></label>
     <label class="set-row"><span>Ник</span><input class="inp" id="setName" maxlength="16" value="${esc(S.name)}"></label>
     <label class="set-row col"><span>Адрес сервера (для чата, онлайна и батлов)</span><input class="inp" id="setSrv" placeholder="https://мой-сервер.onrender.com" value="${esc(S.server)}"><small class="mut">Пусто — общий сервер CASE STORM. Сейчас: ${NET.ok ? 'подключено' : 'нет подключения'}.</small></label>
+    <div class="set-row"><span>Твой ID</span><b class="pid-big">${S.pid}</b></div>
     <div class="set-note">Цены — Steam Community Market на ${PRICE_DATE}. Курс: 1 $ = ${CUR.RUB.rate.toFixed(1)} ₽ = ${CUR.EUR.rate.toFixed(2)} €. Баланс виртуальный: пополнить его деньгами или вывести скины нельзя.</div>
     <div class="row-btns"><button class="btn btn-green" id="setSave">Сохранить</button><button class="btn btn-dark" id="setReset">Сбросить прогресс</button></div></div>`, 'small');
   $('#setCur', m).addEventListener('click', e => { const b = e.target.closest('[data-cur]'); if (!b) return; $$('#setCur button', m).forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); });

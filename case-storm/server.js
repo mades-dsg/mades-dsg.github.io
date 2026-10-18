@@ -17,6 +17,16 @@ let top = [];                       // best drops in 24h
 const lobbies = new Map();          // id -> lobby
 const lastMsg = new Map();          // clientId -> ts (rate limit)
 const MODES = { '1v1': 2, '1v1v1': 3, '1v1v1v1': 4, '2v2': 4 };
+const ADMIN_KEY = process.env.ADMIN_KEY || '';
+const pending = new Map();          // pid -> [gift] (virtual balance gifts waiting for delivery)
+let badKeyAt = 0, badKeys = 0;
+const PID_RE = /^CS-[0-9A-Z]{8}$/;
+function keyOk(k) {
+  if (!ADMIN_KEY) return false;
+  const a = Buffer.from(String(k || '')), b = Buffer.from(ADMIN_KEY);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+function sendToPid(pid, ev, data) { let n = 0; for (const [res, c] of clients) if (c.pid === pid) { send(res, ev, data); n++; } return n; }
 
 const clean = (s, n) => String(s || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, n);
 function online() { return new Set([...clients.values()].map(c => c.id)).size; }
@@ -37,7 +47,7 @@ const api = {
     if (!id || !text) return [400, { error: 'empty' }];
     const now = Date.now(); if (now - (lastMsg.get(id) || 0) < 1500) return [429, { error: 'Не так быстро' }];
     lastMsg.set(id, now);
-    const m = { id: crypto.randomUUID(), from: id, name, text, lvl: Math.max(1, Math.min(99, +b.lvl || 1)), t: now };
+    const m = { id: crypto.randomUUID(), from: id, pid: PID_RE.test(b.pid) ? b.pid : '', name, text, lvl: Math.max(1, Math.min(99, +b.lvl || 1)), t: now };
     chat.push(m); if (chat.length > 80) chat.shift();
     broadcast('chat', m); return [200, { ok: 1 }];
   },
@@ -66,6 +76,28 @@ const api = {
     if (l.players.length === l.slots) start(l); else pushLobbies();
     return [200, publicLobby(l)];
   },
+  async ack(b) {
+    const pid = clean(b.pid, 12), gid = clean(b.gid, 40); const list = pending.get(pid);
+    if (list) { const rest = list.filter(g => g.id !== gid); rest.length ? pending.set(pid, rest) : pending.delete(pid); }
+    return [200, { ok: 1 }];
+  },
+  async 'admin/online'(b) {
+    if (badKeys > 10 && Date.now() - badKeyAt < 60000) return badKey();
+    if (!keyOk(b.key)) return badKey();
+    const seen = new Map(); for (const c of clients.values()) if (c.pid) seen.set(c.pid, c.name || 'Игрок');
+    return [200, { players: [...seen].map(([pid, name]) => ({ pid, name })), pending: pending.size }];
+  },
+  async 'admin/gift'(b) {
+    if (badKeys > 10 && Date.now() - badKeyAt < 60000) return badKey();
+    if (!keyOk(b.key)) return badKey();
+    const pid = clean(b.pid, 12).toUpperCase(); const usd = Math.round((+b.usd || 0) * 100) / 100; const note = clean(b.note, 80);
+    if (!PID_RE.test(pid)) return [400, { error: 'ID должен быть вида CS-XXXXXXXX' }];
+    if (!(usd > 0 && usd <= 100000)) return [400, { error: 'Сумма от 0,01 до 100 000 $' }];
+    const g = { id: crypto.randomUUID(), usd, note, t: Date.now() };
+    const list = pending.get(pid) || []; list.push(g); pending.set(pid, list.slice(-20));
+    const online = sendToPid(pid, 'gift', g);
+    return [200, { ok: 1, online: online > 0 }];
+  },
   async leave(b) {
     const l = lobbies.get(clean(b.lobby, 20)); const id = clean(b.id, 40);
     if (!l || l.status !== 'open') return [404, { error: 'Лобби уже стартовало' }];
@@ -74,6 +106,7 @@ const api = {
     pushLobbies(); return [200, { ok: 1 }];
   },
 };
+function badKey() { const now = Date.now(); if (now - badKeyAt > 60000) badKeys = 0; badKeyAt = now; badKeys++; return [ADMIN_KEY ? 403 : 503, { error: ADMIN_KEY ? (badKeys > 10 ? 'Слишком много попыток, подожди минуту' : 'Неверный ключ') : 'На сервере не задан ADMIN_KEY' }]; }
 function start(l) {
   l.status = 'running';
   l.seeds = l.cases.map(() => l.players.map(() => crypto.randomBytes(4).readUInt32LE(0)));
@@ -96,9 +129,11 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Methods': 'GET,POST' }); return res.end(); }
   if (url.pathname === '/events') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', 'Access-Control-Allow-Origin': '*', 'X-Accel-Buffering': 'no' });
-    const c = { id: clean(url.searchParams.get('id'), 40) || crypto.randomUUID(), name: clean(url.searchParams.get('name'), 16) };
+    const pidQ = clean(url.searchParams.get('pid'), 12);
+    const c = { id: clean(url.searchParams.get('id'), 40) || crypto.randomUUID(), name: clean(url.searchParams.get('name'), 16), pid: PID_RE.test(pidQ) ? pidQ : '' };
     clients.set(res, c);
     send(res, 'hello', { online: online(), chat: chat.slice(-40), feed: feed.slice(0, 30), top, lobbies: lobbyList() });
+    for (const g of (pending.get(c.pid) || [])) send(res, 'gift', g);
     broadcast('online', online());
     req.on('close', () => {
       clients.delete(res);

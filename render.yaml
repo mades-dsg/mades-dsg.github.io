@@ -8,3 +8,6 @@ services:
     buildCommand: echo "no build"
     startCommand: node server.js
     healthCheckPath: /
+    envVars:
+      - key: ADMIN_KEY
+        generateValue: true
