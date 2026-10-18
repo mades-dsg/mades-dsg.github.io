@@ -828,6 +828,50 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 .cs-wallet{display:flex!important;visibility:visible!important;flex:none!important;min-width:64px}
 .item.xs{height:58px}.item.xs .item-name{left:80px;right:96px;top:50%;bottom:auto;transform:translateY(-50%);line-height:1.15}.item.xs .item-name b{font-size:13px}.item.xs .item-name span{font-size:11px}.item.xs .item-price{left:auto;right:10px;top:50%;bottom:auto;transform:translateY(-50%);font-family:var(--fc);font-size:15px}.item.xs:hover{transform:none}@media (max-width:600px){.item.xs .item-name{left:58px;right:70px}.item.xs .item-price{font-size:13px;right:6px}}
 .bgfx{filter:blur(14px) saturate(.75) brightness(.6);transform:scale(1.1)}.bgfx::after{background:linear-gradient(180deg,rgba(38,43,50,.55),rgba(38,43,50,.72) 55%,rgba(30,34,40,.88))}
+/* ===== v5: map backgrounds ===== */
+.bgfx.m1,.bgfx.m2{background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;filter:blur(12px) saturate(.8) brightness(.62)}
+.bgfx.m1.on,.bgfx.m2.on{opacity:1}
+.bgfx.m1::after,.bgfx.m2::after{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(38,43,50,.42),rgba(38,43,50,.62) 55%,rgba(28,32,38,.85))}
+
+/* ===== v5: upgrade screen (caser layout) ===== */
+.up2{display:grid;grid-template-columns:minmax(0,1fr) 380px minmax(0,1fr);grid-template-rows:auto 64px;gap:12px;margin-bottom:14px}
+.up-pan{background:rgba(44,48,55,.82);border:1px solid rgba(255,255,255,.07);border-radius:4px;display:flex;flex-direction:column;min-width:0;backdrop-filter:blur(4px)}
+.up-ph{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px 10px 16px;background:rgba(0,0,0,.22);border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;color:#c9cfd6;font-weight:500}
+.up-ph .btn{height:34px;font-size:14px}
+.up-body{flex:1;min-height:300px;display:flex;align-items:center;justify-content:center;padding:14px;cursor:default}
+.up-foot{min-height:34px;padding:0 16px 12px;text-align:center;font-family:var(--fc);font-size:17px}.up-foot em{font-style:normal;color:#ffd36b;margin-left:6px}
+.up-stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+.up-stack .item{cursor:pointer}
+.up-cash{display:flex;flex-direction:column;align-items:center;gap:6px}.up-cash .ico{width:46px;height:46px;color:var(--brass)}.up-cash b{font-family:var(--fc);font-size:28px}.up-cash span{color:var(--mut);font-size:12px}
+.up-to .item.big{width:min(100%,280px);height:220px}
+.up-mid{display:flex;flex-direction:column;align-items:center;gap:6px}
+.up-logo{display:flex;align-items:center;gap:8px;height:46px}.up-logo .logo-mk{width:36px;height:36px}.up-logo .logo-word{font-size:24px}
+.up-mid .ring-box{width:330px;height:330px}
+.up-bal{flex-direction:row;align-items:center;gap:14px;padding:0 16px}
+.up-bal-l{font-family:var(--fc);font-weight:500;font-size:14px;line-height:1.15;text-transform:uppercase;color:#c9cfd6}
+.up-bal input[type=range]{flex:1;min-width:60px;accent-color:#fff}
+.up-bal-v{display:flex;flex-direction:column;align-items:flex-end;padding-left:14px;border-left:1px solid rgba(255,255,255,.1)}.up-bal-v b{font-family:var(--fc);font-size:18px}.up-bal-v small{color:var(--mut);font-size:11px}
+.up-go{font-family:var(--fc);font-weight:600;font-size:24px;letter-spacing:1px;text-transform:uppercase;border-radius:4px;color:#fff;background:linear-gradient(180deg,#46d979,#239a4c);border:1px solid #5fe892;box-shadow:inset 0 1px rgba(255,255,255,.35),0 6px 20px rgba(55,196,107,.3);transition:transform .12s,filter .15s}
+.up-go:hover:not(:disabled){filter:brightness(1.08)}.up-go:active:not(:disabled){transform:scale(.97)}
+.up-go:disabled{background:rgba(60,64,70,.9);border-color:rgba(255,255,255,.1);color:#8b9096;box-shadow:none;cursor:not-allowed}
+.up-quick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.up-quick button{border-radius:4px;background:rgba(44,48,55,.85);border:1px solid rgba(255,255,255,.08);font-family:var(--fc);font-size:18px;color:#d5dae0;transition:background .15s,border-color .15s}
+.up-quick button:hover{background:rgba(70,75,84,.9)}.up-quick button.on{border-color:var(--teal);color:#fff}
+.up-quick button:first-child{background:linear-gradient(180deg,#2c9e66,#1f7a4c);color:#fff}.up-quick button .ico{width:22px;height:22px}
+.up-lists{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.up-lists .up-pan{min-height:420px}
+.up-lh{display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,0,0,.22);border-bottom:1px solid rgba(255,255,255,.06)}
+.up-lh>.ico{width:22px;height:22px}.up-lh h2{margin:0;font-size:20px;flex:1;white-space:nowrap}
+.up-lh .inp{width:90px;height:36px}.up-pl{color:var(--mut);font-size:13px}.up-lh .search.sm{flex:0 1 180px;min-width:90px}
+.up-lists .item-grid{padding:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));max-height:640px;overflow:auto;align-content:start}
+.up-lists .item-price{top:6px;right:8px;left:auto;bottom:auto;font-family:var(--fc);font-size:15px}
+.up-lists .item-tags{left:auto;right:8px;top:26px}
+.up-lists .item-tags span{background:none;padding:0;color:#c9cfd6}
+.up2.won .ring-box{filter:drop-shadow(0 0 30px rgba(92,255,157,.35))}.up2.lost .ring-box{filter:drop-shadow(0 0 30px rgba(255,78,82,.3))}
+@media (max-width:1250px){.up2{grid-template-columns:minmax(0,1fr) 300px minmax(0,1fr)}.up-mid .ring-box{width:280px;height:280px}.up-quick{grid-template-columns:repeat(4,1fr);grid-auto-rows:29px}.up-quick button{font-size:14px}}
+@media (max-width:900px){.up2{grid-template-columns:1fr 1fr;grid-template-rows:auto}.up-mid{grid-column:1/-1;order:-1}.up-bal,.up-quick{grid-column:1/-1}.up-go{grid-column:1/-1;height:58px}.up-quick{grid-template-columns:repeat(7,1fr);grid-auto-rows:44px}.up-lists{grid-template-columns:1fr}.up-body{min-height:200px}.up-lh{flex-wrap:wrap}}
+@media (max-width:600px){.up2{grid-template-columns:1fr}.up-from,.up-to{grid-column:1/-1}.up-stack{grid-template-columns:repeat(2,1fr)}}
+.up-lists .item-check{left:8px;right:auto;top:8px}.up-lists .item-tags{top:26px}
 
 </style>
 </head>
@@ -2833,11 +2877,79 @@ const ST_R = "ye2ozt=,12,11,14,12;1daj2jk=,10,11,,10;132ig4j=,11,12,13,12;1kk4gh
 
 return{get ST_R(){return ST_R;}};})();
 
+const __m_highend=(function(){
+// High-end items. Steam Community Market caps listings at ~$2000, so for skins above that
+// the price comes from CSFloat (2026-10-18). Format: name=FN,MW,FT,WW,BS (USD).
+const HIGH_STR = `AK-47 | Fire Serpent=2044,,,,
+AK-47 | Hydroponic=3150,,,,
+AK-47 | Wild Lotus=13450,9689,6800,4560,3647
+AUG | Akihabara Accept=2957,,,,
+AWP | Dragon Lore=10358,8190,5915,5482,4263
+AWP | Gungnir=10695,9426,7021,6800,5899
+AWP | Medusa=4672,2585,1925,,1749
+AWP | The Prince=2445,1773,,,
+M4A1-S | Imminent Danger=,,,3500,
+M4A1-S | Knight=2540,3750,,,
+M4A4 | Howl=6500,4799,4030,4750,
+MP9 | Wild Lily=2205,2022,1785,,3121
+Negev | Mjölnir=2350,,2320,,
+SCAR-20 | Splash Jam=2200,,,,
+★ Bayonet | Crimson Web=2249,,,,
+★ Bowie Knife | Crimson Web=2755,,,,
+★ Butterfly Knife | Crimson Web=5800,,,,
+★ Butterfly Knife | Doppler=1810,2200,,,
+★ Butterfly Knife | Fade=1894,2106,,,
+★ Butterfly Knife | Ultraviolet=1895,,,,
+★ Driver Gloves | Crimson Weave=1850,,,,
+★ Driver Gloves | King Snake=2050,,,,
+★ Driver Gloves | Snow Leopard=1743,,,,
+★ Driver Gloves | Wave Chaser=1703,,,,
+★ Karambit | Crimson Web=5495,,,,
+★ Karambit | Fade=,1703,,,
+★ Karambit | Gamma Doppler=,1735,,,
+★ Karambit | Night=2750,,,,
+★ M9 Bayonet | Crimson Web=6203,,,,
+★ Moto Gloves | Cool Mint=2500,,,,
+★ Moto Gloves | Spearmint=6699,2228,,,
+★ Specialist Gloves | Crimson Kimono=23662,2100,,,
+★ Specialist Gloves | Emerald Web=4233,,,,
+★ Specialist Gloves | Foundation=1721,,,,
+★ Specialist Gloves | Lime Polycam=1850,,,,
+★ Specialist Gloves | Pillow Punchers=4450,,,,
+★ Sport Gloves | Amphibious=2063,,,,
+★ Sport Gloves | Arid=2699,,,,
+★ Sport Gloves | Hedge Maze=29300,6180,3333,2750,1950
+★ Sport Gloves | Nocts=2691,,,,
+★ Sport Gloves | Occult=1704,,,,
+★ Sport Gloves | Pandora's Box=21400,4525,2989,2582,1801
+★ Sport Gloves | Slingshot=30000,,,,
+★ Sport Gloves | Superconductor=9301,2399,,,
+★ Sport Gloves | Ultra Violent=4222,,,,
+★ Sport Gloves | Vice=5849,,,,
+★ Talon Knife | Crimson Web=3049,,,,`;
+
+// Legendary Katowice 2014 stickers (CSFloat price, USD) with Steam CDN image hashes.
+const STICKERS = [
+  ['Titan (Holo) | Katowice 2014', 68000, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVLll4Lh8x1T4P6hJqZrJfHAXjXGkr0i4rc_GSjixEh35GSAnNr8IyqSbg8kA8ciRrQJshGm0oqwlCzKr50'],
+  ['iBUYPOWER (Holo) | Katowice 2014', 64994, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL4nIP57S1M6uCRYKthL77KW2XAkr91tLQ-S33iwhly62jcn9yrcy2fOlBxA5JyRuVf40W7xoC2Kaq8sK3FB_Eg'],
+  ['Team LDLC.com (Holo) | Katowice 2014', 25903, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL9mprjwipU4_3gbfU1c_bAXDKTwu8u4bhvG3qwxk1x4WXRyYuteXrDPFUnWJtwEbYJsQ74zIN29ZviPw'],
+  ['Team Dignitas (Holo) | Katowice 2014', 25538, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL1l5Hu9DZa_M2mZ6hibvGSCmbGmbol5bk5Hyvnl0kktT_Xn4mreHLGPFAnXJpxFLQP4UG5kNP5d7S1RHgEpV4'],
+  ['Vox Eminor (Holo) | Katowice 2014', 25000, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVLnkY7l8CtV4OCRYKthL76WWWXIxewvs-c5SirkwE9_4TzTz9j4JCieZgMhCZEhE7IOuxm_k9S0Kaq8sAIJzkJO'],
+  ['Natus Vincere (Holo) | Katowice 2014', 10721, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL_n4DpwipU4_3gav08c6jBWzHElbck5ONvGX2yxU8m6mnXwtetcnOfOgMiCJclRbIMsg74zIPTbZA4cw'],
+  ['HellRaisers (Holo) | Katowice 2014', 7440, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL5m5rs7yNS_Pe8e5tlL_ycQGWRxbgh4rg-HyyxxUh15z6Hyd6tcirBagB1A5t3Ee8J4BCxldziYeL8p1uJW10TqV0'],
+  ['Reason Gaming | Katowice 2014', 5420, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVLjm5fz8iwVt6D8bPU7dKGQXTbHkLt05LE7HnDrwkxy5zuDydqhcXOVaQMmDJV3Q_lK7EchjsH25A'],
+  ['Clan-Mystik (Holo) | Katowice 2014', 4999, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL8h4X09Clk5_2iZ-o1cfaSXWLFlesisblqGS2wx0l0sW7Rntj8J3nGOAIgCpZ4EbIOsEG5jJS5YDNvjHnm'],
+  ['Ninjas in Pyjamas (Holo) | Katowice 2014', 4842, 'i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJai0ki7VeTHjM-sJnCW8Vli_YTxuAm2FVL_l5jq_DFS4eK3YqVgIeOsBmiczqAl5rc-TH-xxEsi6myAyIytcSiebAQhCpZ1FuEDu0bskdfkMb-z5gzWlcsbmn_Kwe4B'],
+];
+
+return{get HIGH_STR(){return HIGH_STR;},get STICKERS(){return STICKERS;}};})();
+
 const __m_data=(function(){
 // ===== CASE STORM — data: real CS2 items, Steam prices, cases =====
 const { DB } = __m_cs2db;
 const { PRICE_STR, ST_RATIO } = __m_prices;
 const { ST_R } = __m_stratio;
+const { HIGH_STR, STICKERS } = __m_highend;
 const STMAP = {}; for (const e of ST_R.split(';')) { const [k, v] = e.split('='); STMAP[k] = v.split(',').map(x => x === '' ? null : +x / 10); }
 
 const RARITIES = [
@@ -2848,7 +2960,7 @@ const RARITIES = [
   { id: 4, name: 'Засекреченное', color: '#d32ce6' },
   { id: 5, name: 'Тайное', color: '#eb4b4b' },
   { id: 6, name: '★ Редкий предмет', color: '#e4ae39' },
-  { id: 7, name: 'Контрабанда', color: '#e4ae39' },
+  { id: 7, name: 'Экстраординарное', color: '#e4ae39' },
 ];
 const WEARS = [
   { id: 0, name: 'Прямо с завода', short: 'FN', fl: [0.00, 0.07] },
@@ -2873,6 +2985,11 @@ for (const line of PRICE_STR.split('\n')) {
   const i = line.lastIndexOf('='); if (i < 0) continue;
   const name = line.slice(0, i), v = line.slice(i + 1);
   PRICE[name] = v.includes(',') ? v.split(',').map(x => x === '' ? null : +x) : [+v, +v, +v, +v, +v];
+}
+// above Steam's ~$2000 listing cap: CSFloat prices
+for (const line of HIGH_STR.split('\n')) {
+  const i = line.lastIndexOf('='); if (i < 0) continue; const name = line.slice(0, i); const hv = line.slice(i + 1).split(',').map(x => x === '' ? null : +x);
+  const base = PRICE[name] || [null, null, null, null, null]; PRICE[name] = base.map((v, k) => hv[k] != null ? hv[k] : (v != null && v >= 1700 ? null : v));
 }
 const RAR_MEDIAN = [0.05, 0.12, 0.6, 3, 12, 45, 220, 1500];
 
@@ -2913,6 +3030,12 @@ for (const [name, [r, img, minF, maxF]] of Object.entries(DB.skins)) {
   sk.ref = wp[2] ?? avail[0] ?? 0.03;
   SKINS.push(sk); SKIN[name] = sk;
   if (knife) KNIVES.push(sk); if (glove) GLOVES.push(sk);
+}
+// legendary stickers as items (no wear, no StatTrak)
+for (const [nm, usd, img] of STICKERS) {
+  const id = 'Sticker | ' + nm; const [title, event = ''] = nm.split(' | ');
+  const sk = { id, name: id, weapon: 'Наклейка', pattern: title + (event ? ' · ' + event : ''), rarity: 7, sticker: true, noWear: true, minF: 0.15, maxF: 0.38, wp: [null, null, usd, null, null], price: usd, ref: usd, stR: null };
+  IMGHASH[id] = img; SKINS.push(sk); SKIN[id] = sk;
 }
 function priceOf(sk, wear, st) { const p = sk.wp[wear] ?? sk.ref; const r = st ? (sk.stR ? sk.stR[wear] ?? sk.stMed : ST_RATIO) : 1; return round2(Math.max(0.03, p * r)); }
 
@@ -2989,29 +3112,45 @@ function buildAuthor(meta) {
 }
 const W = re => sk => re.test(sk.weapon);
 const PT = re => sk => re.test(sk.pattern);
+const SMG = /^(MAC-10|MP9|MP7|MP5-SD|UMP-45|P90|PP-Bizon)$/, PIST = /^(Glock-18|USP-S|P250|P2000|Desert Eagle|Five-SeveN|Tec-9|CZ75-Auto|Dual Berettas|R8 Revolver)$/;
+const maxP = sk => Math.max(...sk.wp.filter(Boolean));
+// badge: front print shape. body: paint colour (realistic, slightly muted). mat: paint finish
 const AUTHOR = [
-  { id: 'bomzh', name: 'Бомж', price: 0.15, emblem: 'coin', body: '#8a7a5c', accent: '#b0c3d9', mat: 'brushed', tier: 'Дешёвые' },
-  { id: 'student', name: 'Студент', price: 0.35, emblem: 'star', body: '#3f6fb5', accent: '#5e98d9', mat: 'gloss', tier: 'Дешёвые' },
-  { id: 'silver', name: 'Сильвер', price: 0.75, emblem: 'skull', body: '#8f99a6', accent: '#c4ccd6', mat: 'brushed', tier: 'Дешёвые' },
-  { id: 'lottery', name: 'Лотерея', price: 1, emblem: 'coin', body: '#3f9a55', accent: '#7dffb0', mat: 'carbon', tier: 'Дешёвые', bands: [[0.2, 0.55, 6, 0.9], [0.55, 2, 3, 0.085], [40, 400, 3, 0.015]] },
-  { id: 'pistol', name: 'Пистолетный', price: 1.4, emblem: 'bolt', body: '#2f5f8f', accent: '#5e98d9', mat: 'carbon', tier: 'Дешёвые', filter: W(/Glock|USP|P250|P2000|Desert|Five|Tec|CZ75|Dual|R8/) },
-  { id: 'neon', name: 'Неон', price: 2, emblem: 'bolt', body: '#7a2fbf', accent: '#ff2bd6', mat: 'gloss', tier: 'Средние', filter: PT(/Neon|Cyber|Fever|Chromatic|Hyper|Synth|Vapor|Disco|Neural|Turbo|Nostalgia|Rider|Revolution|Glitch/) },
-  { id: 'cyber', name: 'Кибер', price: 2.7, emblem: 'chip', body: '#1f8a6a', accent: '#20ffa0', mat: 'carbon', tier: 'Средние', filter: PT(/Asiimov|Cyrex|Mecha|Disruptor|Signal|Trigon|Flux|Phosphor|Circuit|Code|Digital|Mainframe|Ultralight/) },
-  { id: 'fire', name: 'Пламя', price: 3.5, emblem: 'flame', body: '#c4471c', accent: '#ff6a1a', mat: 'carbon', tier: 'Средние', filter: PT(/Fire|Blaze|Heat|Hot|Inferno|Flame|Ember|Hell|Serpent|Incinegator|Magma|Searing|Sun/) },
-  { id: 'fifty', name: '50 на 50', price: 5, emblem: 'chip', body: '#c9a23a', accent: '#ffd36b', mat: 'carbon', tier: 'Средние', bands: [[0.2, 0.3, 1, 0.5], [1.55, 1.75, 1, 0.5]] },
-  { id: 'beast', name: 'Хищник', price: 4.5, emblem: 'claw', body: '#c07a1f', accent: '#ffb020', mat: 'tiger', tier: 'Средние', filter: PT(/Tiger|Jaguar|Beast|Viper|Cobra|Atheris|Panther|Leopard|Kitty|Wolf|Fox|Lion|Medusa|Kraken|Bengal|Snake|Python|Puppy|Cat/) },
-  { id: 'ak', name: 'Калаш', price: 6, emblem: 'star', body: '#a3401f', accent: '#ff8c3a', mat: 'gloss', tier: 'Оружейные', filter: W(/^AK-47$/) },
-  { id: 'm4', name: 'Эмка', price: 7, emblem: 'skull', body: '#2a6aa8', accent: '#4fc3ff', mat: 'carbon', tier: 'Оружейные', filter: W(/^M4A/) },
-  { id: 'awp', name: 'Снайпер', price: 9, emblem: 'planet', body: '#2f8a4a', accent: '#3dff8a', mat: 'gloss', tier: 'Оружейные', filter: W(/^(AWP|SSG 08|SCAR-20|G3SG1)$/) },
-  { id: 'deagle', name: 'Дигл', price: 10, emblem: 'bolt', body: '#8c8c88', accent: '#f2c14e', mat: 'brushed', tier: 'Оружейные', filter: W(/^(Desert Eagle|R8 Revolver)$/) },
-  { id: 'dragon', name: 'Дракон', price: 12, emblem: 'moon', body: '#b02626', accent: '#ff4d4d', mat: 'scales', tier: 'Оружейные', filter: PT(/Dragon|Koi|Lotus|Daimyo|Kimono|Kami|Lore|Gungnir|Wyrm|Lily|Oni|Shinobu|Jörmungandr/) },
-  { id: 'pink', name: 'Розовая мечта', price: 18, emblem: 'star', body: '#b0359e', accent: '#d32ce6', mat: 'gloss', tier: 'Премиум', filter: sk => sk.rarity === 4 },
-  { id: 'red', name: 'Красная линия', price: 30, emblem: 'flame', body: '#b8232a', accent: '#eb4b4b', mat: 'carbon', tier: 'Премиум', filter: sk => sk.rarity === 5 },
-  { id: 'gloves', name: 'Перчатки', price: 110, emblem: 'crown', body: '#6a3fb0', accent: '#c58bff', mat: 'galaxy', tier: 'Премиум', filter: sk => sk.glove },
-  { id: 'knives', name: 'Ножевой', price: 120, emblem: 'blade', body: '#7a1f2e', accent: '#e4ae39', mat: 'damascus', tier: 'Премиум', filter: sk => sk.knife },
-  { id: 'major', name: 'Мажор', price: 250, emblem: 'crown', body: '#c79a24', accent: '#ffd34d', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove },
-  { id: 'oligarch', name: 'Олигарх', price: 600, emblem: 'crown', body: '#2a2a2a', accent: '#ffd700', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove, bands: [[0.3, 0.7, 5, 0.6], [0.7, 1.3, 5, 0.3], [1.3, 3.2, 4, 0.1]] },
-  { id: 'global', name: 'Глобал', price: 1200, emblem: 'planet', body: '#d4b85a', accent: '#fff3b0', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove, bands: [[0.35, 0.75, 5, 0.62], [0.75, 1.3, 5, 0.33], [1.3, 1.6, 3, 0.05]] },
+  { id: 'nub', name: 'Нуб', price: 0.08, emblem: 'coin', badge: 'circle', body: '#5b5f63', accent: '#b0c3d9', mat: 'brushed', tier: 'Дешёвые' },
+  { id: 'bomzh', name: 'Бомж', price: 0.15, emblem: 'coin', badge: 'shield', body: '#7d6a4a', accent: '#d9c8a0', mat: 'brushed', tier: 'Дешёвые' },
+  { id: 'student', name: 'Студент', price: 0.35, emblem: 'star', badge: 'pentagon', body: '#2f4f86', accent: '#9cc2ff', mat: 'gloss', tier: 'Дешёвые' },
+  { id: 'army', name: 'Армейский', price: 0.5, emblem: 'star', badge: 'diamond', body: '#4f5a2c', accent: '#c9d48a', mat: 'carbon', tier: 'Дешёвые', filter: sk => sk.rarity === 2 },
+  { id: 'silver', name: 'Сильвер', price: 0.75, emblem: 'skull', badge: 'hex', body: '#6f777f', accent: '#e6ebf0', mat: 'brushed', tier: 'Дешёвые' },
+  { id: 'lottery', name: 'Лотерея', price: 1, emblem: 'coin', badge: 'circle', body: '#2f6b3c', accent: '#9dffb8', mat: 'carbon', tier: 'Дешёвые', bands: [[0.2, 0.55, 6, 0.9], [0.55, 2, 3, 0.085], [40, 400, 3, 0.015]] },
+  { id: 'restricted', name: 'Запрещённый', price: 1.2, emblem: 'bolt', badge: 'shield', body: '#3f2f6e', accent: '#b38cff', mat: 'gloss', tier: 'Дешёвые', filter: sk => sk.rarity === 3 },
+  { id: 'pistol', name: 'Пистолетный', price: 1.4, emblem: 'bolt', badge: 'diamond', body: '#1f2d4f', accent: '#8fb6ff', mat: 'carbon', tier: 'Дешёвые', filter: sk => PIST.test(sk.weapon) },
+  { id: 'camo', name: 'Камуфляж', price: 1.8, emblem: 'snow', badge: 'hex', body: '#5c5a3a', accent: '#d8d0a0', mat: 'carbon', tier: 'Средние', filter: sk => /Camo|DDPAT|Forest|Desert|Urban|Jungle|Woodland|Mesh|Sand|Boreal|Tiger/.test(sk.pattern) },
+  { id: 'neon', name: 'Неон', price: 2, emblem: 'bolt', badge: 'diamond', body: '#4a2a7a', accent: '#ff5ce1', mat: 'gloss', tier: 'Средние', filter: sk => /Neon|Cyber|Fever|Chromatic|Hyper|Synth|Vapor|Disco|Neural|Turbo|Nostalgia|Rider|Revolution|Glitch/.test(sk.pattern) },
+  { id: 'smg', name: 'Пулемётчик', price: 2.4, emblem: 'claw', badge: 'pentagon', body: '#6b3a1e', accent: '#ffb37a', mat: 'carbon', tier: 'Средние', filter: sk => SMG.test(sk.weapon) },
+  { id: 'cyber', name: 'Кибер', price: 2.7, emblem: 'chip', badge: 'hex', body: '#1f5f63', accent: '#7dffe0', mat: 'carbon', tier: 'Средние', filter: sk => /Asiimov|Cyrex|Mecha|Disruptor|Signal|Trigon|Flux|Phosphor|Circuit|Code|Digital|Mainframe|Ultralight/.test(sk.pattern) },
+  { id: 'fire', name: 'Пламя', price: 3.5, emblem: 'flame', badge: 'shield', body: '#a8401c', accent: '#ffc46b', mat: 'carbon', tier: 'Средние', filter: sk => /Fire|Blaze|Heat|Hot|Inferno|Flame|Ember|Hell|Serpent|Incinegator|Magma|Searing|Sun/.test(sk.pattern) },
+  { id: 'beast', name: 'Хищник', price: 4.5, emblem: 'claw', badge: 'diamond', body: '#8a5a1c', accent: '#ffd27a', mat: 'tiger', tier: 'Средние', filter: sk => /Tiger|Jaguar|Beast|Viper|Cobra|Atheris|Panther|Leopard|Kitty|Wolf|Fox|Lion|Medusa|Kraken|Bengal|Snake|Python|Puppy|Cat/.test(sk.pattern) },
+  { id: 'fifty', name: '50 на 50', price: 5, emblem: 'coin', badge: 'circle', body: '#1d1f22', accent: '#ffd36b', mat: 'carbon', tier: 'Средние', bands: [[0.2, 0.3, 1, 0.5], [1.55, 1.75, 1, 0.5]] },
+  { id: 'glock', name: 'Глок', price: 5.5, emblem: 'bolt', badge: 'pentagon', body: '#3a3f46', accent: '#9fe0ff', mat: 'brushed', tier: 'Оружейные', filter: W(/^Glock-18$/) },
+  { id: 'ak', name: 'Калаш', price: 6, emblem: 'star', badge: 'pentagon', body: '#7a2a1c', accent: '#ffb07a', mat: 'gloss', tier: 'Оружейные', filter: W(/^AK-47$/) },
+  { id: 'm4', name: 'Эмка', price: 7, emblem: 'skull', badge: 'shield', body: '#1f3550', accent: '#8fd0ff', mat: 'carbon', tier: 'Оружейные', filter: W(/^M4A/) },
+  { id: 'usp', name: 'Тихоня', price: 8, emblem: 'moon', badge: 'circle', body: '#2a2d33', accent: '#c8d2dc', mat: 'brushed', tier: 'Оружейные', filter: W(/^(USP-S|P2000)$/) },
+  { id: 'awp', name: 'Снайпер', price: 9, emblem: 'planet', badge: 'hex', body: '#22492f', accent: '#9dffb3', mat: 'gloss', tier: 'Оружейные', filter: W(/^(AWP|SSG 08|SCAR-20|G3SG1)$/) },
+  { id: 'deagle', name: 'Дигл', price: 10, emblem: 'bolt', badge: 'diamond', body: '#6a6c6e', accent: '#ffd36b', mat: 'brushed', tier: 'Оружейные', filter: W(/^(Desert Eagle|R8 Revolver)$/) },
+  { id: 'dragon', name: 'Дракон', price: 12, emblem: 'moon', badge: 'shield', body: '#7a1f24', accent: '#ffcf70', mat: 'scales', tier: 'Оружейные', filter: PT(/Dragon|Koi|Lotus|Daimyo|Kimono|Kami|Lore|Gungnir|Wyrm|Lily|Oni|Shinobu|Jörmungandr/) },
+  { id: 'pink', name: 'Розовая мечта', price: 18, emblem: 'star', badge: 'diamond', body: '#9a3a7e', accent: '#ffc2ef', mat: 'gloss', tier: 'Премиум', filter: sk => sk.rarity === 4 },
+  { id: 'red', name: 'Красная линия', price: 30, emblem: 'flame', badge: 'pentagon', body: '#8c1c22', accent: '#ffd0a0', mat: 'carbon', tier: 'Премиум', filter: sk => sk.rarity === 5 },
+  { id: 'gloves', name: 'Перчатки', price: 110, emblem: 'crown', badge: 'shield', body: '#4a2f7a', accent: '#e0c4ff', mat: 'galaxy', tier: 'Премиум', filter: sk => sk.glove },
+  { id: 'knives', name: 'Ножевой', price: 120, emblem: 'blade', badge: 'diamond', body: '#5c1a22', accent: '#ffd36b', mat: 'damascus', tier: 'Премиум', filter: sk => sk.knife },
+  { id: 'doppler', name: 'Допплер', price: 250, emblem: 'planet', badge: 'hex', body: '#2a1f4f', accent: '#ff7af0', mat: 'galaxy', tier: 'Премиум', filter: sk => sk.knife && /Doppler|Fade|Marble|Gamma/.test(sk.pattern) },
+  { id: 'major', name: 'Мажор', price: 250, emblem: 'crown', badge: 'circle', body: '#9c7a2a', accent: '#fff1c0', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove },
+  { id: 'butterfly', name: 'Бабочка', price: 900, emblem: 'blade', badge: 'shield', body: '#1f2a3a', accent: '#9fd8ff', mat: 'damascus', tier: 'Хайроллер', filter: W(/^Butterfly Knife$/) },
+  { id: 'oligarch', name: 'Олигарх', price: 600, emblem: 'crown', badge: 'pentagon', body: '#1d1f22', accent: '#ffd700', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove, bands: [[0.3, 0.7, 5, 0.6], [0.7, 1.3, 5, 0.3], [1.3, 3.2, 4, 0.1]] },
+  { id: 'karambit', name: 'Керамбит', price: 900, emblem: 'claw', badge: 'diamond', body: '#3a1f1f', accent: '#ffb070', mat: 'damascus', tier: 'Хайроллер', filter: W(/^Karambit$/) },
+  { id: 'global', name: 'Глобал', price: 1200, emblem: 'planet', badge: 'hex', body: '#b8913c', accent: '#fff3b0', mat: 'gold', tier: 'Хайроллер', filter: sk => sk.knife || sk.glove, bands: [[0.35, 0.75, 5, 0.62], [0.75, 1.3, 5, 0.33], [1.3, 1.6, 3, 0.05]] },
+  { id: 'collector', name: 'Коллекционер', price: 2500, emblem: 'star', badge: 'shield', body: '#2a2a2e', accent: '#ffd36b', mat: 'gold', tier: 'Легенды', filter: sk => maxP(sk) >= 900, bands: [[0.35, 0.7, 6, 0.6], [0.7, 1.4, 5, 0.3], [1.4, 4.5, 4, 0.08], [4.5, 30, 3, 0.02]] },
+  { id: 'katowice', name: 'Катовице 2014', price: 6000, emblem: 'crown', badge: 'circle', body: '#e8e2d2', accent: '#c9302c', mat: 'brushed', tier: 'Легенды', filter: sk => sk.sticker || maxP(sk) >= 2500, bands: [[0.4, 0.8, 5, 0.55], [0.8, 1.5, 4, 0.33], [1.5, 5, 4, 0.1], [5, 12, 2, 0.02]] },
+  { id: 'million', name: 'Миллион', price: 12345.68, rubFixed: 1e6, emblem: 'crown', badge: 'hex', body: '#111214', accent: '#ffd700', mat: 'gold', tier: 'Легенды', filter: sk => sk.sticker || maxP(sk) >= 3000, bands: [[0.25, 0.62, 6, 0.6], [0.62, 1.25, 5, 0.3], [1.25, 3, 6, 0.09], [3, 10, 2, 0.012]] },
 ];
 for (const m of AUTHOR) buildAuthor(m);
 CASES.sort((a, b) => a.price - b.price);
@@ -3490,7 +3629,7 @@ const THREE = __m_three_module_min;
 const { paintPattern, drawIcon, shade, rgba } = __m_art;
 const { hashStr } = __m_data;
 
-const W = 2.5, D = 1.4, BH = 1.12, LH = 0.52, R = 0.2, BV = 0.06;
+const W = 2.6, D = 1.55, BH = 1.0, LH = 0.46, R = 0.2, BV = 0.06;
 
 function rrShape(w, h, r, hole) {
   const s = hole ? new THREE.Path() : new THREE.Shape(); const x = -w / 2, y = -h / 2;
@@ -3648,79 +3787,167 @@ function stencilLogoTexture(def) {
 }
 function mulberryLite(a) { return () => { a = (a * 1664525 + 1013904223) | 0; return ((a >>> 0) % 10000) / 10000; }; }
 
-function buildCase(def) {
-  const g = new THREE.Group();
-  const shellMat = new THREE.MeshPhysicalMaterial({ map: artTexture(def, 1024, 512, false), roughness: 0.62, metalness: 0.08, clearcoat: 0.35, clearcoatRoughness: 0.45 });
-  shellMat.map.wrapS = shellMat.map.wrapT = THREE.RepeatWrapping; shellMat.map.repeat.set(0.36, 0.7); shellMat.map.offset.set(0.1, 0.15);
-  const ribMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(def.body).multiplyScalar(0.55), roughness: 0.7, metalness: 0.1 });
-  const steelMat = () => new THREE.MeshStandardMaterial({ color: 0x8d939b, metalness: 0.95, roughness: 0.38 });
-  const steel = def.price >= 18 ? new THREE.MeshStandardMaterial({ color: 0xc9a24a, metalness: 1, roughness: 0.3 }) : steelMat();
-  const gun = new THREE.MeshStandardMaterial({ color: 0x2a2d32, metalness: 0.85, roughness: 0.45 });
-  const rubber = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.9, metalness: 0 });
-  const innerMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-
-  const base = new THREE.Mesh(shell(W, D, BH, R), shellMat); base.castShadow = true; base.receiveShadow = true; g.add(base);
-  { const rib = new THREE.Mesh(ring(W + 0.025, D + 0.025, R + 0.01, 0.05, 0.04), ribMat); rib.position.y = 0.3; g.add(rib); }
-  const seam = new THREE.Mesh(ring(W + 0.03, D + 0.03, R + 0.012, 0.08, 0.06), gun); seam.position.y = BH - 0.06; g.add(seam);
-  const inner = new THREE.Mesh(new THREE.ShapeGeometry(rrShape(W - 0.16, D - 0.16, R - 0.08)), innerMat); inner.rotation.x = -Math.PI / 2; inner.position.y = BH + 0.004; g.add(inner);
-  // front: big emblem medallion + stencil logo (caser-style), label sticker on the left side, vent grille on the right
-  const premium = def.price >= 18;
-  const medMat = new THREE.MeshPhysicalMaterial({ map: medallionTexture(def), transparent: true, roughness: 0.4, metalness: 0.35, clearcoat: 0.6, clearcoatRoughness: 0.3 });
-  const med = new THREE.Mesh(new THREE.CircleGeometry(0.34, 48), medMat); med.position.set(0, 0.47, D / 2 + 0.006); g.add(med);
-  const medRing = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.022, 10, 48), premium ? new THREE.MeshStandardMaterial({ color: 0xd9a83a, metalness: 1, roughness: 0.3 }) : steelMat()); medRing.position.copy(med.position); medRing.position.z += 0.004; g.add(medRing);
-  const logo = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.116), new THREE.MeshStandardMaterial({ map: stencilLogoTexture(def), transparent: true, roughness: 0.9 }));
-  logo.position.set(0, 0.13, D / 2 + 0.005); g.add(logo);
-  const label = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.33), new THREE.MeshStandardMaterial({ map: labelTexture(def), roughness: 0.8 }));
-  label.rotation.y = -Math.PI / 2; label.position.set(-W / 2 - 0.004, BH * 0.5, 0); g.add(label);
-  const vent = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.5), new THREE.MeshStandardMaterial({ map: ventTexture(), roughness: 0.6, metalness: 0.5 }));
-  vent.rotation.y = Math.PI / 2; vent.position.set(W / 2 + 0.004, BH * 0.5, 0); g.add(vent);
-  // padlock hanging from the hasp under the lid seam
-  const lockG = new THREE.Group(); lockG.position.set(0, BH - 0.05, D / 2 + 0.05); lockG.scale.setScalar(0.8); g.add(lockG);
-  const brass = new THREE.MeshStandardMaterial({ color: premium ? 0xe0b14a : 0xb08a3e, metalness: 1, roughness: 0.32 });
-  const lockBody = new THREE.Mesh(shell(0.2, 0.07, 0.17, 0.03, 0.015, 2), brass); lockBody.position.set(0, -0.12, -0.03); lockG.add(lockBody);
-  const shackle = new THREE.Mesh(new THREE.TorusGeometry(0.065, 0.017, 10, 24, Math.PI), steelMat()); shackle.position.set(0, 0.04, 0); lockG.add(shackle);
-  const hasp = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.12, 0.03), gun); hasp.position.set(0, 0.06, -0.04); lockG.add(hasp);
-  const key = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.01, 12), gun); key.rotation.x = Math.PI / 2; key.position.set(0, -0.05, 0.01); lockG.add(key);
-  // lid
-  const lidPivot = new THREE.Group(); lidPivot.position.set(0, BH, -D / 2); g.add(lidPivot);
-  const lid = new THREE.Group(); lid.position.z = D / 2; lidPivot.add(lid);
-  const lidMesh = new THREE.Mesh(shell(W, D, LH, R, 0.1, 5), shellMat); lidMesh.castShadow = true; lid.add(lidMesh);
-  const seam2 = new THREE.Mesh(ring(W + 0.03, D + 0.03, R + 0.012, 0.08, 0.06), gun); lid.add(seam2);
-  // lid top print with the case name
-  const top = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.3, D - 0.3), new THREE.MeshPhysicalMaterial({ map: artTexture(def, 1024, 560, true), roughness: 0.55, clearcoat: 0.4, clearcoatRoughness: 0.4 }));
-  top.rotation.x = -Math.PI / 2; top.position.set(0, LH + 0.003, 0); lid.add(top);
-  // carry handle on the lid front
-  const hg = new THREE.Group(); hg.position.set(0, LH * 0.55, D / 2 + 0.02); lid.add(hg);
-  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.05, 14, 40, Math.PI), rubber); handle.rotation.set(Math.PI / 2 + 0.35, 0, 0); handle.position.set(0, 0, 0.02); handle.scale.set(1, 0.45, 1);
-  hg.add(handle);
-  for (const sx of [-1, 1]) { const m = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.14, 0.08), gun); m.position.set(sx * 0.34, 0, 0.0); hg.add(m); }
-  // corner brackets with screws
-  const capG = shell(0.4, 0.4, 0.3, 0.12, 0.04, 3);
-  const screwG = new THREE.CylinderGeometry(0.025, 0.025, 0.02, 10);
-  const addCap = (parent, x, y, z, sx, sz) => {
-    const c = new THREE.Mesh(capG, steel); c.position.set(x, y, z); c.castShadow = true; parent.add(c);
-    const sc = new THREE.Mesh(screwG, gun); sc.rotation.x = Math.PI / 2; sc.position.set(x - sx * 0.08, y + 0.15, z + sz * 0.205); parent.add(sc);
-  };
-  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
-    addCap(g, sx * (W / 2 - 0.17), -0.01, sz * (D / 2 - 0.17), sx, sz);
-    addCap(lid, sx * (W / 2 - 0.17), LH - 0.29, sz * (D / 2 - 0.17), sx, sz);
+// ---------- realistic crate (CS2 / caser style): painted metal box, worn edges, ribs, corner posts, print on the front ----------
+function wornPaint(g, w, h, def, seed, opt = {}) {
+  const rnd = mulberryLite(seed); const b = def.body;
+  g.fillStyle = b; g.fillRect(0, 0, w, h);
+  // large mottling and soft light from the top
+  for (let i = 0; i < 26; i++) { const x = rnd() * w, y = rnd() * h, r = 40 + rnd() * w * 0.35; const gr = g.createRadialGradient(x, y, 0, x, y, r); const lt = rnd() < 0.5; gr.addColorStop(0, lt ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.09)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, w, h); }
+  const top = g.createLinearGradient(0, 0, 0, h); top.addColorStop(0, 'rgba(255,255,255,.10)'); top.addColorStop(0.5, 'rgba(255,255,255,0)'); top.addColorStop(1, 'rgba(0,0,0,.28)'); g.fillStyle = top; g.fillRect(0, 0, w, h);
+  // vertical streaks
+  for (let i = 0; i < 40; i++) { g.fillStyle = `rgba(0,0,0,${0.02 + rnd() * 0.05})`; g.fillRect(rnd() * w, rnd() * h * 0.6, 1 + rnd() * 3, h * (0.2 + rnd() * 0.6)); }
+  // chipped paint along the edges (metal shows through)
+  const chip = (x, y, s) => { g.beginPath(); g.moveTo(x, y); for (let k = 0; k < 6; k++) { const a = k / 6 * 6.283 + rnd(); g.lineTo(x + Math.cos(a) * s * (0.5 + rnd()), y + Math.sin(a) * s * (0.5 + rnd())); } g.closePath(); g.fill(); };
+  const edge = opt.edge ?? 1;
+  for (let i = 0; i < 260 * edge; i++) {
+    const side = Math.floor(rnd() * 4); const t = rnd(); const d = Math.pow(rnd(), 3) * 26;
+    const x = side === 0 ? t * w : side === 1 ? t * w : side === 2 ? d : w - d; const y = side === 0 ? d : side === 1 ? h - d : t * h;
+    g.fillStyle = rnd() < 0.7 ? `rgba(200,198,190,${0.35 + rnd() * 0.5})` : `rgba(30,28,26,${0.4 + rnd() * 0.4})`; chip(x, y, 1 + rnd() * 5);
   }
-  // feet
-  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const f = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.04, 14), rubber); f.position.set(sx * (W / 2 - 0.35), -0.02, sz * (D / 2 - 0.3)); g.add(f); }
-  // latches
+  // scratches
+  g.lineCap = 'round';
+  for (let i = 0; i < 46; i++) { g.strokeStyle = `rgba(230,228,220,${0.08 + rnd() * 0.22})`; g.lineWidth = 0.6 + rnd() * 1.4; const x = rnd() * w, y = rnd() * h, l = 10 + rnd() * 60, a = rnd() * 6.283; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l * 0.4); g.stroke(); }
+  // grime near the bottom
+  const gr2 = g.createLinearGradient(0, h * 0.7, 0, h); gr2.addColorStop(0, 'rgba(40,32,24,0)'); gr2.addColorStop(1, 'rgba(40,32,24,.45)'); g.fillStyle = gr2; g.fillRect(0, h * 0.7, w, h * 0.3);
+  // fine grain
+  const img = g.getImageData(0, 0, w, h); const dd = img.data; for (let i = 0; i < dd.length; i += 4) { const n = (rnd() - 0.5) * 16; dd[i] += n; dd[i + 1] += n; dd[i + 2] += n; } g.putImageData(img, 0, 0);
+}
+function badgePath(g, kind, cx, cy, r) {
+  g.beginPath();
+  if (kind === 'circle') g.arc(cx, cy, r, 0, 6.283);
+  else if (kind === 'diamond') { g.moveTo(cx, cy - r * 1.08); g.lineTo(cx + r * 1.08, cy); g.lineTo(cx, cy + r * 1.08); g.lineTo(cx - r * 1.08, cy); g.closePath(); }
+  else if (kind === 'shield') { g.moveTo(cx - r * 0.9, cy - r * 0.95); g.lineTo(cx + r * 0.9, cy - r * 0.95); g.lineTo(cx + r * 0.9, cy - r * 0.1); g.quadraticCurveTo(cx + r * 0.85, cy + r * 0.75, cx, cy + r * 1.1); g.quadraticCurveTo(cx - r * 0.85, cy + r * 0.75, cx - r * 0.9, cy - r * 0.1); g.closePath(); }
+  else { const n = kind === 'hex' ? 6 : 5; for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + i / n * 6.283 + (n === 6 ? Math.PI / 6 : 0); const x = cx + Math.cos(a) * r * 1.05, y = cy + Math.sin(a) * r * 1.05; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.closePath(); }
+}
+function erode(g, w, h, seed, amount) { const rnd = mulberryLite(seed); g.save(); g.globalCompositeOperation = 'destination-out'; for (let i = 0; i < amount; i++) { g.globalAlpha = 0.3 + rnd() * 0.7; g.beginPath(); g.arc(rnd() * w, rnd() * h, 0.6 + rnd() * 2.4, 0, 6.283); g.fill(); } g.restore(); }
+function printLayer(w, h, fn, seed, wear = 900) { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); fn(g, w, h); erode(g, w, h, seed, wear); return c; }
+function frontTexture(def) {
+  return canvasTex(1024, Math.round(1024 * BH / W), (g, w, h) => {
+    const seed = hashStr(def.id + 'front'); wornPaint(g, w, h, def, seed);
+    // recessed centre panel framed by two vertical grooves (like the caser crates)
+    g.fillStyle = 'rgba(0,0,0,.16)'; g.fillRect(w * 0.2, h * 0.08, w * 0.6, h * 0.84);
+    for (const x of [w * 0.2, w * 0.8]) { g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(x - 5, h * 0.06, 6, h * 0.88); g.fillStyle = 'rgba(255,255,255,.10)'; g.fillRect(x + 1, h * 0.06, 3, h * 0.88); }
+    const metal = (g2, x0, x1) => { const m = g2.createLinearGradient(0, x0, 0, x1); m.addColorStop(0, shade(def.accent, 0.45)); m.addColorStop(0.5, def.accent); m.addColorStop(1, shade(def.accent, -0.35)); return m; };
+    const pr = printLayer(w, h, (p) => {
+      const cx = w / 2, cy = h * 0.45, r = h * 0.36;
+      p.save(); badgePath(p, def.badge || 'shield', cx, cy, r); p.fillStyle = 'rgba(0,0,0,.38)'; p.fill(); p.lineWidth = 9; p.strokeStyle = metal(p, cy - r, cy + r); p.stroke();
+      badgePath(p, def.badge || 'shield', cx, cy, r * 0.86); p.lineWidth = 2.5; p.strokeStyle = 'rgba(255,255,255,.35)'; p.stroke(); p.restore();
+      p.shadowColor = 'rgba(0,0,0,.6)'; p.shadowBlur = 8; p.shadowOffsetY = 3;
+      drawIcon(p, def.emblem, cx, cy - r * 0.02, r * 1.05, def.accent, false);
+      p.shadowColor = 'transparent';
+      p.fillStyle = shade(def.accent, 0.2); for (const k of [-1, 0, 1]) { const sx = cx + k * r * 0.32, sy = cy + r * 0.72; p.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? 5 : 12; p.lineTo(sx + Math.cos(a) * rr, sy + Math.sin(a) * rr); } p.closePath(); p.fill(); }
+      p.font = `${Math.round(h * 0.085)}px ${STENCIL}`; p.textAlign = 'center'; p.textBaseline = 'middle'; p.fillStyle = 'rgba(235,232,222,.78)'; p.fillText('CASE STORM', cx, h * 0.89);
+      p.font = `600 ${Math.round(h * 0.035)}px "Roboto Condensed", Arial, sans-serif`; p.textAlign = 'left'; p.fillStyle = 'rgba(235,232,222,.5)';
+      p.fillText('WEAPON CASE · CS2', w * 0.835, h * 0.16); p.fillText('No ' + String(hashStr(def.id) % 9000 + 1000), w * 0.835, h * 0.21); p.fillText(def.name.toUpperCase().slice(0, 14), w * 0.835, h * 0.26);
+    }, seed + 1, 1400);
+    g.drawImage(pr, 0, 0);
+  });
+}
+function sideTexture(def, right) {
+  return canvasTex(512, Math.round(512 * BH / D), (g, w, h) => {
+    const seed = hashStr(def.id + (right ? 'R' : 'L')); wornPaint(g, w, h, def, seed);
+    const pr = printLayer(w, h, (p) => {
+      p.fillStyle = shade(def.accent, -0.1); p.globalAlpha = 0.85;
+      if (right) { for (let i = 0; i < 3; i++) { p.beginPath(); const x = w * 0.62 + i * 34; p.moveTo(x, h * 0.62); p.lineTo(x + 20, h * 0.62); p.lineTo(x + 60, h * 0.92); p.lineTo(x + 40, h * 0.92); p.closePath(); p.fill(); } }
+      else { p.font = `${Math.round(h * 0.12)}px ${STENCIL}`; p.textAlign = 'center'; p.fillStyle = 'rgba(235,232,222,.6)'; p.fillText(def.name.toUpperCase().slice(0, 12), w * 0.5, h * 0.86); }
+      p.globalAlpha = 1;
+    }, seed + 2, 500);
+    g.drawImage(pr, 0, 0);
+  });
+}
+function lidTopTexture(def) {
+  return canvasTex(1024, Math.round(1024 * D / W), (g, w, h) => {
+    const seed = hashStr(def.id + 'top'); wornPaint(g, w, h, def, seed, { edge: 1.4 });
+    const pr = printLayer(w, h, (p) => {
+      p.font = `${Math.round(h * 0.16)}px ${STENCIL}`; p.textAlign = 'center'; p.textBaseline = 'middle'; p.fillStyle = 'rgba(235,232,222,.72)';
+      let fs = h * 0.16; const name = def.name.toUpperCase(); while (p.measureText(name).width > w * 0.7 && fs > 20) { fs -= 4; p.font = `${Math.round(fs)}px ${STENCIL}`; }
+      p.fillText(name, w / 2, h * 0.5);
+    }, seed + 3, 900);
+    g.drawImage(pr, 0, 0);
+  });
+}
+function plainTexture(def, tag) { return canvasTex(512, 256, (g, w, h) => wornPaint(g, w, h, def, hashStr(def.id + tag))); }
+
+// 2.5D painted crate (no WebGL): used instantly while 3D thumbnails render, and on weak PCs
+function crate2D(def, w = 340, h = 276) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
+  const fr = frontTexture(def).image, sd = sideTexture(def, true).image, tp = lidTopTexture(def).image, ls = plainTexture(def, 'lid').image;
+  const fw = w * 0.66, fh = fw * BH / W, lh = fw * LH / W, dx = w * 0.17, dy = h * 0.12; const fx = w * 0.08, fy = h * 0.3 + lh;
+  g.fillStyle = 'rgba(0,0,0,.35)'; g.beginPath(); g.ellipse(fx + fw / 2 + dx / 2, fy + fh + 4, fw * 0.62, 16, 0, 0, 6.283); g.filter = 'blur(6px)'; g.fill(); g.filter = 'none';
+  const face = (img, a, b, cc, d, e, f, dark) => { g.save(); g.setTransform(a, b, cc, d, e, f); g.drawImage(img, 0, 0, 1, 1); if (dark) { g.fillStyle = `rgba(0,0,0,${dark})`; g.fillRect(0, 0, 1, 1); } g.restore(); };
+  // body: right side, front
+  face(sd, dx, -dy, 0, fh, fx + fw, fy, 0.28);
+  face(fr, fw, 0, 0, fh, fx, fy, 0);
+  // lid: right side, front strip, top
+  const ly = fy - lh; face(ls, dx, -dy, 0, lh, fx + fw, ly, 0.3); face(ls, fw, 0, 0, lh, fx, ly, 0.05);
+  face(tp, fw, 0, dx, -dy, fx, ly, -0); g.save(); g.setTransform(fw, 0, dx, -dy, fx, ly); g.fillStyle = 'rgba(255,255,255,.08)'; g.fillRect(0, 0, 1, 1); g.restore();
+  const col = shade(def.body, -0.45);
+  // ribs on the lid, posts, caps
+  g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 2; for (const k of [0.3, 0.55, 0.8]) { const y = ly + lh * k; g.beginPath(); g.moveTo(fx, y); g.lineTo(fx + fw, y); g.lineTo(fx + fw + dx, y - dy); g.stroke(); }
+  g.fillStyle = col; for (const x of [fx - 3, fx + fw - 9]) g.fillRect(x, fy, 12, fh);
+  g.fillStyle = def.price >= 18 ? '#c9a24a' : '#7c8187'; for (const x of [fx - 5, fx + fw - 11]) { g.fillRect(x, fy + fh - 14, 16, 14); g.fillRect(x, ly - 2, 16, lh + 4); }
+  g.fillStyle = '#24272b'; for (const x of [fx + fw * 0.26, fx + fw * 0.7]) g.fillRect(x, fy - 8, 14, 18);
+  g.fillStyle = def.price >= 18 ? '#e0b14a' : '#a8823a'; g.fillRect(fx + fw * 0.86, fy - 2, 12, 11);
+  // highlight on the top front edge
+  g.strokeStyle = 'rgba(255,255,255,.18)'; g.beginPath(); g.moveTo(fx, ly); g.lineTo(fx + fw, ly); g.lineTo(fx + fw + dx, ly - dy); g.stroke();
+  return c.toDataURL('image/png');
+}
+function buildCase(def) {
+  const g = new THREE.Group(); const premium = def.price >= 18;
+  const paint = (map) => new THREE.MeshStandardMaterial({ map, roughness: 0.72, metalness: 0.18 });
+  const sideL = paint(sideTexture(def, false)), sideR = paint(sideTexture(def, true)), front = paint(frontTexture(def)), back = paint(plainTexture(def, 'back')), lidSide = paint(plainTexture(def, 'lid'));
+  const innerMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  const dark = new THREE.MeshStandardMaterial({ color: new THREE.Color(def.body).multiplyScalar(0.72), roughness: 0.7, metalness: 0.22 });
+  const ribMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(def.body).multiplyScalar(0.92), roughness: 0.6, metalness: 0.25 });
+  const metal = premium ? new THREE.MeshStandardMaterial({ color: 0xc9a24a, metalness: 1, roughness: 0.32 }) : new THREE.MeshStandardMaterial({ color: 0x7c8187, metalness: 0.9, roughness: 0.42 });
+  const gun = new THREE.MeshStandardMaterial({ color: 0x24272b, metalness: 0.8, roughness: 0.5 });
+  const rubber = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.92, metalness: 0 });
+  const box = (w, h, d, m, x, y, z, parent = g) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); o.castShadow = true; o.receiveShadow = true; parent.add(o); return o; };
+  // body (top face = dark interior so the open case looks hollow)
+  const body = new THREE.Mesh(new THREE.BoxGeometry(W, BH, D), [sideR, sideL, innerMat, dark, front, back]); body.position.y = BH / 2; body.castShadow = true; body.receiveShadow = true; g.add(body);
+  // ribs around the body
+  const ring = (parent, y, w, d, t = 0.035, hh = 0.05, m = ribMat) => { box(w + 2 * t, hh, t, m, 0, y, d / 2 + t / 2, parent); box(w + 2 * t, hh, t, m, 0, y, -d / 2 - t / 2, parent); box(t, hh, d, m, w / 2 + t / 2, y, 0, parent); box(t, hh, d, m, -w / 2 - t / 2, y, 0, parent); };
+  ring(g, 0.06, W, D, 0.04, 0.09, dark); ring(g, BH - 0.05, W, D, 0.04, 0.08, dark);
+  // vertical corner posts
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(0.17, BH - 0.02, 0.17, dark, sx * (W / 2 - 0.05), BH / 2, sz * (D / 2 - 0.05));
+  // corner caps (bottom)
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(0.24, 0.16, 0.24, metal, sx * (W / 2 - 0.06), 0.08, sz * (D / 2 - 0.06));
+  // side handles (recess frame + grip) on both sides
+  for (const sx of [-1, 1]) {
+    box(0.03, 0.26, 0.6, gun, sx * (W / 2 + 0.03), BH * 0.6, 0);
+    box(0.012, 0.16, 0.48, innerMat, sx * (W / 2 + 0.046), BH * 0.6, 0);
+    box(0.05, 0.05, 0.42, rubber, sx * (W / 2 + 0.06), BH * 0.66, 0);
+  }
+  // lid
+  const lidPivot = new THREE.Group(); lidPivot.position.set(0, BH, -D / 2 - 0.02); g.add(lidPivot);
+  const lid = new THREE.Group(); lid.position.z = D / 2 + 0.02; lidPivot.add(lid);
+  const LW = W + 0.06, LD = D + 0.06;
+  const lidBox = new THREE.Mesh(new THREE.BoxGeometry(LW, LH, LD), [lidSide, lidSide, paint(lidTopTexture(def)), innerMat, lidSide, lidSide]); lidBox.position.y = LH / 2; lidBox.castShadow = true; lid.add(lidBox);
+  for (const y of [LH * 0.28, LH * 0.52, LH * 0.76]) ring(lid, y, LW, LD, 0.03, 0.045);
+  for (let i = 0; i < 5; i++) box(LW - 0.5, 0.035, 0.06, ribMat, 0, LH + 0.017, -LD / 2 + 0.28 + i * (LD - 0.56) / 4, lid);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { box(0.24, LH + 0.02, 0.24, metal, sx * (LW / 2 - 0.06), LH / 2, sz * (LD / 2 - 0.06), lid); }
+  // top carry handle
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.045, 12, 32, Math.PI), rubber); handle.scale.set(1, 0.42, 1); handle.position.set(0, LH + 0.02, 0); lid.add(handle);
+  for (const sx of [-1, 1]) box(0.12, 0.05, 0.1, gun, sx * 0.3, LH + 0.03, 0, lid);
+  // latches on the front seam
   const latches = [];
   for (const sx of [-1, 1]) {
-    const lg = new THREE.Group(); lg.position.set(sx * 0.78, BH - 0.02, D / 2 + 0.02); g.add(lg);
-    const plate = new THREE.Mesh(shell(0.28, 0.06, 0.32, 0.03, 0.012, 2), gun); plate.position.set(0, -0.3, -0.02); lg.add(plate);
-    const lever = new THREE.Group(); lg.add(lever);
-    const lm = new THREE.Mesh(shell(0.22, 0.05, 0.36, 0.03, 0.012, 2), steel); lm.position.set(0, -0.2, 0.03); lever.add(lm);
+    const lg = new THREE.Group(); lg.position.set(sx * 0.62, BH + 0.02, D / 2 + 0.05); g.add(lg);
+    box(0.24, 0.28, 0.04, gun, 0, -0.12, -0.02, lg);
+    const lever = new THREE.Group(); lg.add(lever); box(0.18, 0.34, 0.04, metal, 0, -0.12, 0.02, lever);
     latches.push(lever);
   }
+  // padlock on the front right
+  const lockG = new THREE.Group(); lockG.position.set(0.98, BH - 0.06, D / 2 + 0.07); g.add(lockG);
+  const brass = new THREE.MeshStandardMaterial({ color: premium ? 0xe0b14a : 0xa8823a, metalness: 1, roughness: 0.35 });
+  box(0.17, 0.15, 0.06, brass, 0, -0.1, 0, lockG);
+  const shackle = new THREE.Mesh(new THREE.TorusGeometry(0.055, 0.015, 8, 20, Math.PI), metal); shackle.position.set(0, -0.02, 0); lockG.add(shackle);
+  // feet
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) { const f = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.03, 12), rubber); f.position.set(sx * (W / 2 - 0.35), -0.015, sz * (D / 2 - 0.3)); g.add(f); }
   const glowMat = new THREE.MeshStandardMaterial({ color: 0x000000 });
   g.userData = { lidPivot, latches, innerMat, glowMat, def };
   return g;
 }
-
 class CaseStage {
   constructor(container, opts = {}) {
     this.el = container;
@@ -3877,9 +4104,9 @@ class CaseStage {
   }
   renderThumb(def, w = 420, h = 340) {
     this.renderer.setPixelRatio(1); this.renderer.setSize(w, h, false);
-    this.camera.aspect = w / h; this.camera.position.set(0, 2.5, 6.1); this.camera.fov = 30; this.camera.updateProjectionMatrix();
-    this.setCase(def); this.holder.rotation.y = -0.38; this.holder.position.y = 0.0;
-    this.camera.lookAt(0, 0.78, 0);
+    this.camera.aspect = w / h; this.camera.position.set(0, 1.55, 5.6); this.camera.fov = 30; this.camera.updateProjectionMatrix();
+    this.setCase(def); this.holder.rotation.y = -0.52; this.holder.position.y = 0.0;
+    this.camera.lookAt(0, 0.6, 0);
     this.renderer.render(this.scene, this.camera);
     return this.renderer.domElement.toDataURL('image/png');
   }
@@ -3920,7 +4147,7 @@ function renderThumbsAsync(cases, onThumb, onDone) {
   setTimeout(next, 30);
 }
 
-return{get buildCase(){return buildCase;},get CaseStage(){return CaseStage;},get renderAllThumbs(){return renderAllThumbs;},get hasWebGL(){return hasWebGL;},get renderThumbsAsync(){return renderThumbsAsync;}};})();
+return{get crate2D(){return crate2D;},get buildCase(){return buildCase;},get CaseStage(){return CaseStage;},get renderAllThumbs(){return renderAllThumbs;},get hasWebGL(){return hasWebGL;},get renderThumbsAsync(){return renderThumbsAsync;}};})();
 
 const __m_audio=(function(){
 // WebAudio synth — every sound is generated, no files.
@@ -3991,7 +4218,7 @@ const __m_main=(function(){
 // ===== CASE STORM — app =====
 const { RARITIES, WEARS, SKINS, SKIN, CASES, CASE_BY_ID, AUTHOR, rollCase, makeItem, fillerSkin, priceOf, VARIANTS, variantNear, levelFromXp, skinTitle, skinSub, skinFull, round2, CUR, setRates, seeded, hashStr } = __m_data;
 const { skinSrc, caseImgSrc } = __m_images;
-const { CaseStage, renderThumbsAsync, hasWebGL } = __m_case3d;
+const { CaseStage, renderThumbsAsync, hasWebGL, crate2D } = __m_case3d;
 const { sfx, setMuted, setVolume } = __m_audio;
 const { iconURL } = __m_art;
 const { ico } = __m_icons;
@@ -4047,13 +4274,14 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 // ---------- money formatting ----------
 function fmtNum(v, dec) { const s = v.toFixed(dec); const [a, b] = s.split('.'); return a.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (b ? ',' + b : ''); }
 function moneyTxt(usd) { const c = CUR[S.cur] || CUR.RUB; const v = usd * c.rate; const dec = c.dec === 0 ? (v < 10 && v % 1 ? 1 : 0) : (v >= 1000 ? 0 : 2); return S.cur === 'USD' ? c.sym + fmtNum(v, dec) : fmtNum(v, dec) + ' ' + c.sym; }
+const curTxt = t => String(t).replace(/%([\d.]+)%/g, (m, v) => moneyTxt(+v));
 const money = usd => `<span class="mn">${moneyTxt(usd)}</span>`;
 const rc = r => RARITIES[r].color;
 async function loadRates() {
   if (S.rates && S.ratesAt > Date.now() - 6 * 3600e3) return;
   try {
     const r = await fetch('https://open.er-api.com/v6/latest/USD'); const d = await r.json();
-    if (d && d.rates && d.rates.RUB) { S.rates = { RUB: d.rates.RUB, EUR: d.rates.EUR }; S.ratesAt = Date.now(); setRates(S.rates); save(); refreshMoney(); }
+    if (d && d.rates && d.rates.RUB) { S.rates = { RUB: d.rates.RUB, EUR: d.rates.EUR }; S.ratesAt = Date.now(); setRates(S.rates); syncFixedPrices(); save(); refreshMoney(); }
   } catch (e) { }
 }
 function refreshMoney() { const b = $('#walletAmt'); if (b) b.textContent = moneyTxt(S.bal); if (current.name) go(current.name, current.arg, false, true); }
@@ -4070,7 +4298,7 @@ function itemCard(it, opts = {}) {
   const w = WEARS[it.w];
   return `<div class="item r${sk.rarity} ${opts.cls || ''}" data-uid="${it.uid || ''}" style="--rc:${rc(sk.rarity)}">
     ${opts.chance != null ? `<div class="item-chance">${opts.chance}</div>` : ''}
-    <div class="item-tags">${w && opts.wear !== false ? `<span>${w.short}</span>` : ''}${it.st ? '<span class="st">ST</span>' : ''}</div>
+    <div class="item-tags">${w && opts.wear !== false && !sk.noWear ? `<span>${w.short}</span>` : ''}${it.st ? '<span class="st">ST</span>' : ''}</div>
     <img loading="lazy" decoding="async" data-sk="${esc(sk.id)}" src="${skinSrc(sk)}" alt="">
     <div class="item-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))}</span></div>
     ${opts.noPrice ? '' : `<div class="item-price">${money(it.p ?? sk.ref)}</div>`}
@@ -4145,28 +4373,28 @@ const ACH = [
   ['st', 'Счётчик убийств', 'Выбей StatTrak™', 0.5], ['fn', 'Заводская свежесть', 'Float меньше 0.01', 2], ['hoarder', 'Плюшкин', 'Держи 30 предметов в инвентаре', 1],
   ['upg', 'Апгрейдер', 'Выиграй апгрейд', 1], ['miracle', 'Чудо в перьях', 'Выиграй апгрейд с шансом ниже 10%', 5], ['unlucky', 'Невезунчик', 'Проиграй 5 апгрейдов подряд', 2],
   ['battle', 'Батлер', 'Выиграй батл у живого игрока', 2], ['crazy', 'Всё наоборот', 'Выиграй батл в обратном режиме', 2], ['contract', 'Нотариус', 'Подпиши контракт', 0.5],
-  ['sapper', 'Сапёр', 'Забери x5 и больше в «Минёре»', 3], ['flip', 'Контра или терры', 'Выиграй 3 флипа подряд', 1], ['rich', 'Олигарх', 'Накопи баланс 150 $', 5],
+  ['rich', 'Олигарх', 'Накопи баланс %150%', 5],
   ['broke', 'Банкрот', 'Останься без денег и скинов', 1], ['promo', 'Халявщик', 'Активируй промокод', 0.3], ['chat', 'Общительный', 'Напиши в общий чат', 0.2],
 ];
 function unlock(id) {
   if (S.ach[id]) return; const a = ACH.find(x => x[0] === id); if (!a) return;
   S.ach[id] = Date.now(); save();
-  setTimeout(() => { toast(`<div class="ach-toast">${ico('trophy')}<div><b>Достижение: ${esc(a[1])}</b><span>${esc(a[2])}${a[3] ? ' · +' + moneyTxt(a[3]) : ''}</span></div></div>`, 'gold'); if (a[3]) setBal(S.bal + a[3]); sfx.win(4); }, 600);
+  setTimeout(() => { toast(`<div class="ach-toast">${ico('trophy')}<div><b>Достижение: ${esc(a[1])}</b><span>${esc(curTxt(a[2]))}${a[3] ? ' · +' + moneyTxt(a[3]) : ''}</span></div></div>`, 'gold'); if (a[3]) setBal(S.bal + a[3]); sfx.win(4); }, 600);
 }
 
 // ---------- quests ----------
 const QUEST_POOL = [
   { id: 'open', t: 'Открой {n} кейсов', n: [3, 5, 10], r: 0.12 }, { id: 'battle', t: 'Сыграй батл', n: [1], r: 0.6 }, { id: 'upg', t: 'Сделай {n} апгрейд(а)', n: [1, 3], r: 0.25 },
-  { id: 'contract', t: 'Подпиши контракт', n: [1], r: 0.5 }, { id: 'mines', t: 'Сыграй {n} раз в «Минёра»', n: [2, 3], r: 0.15 }, { id: 'sell', t: 'Продай скинов на {n} $', n: [1, 3], r: 0.4 },
+  { id: 'contract', t: 'Подпиши контракт', n: [1], r: 0.5 }, { id: 'sell', t: 'Продай скинов на %{n}%', n: [1, 3], r: 0.4 },
 ];
 function dayKey() { const d = new Date(); return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate(); }
 function ensureQuests() {
-  if (S.quests && S.quests.day === dayKey()) return;
+  if (S.quests && S.quests.day === dayKey() && !S.quests.list.some(q => q.id === 'mines' || (q.id === 'sell' && !q.text.includes('%')))) return;
   const pool = QUEST_POOL.slice().sort(() => Math.random() - 0.5).slice(0, 3);
   S.quests = { day: dayKey(), list: pool.map(q => { const n = pick(q.n); return { id: q.id, text: q.t.replace('{n}', n), need: n, have: 0, reward: round2(0.2 + q.r * n), done: false, claimed: false }; }) };
   save();
 }
-function quest(id, amount = 1) { ensureQuests(); for (const q of S.quests.list) if (q.id === id && !q.done) { q.have = Math.min(q.need, round2(q.have + amount)); if (q.have >= q.need) { q.done = true; toast(`Задание выполнено: <b>${esc(q.text)}</b> — награда ждёт в «Наградах»`, 'gold'); } } save(); }
+function quest(id, amount = 1) { ensureQuests(); for (const q of S.quests.list) if (q.id === id && !q.done) { q.have = Math.min(q.need, round2(q.have + amount)); if (q.have >= q.need) { q.done = true; toast(`Задание выполнено: <b>${esc(curTxt(q.text))}</b> — награда ждёт в «Наградах»`, 'gold'); } } save(); }
 
 // ---------- bonus / daily ----------
 const bonusAmount = () => round2(0.3 + levelFromXp(S.xp).lvl * 0.05);
@@ -4277,16 +4505,19 @@ function go(name, arg, push = true, keepScroll = false) {
   current = { name, arg };
   const navKey = { case: 'cases', battle: 'battles' }[name] || name;
   $$('[data-go]').forEach(a => a.classList.toggle('on', a.dataset.go === navKey));
-  const v = $('#view'); v.innerHTML = ''; v.className = 'view v-' + name; if (!keepScroll) window.scrollTo({ top: 0 });
+  const old = $('#view'); const v = old.cloneNode(false); old.replaceWith(v); // fresh element: drops listeners left by the previous page v.className = 'view v-' + name; if (!keepScroll) window.scrollTo({ top: 0 });
+  setBg(name, arg);
   (views[name] || views.cases)(v, arg);
   if (push) { try { history.pushState({ name, arg }, '', '#' + name + (arg ? '/' + encodeURIComponent(arg) : '')); } catch (e) { } }
 }
-function parseHash() { const h = (location.hash || '').slice(1).split('/'); const valid = ['cases', 'case', 'battles', 'upgrade', 'contracts', 'games', 'rewards', 'inventory', 'admin']; return valid.includes(h[0]) ? { name: h[0], arg: h[1] ? decodeURIComponent(h[1]) : null } : { name: 'cases', arg: null }; }
+function parseHash() { const h = (location.hash || '').slice(1).split('/'); const valid = ['cases', 'case', 'battles', 'upgrade', 'contracts', 'rewards', 'inventory', 'admin']; return valid.includes(h[0]) ? { name: h[0], arg: h[1] ? decodeURIComponent(h[1]) : null } : { name: 'cases', arg: null }; }
 window.addEventListener('popstate', e => { const s = e.state || parseHash(); if (!busy && s.name !== 'battle') go(s.name, s.arg, false); });
 
 const caseImg = c => c.official ? caseImgSrc(c.img) : (THUMBS[c.id] || '');
 function dayCase() { const pool = CASES.filter(c => !c.official && c.price >= 1 && c.price <= 15); return pool[Math.floor(Date.now() / 864e5) % pool.length]; }
 const casePrice = c => c === dayCase() ? round2(c.price * 0.8) : c.price;
+function syncFixedPrices() { for (const c of CASES) if (c.rubFixed) c.price = round2(c.rubFixed / CUR.RUB.rate); }
+syncFixedPrices();
 
 // =================== VIEW: CASES ===================
 const LIMITED = ['fire', 'dragon', 'neon', 'beast', 'knives'];
@@ -4389,7 +4620,7 @@ views.case = (v, id) => {
     <button class="btn btn-dark" id="demoBtn">Демо</button>
     <label class="tgl"><input type="checkbox" id="fastChk" ${S.fast ? 'checked' : ''}><span></span>Быстро</label>
   </div>
-  <section class="contents"><h2>Содержимое кейса <small>${cs.pool.length} предметов · цены Steam</small></h2>
+  <section class="contents"><h2>Содержимое кейса <small>${cs.pool.length} предметов · цены Steam${cs.pool.some(p => p.ev >= 1700) ? " и CSFloat" : ""}</small></h2>
     <div class="item-grid">${cs.pool.slice().sort((a, b) => b.ev - a.ev).map(p => itemCard({ s: p.skin.id, w: p.wear ?? 2, p: p.ev }, { chance: pct(p.p), wear: p.wear != null })).join('')}</div>
   </section>`;
   if (!cs.official) { try { if (!GL || window.__slowGL) throw new Error('no fast webgl'); stage = new CaseStage($('#stage')); stage.setCase(cs); } catch (e) { console.warn(e); $('#stage').innerHTML = `<div class="case-2d"><img src="${THUMBS[cs.id] || ''}"></div>`; } }
@@ -4469,7 +4700,7 @@ function showDrop(items, cs, demo, free) {
         <img data-sk="${esc(sk.id)}" data-big="1" src="${skinSrc(sk, true)}" alt="">
         <div class="drop-rar">${RARITIES[sk.rarity].name}${it.st ? ' · StatTrak™' : ''}</div>
         <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))}</span></div>
-        <div class="drop-wear">${WEARS[it.w].name} · ${it.f.toFixed(4)}</div>
+        <div class="drop-wear">${sk.noWear ? 'Наклейка' : WEARS[it.w].name + ' · ' + it.f.toFixed(4)}</div>
         ${demo ? `<div class="drop-price">${money(it.p)}</div>` : `<button class="btn btn-sell" data-sell="${it.uid}">${ico('sell')} Продать ${money(it.p)}</button>`}
       </div>`; }).join('')}</div>
     <div class="row-btns">
@@ -4529,7 +4760,7 @@ views.inventory = v => {
   <div class="inv-bar">
     <h2>Инвентарь <small>${S.inv.length} шт · ${money(total)}</small></h2>
     <div class="inv-tools">
-      <div class="chips" id="invF">${[['all', 'Все'], ['knife', '★ Ножи и перчатки'], ['5', 'Тайные'], ['cheap', 'Дешевле 0,1 $']].map(([k, t]) => `<button data-f="${k}" class="${invFilter === k ? 'on' : ''}">${t}</button>`).join('')}</div>
+      <div class="chips" id="invF">${[['all', 'Все'], ['knife', '★ Ножи и перчатки'], ['5', 'Тайные'], ['cheap', 'Дешевле ' + moneyTxt(0.1)]].map(([k, t]) => `<button data-f="${k}" class="${invFilter === k ? 'on' : ''}">${t}</button>`).join('')}</div>
       <select id="invSort" aria-label="Сортировка"><option value="new">Новые</option><option value="exp">Дорогие</option><option value="cheap">Дешёвые</option><option value="rar">Редкость</option></select>
       <button class="btn btn-dark btn-sm" id="selAll">Выбрать всё</button>
       <button class="btn btn-sell btn-sm" id="sellSel" disabled>Продать</button>
@@ -4580,8 +4811,8 @@ function itemModal(it) {
     <img data-sk="${esc(sk.id)}" data-big="1" src="${skinSrc(sk, true)}">
     <div class="drop-rar">${RARITIES[sk.rarity].name}${it.st ? ' · StatTrak™' : ''}</div>
     <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))}</span></div>
-    <div class="drop-wear">${WEARS[it.w].name}</div>
-    <div class="float-bar"><i style="left:${it.f * 100}%"></i></div><div class="float-num">Float ${it.f.toFixed(5)}</div>
+    ${sk.noWear ? '<div class="drop-wear">Наклейка · без износа</div>' : `<div class="drop-wear">${WEARS[it.w].name}</div>
+    <div class="float-bar"><i style="left:${it.f * 100}%"></i></div><div class="float-num">Float ${it.f.toFixed(5)}</div>`}
     <div class="row-btns"><button class="btn btn-sell" data-a="sell">Продать ${money(it.p)}</button><button class="btn btn-dark" data-a="upg">${ico('upgrade')} В апгрейд</button><button class="btn btn-dark" data-a="con">${ico('contract')} В контракт</button></div></div>`, 'preview-modal');
   m.addEventListener('click', e => {
     const a = e.target.closest('[data-a]'); if (!a) return;
@@ -4592,37 +4823,46 @@ function itemModal(it) {
 }
 
 // =================== VIEW: UPGRADE ===================
-const UP = { sel: [], target: null, q: '', chance: 0.5, side: 'under', extra: 0, spin: null };
+const UP = { sel: [], target: null, q: '', chance: 0.5, side: 'under', extra: 0, spin: null, lo: '', hi: '', sortT: 'asc', sortI: 'exp' };
 views.upgrade = v => {
-  UP.sel = UP.sel.filter(u => S.inv.some(i => i.uid === u)); UP.spin = null;
+  UP.sel = UP.sel.filter(u => S.inv.some(i => i.uid === u)); UP.spin = null; UP.extra = Math.min(UP.extra, S.bal);
   v.innerHTML = `
-  <div class="page-head"><h1>Апгрейды</h1><p>Поставь скины и деньги с баланса, выбери цель. Ниже шанс — выше множитель.</p></div>
-  <div class="upg">
-    <div class="upg-side"><div class="lbl">Ваша ставка</div><div class="upg-slot" id="upFrom"></div><div class="upg-extra"><label>+ с баланса, $ <input id="upExtra" type="number" min="0" step="0.1" value="${UP.extra}"></label></div><div class="upg-sum" id="upSum"></div></div>
-    <div class="upg-center">
+  <div class="up2">
+    <section class="up-pan up-from"><div class="up-ph"><span>Выберите предметы и/или баланс для использования</span><button class="btn btn-dark btn-sm" id="upClrA">Очистить</button></div><div class="up-body" id="upFrom"></div><div class="up-foot" id="upSum"></div></section>
+    <section class="up-mid">
+      <div class="up-logo">${LOGO_HTML}</div>
       <div class="ring-box"><canvas id="ring" width="640" height="640"></canvas><div class="ring-mid"><b id="upChance">0%</b><span id="upMult">шанс</span></div></div>
-      <div class="upg-ctrl">
-        <div class="seg sm" id="upSide"><button data-side="under" class="${UP.side === 'under' ? 'on' : ''}">Сектор снизу</button><button data-side="over" class="${UP.side === 'over' ? 'on' : ''}">Сектор сверху</button></div>
-        <div class="seg sm" id="upQuick">${[['x1.5', 0.6133], ['x2', 0.46], ['x3', 0.3067], ['x5', 0.184], ['x10', 0.092]].map(([t, c]) => `<button data-c="${c}">${t}</button>`).join('')}</div>
-      </div>
-      <div class="range-row"><span>1%</span><input type="range" id="upRange" min="1" max="80" step="1" value="${Math.round(UP.chance * 100)}" aria-label="Шанс"><span>80%</span></div>
-      <button class="btn btn-green btn-upg" id="upBtn" disabled>${ico('upgrade')} Улучшить</button>
-    </div>
-    <div class="upg-side"><div class="lbl">Вы получите</div><div class="upg-slot" id="upTo"></div><div class="upg-sum" id="upTSum"></div></div>
+    </section>
+    <section class="up-pan up-to"><div class="up-ph"><span>Выберите предмет для апгрейда</span><button class="btn btn-dark btn-sm" id="upClrB">Очистить</button></div><div class="up-body" id="upTo"></div><div class="up-foot" id="upTSum"></div></section>
+    <section class="up-pan up-bal"><div class="up-bal-l">Добавить<br>баланс</div><input type="range" id="upExtra" min="0" max="${Math.max(0.01, S.bal)}" step="0.01" value="${UP.extra}" aria-label="Сумма с баланса"><div class="up-bal-v"><b id="upExtraV">${money(UP.extra)}</b><small>Макс. ${moneyTxt(S.bal)}</small></div></section>
+    <button class="up-go" id="upBtn" disabled>Апгрейд</button>
+    <section class="up-quick" id="upQuick"><button data-q="rnd" title="Случайная цель">${ico('dice')}</button><button data-q="x2">x2</button><button data-q="x5">x5</button><button data-q="x10">x10</button><button data-q="c30">30%</button><button data-q="c50">50%</button><button data-q="c75">75%</button></section>
   </div>
-  <div class="upg-lists">
-    <section><h2>Ваши предметы <small>до 6 шт</small></h2><div class="item-grid sm" id="upInv"></div></section>
-    <section><h2>Цель <label class="search sm">${ico('search')}<input id="upQ" placeholder="AK-47, Karambit…" value="${esc(UP.q)}"></label></h2><div class="item-grid sm" id="upTargets"></div></section>
+  <div class="up-lists">
+    <section class="up-pan"><div class="up-lh">${ico('bag')}<h2>Мои предметы</h2><button class="icon-btn" id="upSortI" title="Сортировка">${ico('refresh')}</button></div><div class="item-grid sm" id="upInv"></div></section>
+    <section class="up-pan"><div class="up-lh">${ico('upgrade')}<h2>Выбрать предмет</h2><span class="up-pl">Цена</span><input class="inp" id="upLo" placeholder="От" value="${esc(UP.lo)}" inputmode="decimal"><input class="inp" id="upHi" placeholder="До" value="${esc(UP.hi)}" inputmode="decimal"><button class="icon-btn" id="upSortT" title="Сортировка по цене">${ico('refresh')}</button><label class="search sm">${ico('search')}<input id="upQ" placeholder="Поиск" value="${esc(UP.q)}"></label></div><div class="item-grid sm" id="upTargets"></div></section>
   </div>`;
-  $('#upSide').addEventListener('click', e => { const b = e.target.closest('[data-side]'); if (!b || busy) return; UP.side = b.dataset.side; $$('#upSide button').forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); drawRing(); });
-  $('#upQuick').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b || busy) return; UP.chance = +b.dataset.c; $('#upRange').value = Math.round(UP.chance * 100); targetFromChance(); sfx.tab(); renderUp(); });
-  $('#upRange').addEventListener('input', e => { if (busy) return; UP.chance = +e.target.value / 100; targetFromChance(); sfx.tension(UP.chance); renderUp(false); });
-  $('#upExtra').addEventListener('input', e => { UP.extra = clamp(round2(+e.target.value || 0), 0, S.bal); targetFromChance(); renderUp(false); });
+  const cur = CUR[S.cur] || CUR.RUB;
+  $('#upClrA').onclick = () => { if (busy) return; UP.sel = []; UP.extra = 0; $('#upExtra').value = 0; sfx.click(); renderUp(); };
+  $('#upClrB').onclick = () => { if (busy) return; UP.target = null; sfx.click(); renderUp(); };
+  $('#upExtra').addEventListener('input', e => { if (busy) return; UP.extra = clamp(round2(+e.target.value || 0), 0, S.bal); $('#upExtraV').innerHTML = money(UP.extra); if (!UP.target) targetFromChance(); sfx.tension(UP.extra / Math.max(0.01, S.bal)); renderUp(false); });
+  $('#upQuick').addEventListener('click', e => {
+    const b = e.target.closest('[data-q]'); if (!b || busy) return; const st = upStake(); if (!st) { toast('Сначала выбери скины или добавь баланс'); return; }
+    const q = b.dataset.q; sfx.tab();
+    if (q === 'rnd') { const pool = VARIANTS.filter(vr => vr.price > st * 1.3 && vr.price < st * 12); UP.target = pick(pool) || null; }
+    else if (q[0] === 'x') UP.target = variantNear(st * +q.slice(1), st * 1.1);
+    else { UP.chance = +q.slice(1) / 100; targetFromChance(); }
+    $$('#upQuick button').forEach(x => x.classList.toggle('on', x === b)); renderUp();
+  });
+  const priceIn = () => { UP.lo = $('#upLo').value; UP.hi = $('#upHi').value; renderTargets(); };
+  $('#upLo').addEventListener('input', priceIn); $('#upHi').addEventListener('input', priceIn);
+  $('#upSortT').onclick = () => { UP.sortT = UP.sortT === 'asc' ? 'desc' : 'asc'; sfx.tab(); renderTargets(); };
+  $('#upSortI').onclick = () => { UP.sortI = UP.sortI === 'exp' ? 'cheap' : 'exp'; sfx.tab(); renderUp(); };
   $('#upQ').addEventListener('input', e => { UP.q = e.target.value; renderTargets(); });
-  $('#upInv').addEventListener('click', e => { const c = e.target.closest('.item'); if (!c || busy) return; const u = c.dataset.uid; if (UP.sel.includes(u)) UP.sel = UP.sel.filter(x => x !== u); else if (UP.sel.length < 6) UP.sel.push(u); else toast('Максимум 6 предметов'); sfx.click(); targetFromChance(); renderUp(); });
-  $('#upTargets').addEventListener('click', e => { const c = e.target.closest('.item'); if (!c || busy) return; UP.target = VARIANTS[+c.dataset.vi]; UP.chance = upChance(); $('#upRange').value = Math.round(UP.chance * 100); sfx.click(); renderUp(); });
+  $('#upInv').addEventListener('click', e => { const c = e.target.closest('.item'); if (!c || busy) return; const u = c.dataset.uid; if (UP.sel.includes(u)) UP.sel = UP.sel.filter(x => x !== u); else if (UP.sel.length < 6) UP.sel.push(u); else toast('Максимум 6 предметов'); sfx.click(); if (!UP.target) targetFromChance(); renderUp(); });
+  $('#upFrom').addEventListener('click', e => { const c = e.target.closest('.item'); if (!c || busy) return; UP.sel = UP.sel.filter(x => x !== c.dataset.uid); sfx.click(); renderUp(); });
+  $('#upTargets').addEventListener('click', e => { const c = e.target.closest('.item'); if (!c || busy) return; UP.target = VARIANTS[+c.dataset.vi]; sfx.click(); renderUp(); });
   $('#upBtn').addEventListener('click', doUpgrade);
-  if ((UP.sel.length || UP.extra) && !UP.target) targetFromChance();
   renderUp();
 };
 function upStake() { return round2(S.inv.filter(i => UP.sel.includes(i.uid)).reduce((a, i) => a + i.p, 0) + (UP.extra || 0)); }
@@ -4652,23 +4892,27 @@ function drawRing(result) {
 }
 function renderUp(full = true) {
   const s = upStake(); const ch = upChance();
-  $('#upFrom').innerHTML = UP.sel.length ? `<div class="stack n${UP.sel.length}">${UP.sel.map(u => itemCard(S.inv.find(i => i.uid === u), { cls: 'sm' })).join('')}</div>` : `<div class="slot-empty">${ico('plus')}<br>Выбери скины снизу или поставь деньги с баланса</div>`;
-  $('#upSum').innerHTML = s ? money(s) : '';
-  $('#upTo').innerHTML = UP.target ? itemCard({ s: UP.target.skin.id, w: UP.target.w, p: UP.target.price }, { cls: 'big' }) : `<div class="slot-empty">${ico('upgrade')}<br>Выбери цель справа или подвинь шанс</div>`;
+  $('#upFrom').innerHTML = UP.sel.length ? `<div class="up-stack">${UP.sel.map(u => itemCard(S.inv.find(i => i.uid === u), { cls: 'sm' })).join('')}</div>` : (UP.extra ? `<div class="up-cash">${ico('coin')}<b>${money(UP.extra)}</b><span>с баланса</span></div>` : `<div class="slot-empty">${ico('plus')}<br>Выбери предметы снизу<br>или добавь баланс</div>`);
+  $('#upSum').innerHTML = s ? `Ставка: ${money(s)}` : '';
+  $('#upTo').innerHTML = UP.target ? itemCard({ s: UP.target.skin.id, w: UP.target.w, p: UP.target.price }, { cls: 'big' }) : `<div class="slot-empty">${ico('upgrade')}<br>Выбери предмет справа снизу<br>или нажми x2 / x5 / 50%</div>`;
   $('#upTSum').innerHTML = UP.target ? `${money(UP.target.price)} <em>x${(UP.target.price / (s || 1)).toFixed(2)}</em>` : '';
   $('#upChance').textContent = (ch * 100).toFixed(2) + '%'; $('#upMult').textContent = UP.target && s ? 'x' + (UP.target.price / s).toFixed(2) : 'шанс';
   $('#upBtn').disabled = !(s && UP.target && UP.target.price > s);
   drawRing();
   if (!full) return;
-  const inv = sortItems(S.inv, 'exp');
-  $('#upInv').innerHTML = inv.length ? inv.map(it => itemCard(it, { cls: 'sm ' + (UP.sel.includes(it.uid) ? 'sel' : ''), check: true })).join('') : '<div class="empty"><b>Нет предметов</b><span>Можно апгрейдить одни деньги — впиши сумму слева</span></div>';
+  const inv = sortItems(S.inv, UP.sortI);
+  $('#upInv').innerHTML = inv.length ? inv.map(it => itemCard(it, { cls: 'sm ' + (UP.sel.includes(it.uid) ? 'sel' : ''), check: true })).join('') : `<div class="empty">${ico('bag')}<b>Ваш инвентарь пуст</b><span>Открой первый кейс — или апгрейди баланс ползунком выше</span><button class="btn btn-green" data-goto="cases">${ico('crate')} Открыть кейс</button></div>`;
+  const eb = $('#upInv [data-goto]'); if (eb) eb.onclick = () => go('cases');
   renderTargets();
 }
 function renderTargets() {
-  const s = upStake(); const q = UP.q.trim().toLowerCase();
-  let list = VARIANTS.filter(vr => vr.price > Math.max(s * 1.1, 0.05) && (!q || vr.skin.name.toLowerCase().includes(q)));
-  if (!q) { const out = [], seen = new Set(); for (const vr of list) { if (vr.price > Math.max(s, 0.1) * 80) break; if (seen.has(vr.skin.id)) continue; seen.add(vr.skin.id); out.push(vr); if (out.length > 90) break; } list = out; } else list = list.slice(0, 90);
-  $('#upTargets').innerHTML = list.map(vr => itemCard({ s: vr.skin.id, w: vr.w, p: vr.price }, { cls: 'sm ' + (UP.target === vr ? 'sel' : '') }).replace('class="item', `data-vi="${VARIANTS.indexOf(vr)}" class="item`)).join('') || '<div class="empty">Ничего не найдено</div>';
+  const s = upStake(); const q = UP.q.trim().toLowerCase(); const r = (CUR[S.cur] || CUR.RUB).rate;
+  const lo = parseFloat(String(UP.lo).replace(',', '.')), hi = parseFloat(String(UP.hi).replace(',', '.'));
+  const min = Math.max(s * 1.1, 0.05, isFinite(lo) ? lo / r : 0), max = isFinite(hi) ? hi / r : Infinity;
+  let list = VARIANTS.filter(vr => vr.price > min && vr.price <= max && (!q || vr.skin.name.toLowerCase().includes(q)));
+  if (!q && !isFinite(hi)) { const out = [], seen = new Set(); for (const vr of list) { if (vr.price > Math.max(s, 0.1) * 120 && out.length > 40) break; if (seen.has(vr.skin.id)) continue; seen.add(vr.skin.id); out.push(vr); if (out.length > 120) break; } list = out; } else list = list.slice(0, 160);
+  if (UP.sortT === 'desc') list = list.slice().reverse();
+  $('#upTargets').innerHTML = list.map(vr => itemCard({ s: vr.skin.id, w: vr.w, p: vr.price }, { cls: 'sm up-t ' + (UP.target === vr ? 'sel' : '') }).replace('class="item', `data-vi="${VARIANTS.indexOf(vr)}" class="item`)).join('') || '<div class="empty">Ничего не найдено</div>';
 }
 async function doUpgrade() {
   if (busy) return; const s = upStake(); const tgt = UP.target; if (!s || !tgt) return;
@@ -4688,7 +4932,7 @@ async function doUpgrade() {
   const dur = S.fast ? 2600 : 6500; const t0 = performance.now(); let lastSeg = -1;
   await new Promise(res => { const f = now => { const k = Math.min(1, (now - t0) / dur); const e = 1 - Math.pow(1 - k, 4.2); ringAngle = from + total * e; drawRing(); const seg = Math.floor(ringAngle / (Math.PI * 2 / 72)); if (seg !== lastSeg) { lastSeg = seg; sfx.tick(1 + k * 0.5); } if (k < 1) requestAnimationFrame(f); else res(); }; requestAnimationFrame(f); });
   drawRing(win);
-  const box = $('.upg');
+  const box = $('.up2');
   if (win) { const it = makeItem(tgt.skin, tgt.w, false); it.p = tgt.price; addItems([it]); S.upgWin++; S.upgLoseStreak = 0; unlock('upg'); if (ch < 0.1) unlock('miracle'); sfx.win(SKIN[it.s].rarity); box.classList.add('won'); }
   else { S.upgLoseStreak = (S.upgLoseStreak || 0) + 1; if (S.upgLoseStreak >= 5) unlock('unlucky'); sfx.lose(); box.classList.add('lost'); }
   $('#upChance').textContent = win ? 'WIN' : 'LOSE';
@@ -4699,7 +4943,7 @@ async function doUpgrade() {
   const m = modal(`<div class="preview ${win ? '' : 'lose'} r${sk.rarity}" style="--rc:${win ? rc(sk.rarity) : '#ff4d5e'}">
     <div class="drop-title">${win ? 'Апгрейд зашёл' : 'Мимо'}</div><div class="drop-joke">${win ? pick(['Красава', 'Риск окупился']) : pick(['Почти!', 'Бывает'])}</div>
     <img data-sk="${esc(sk.id)}" data-big="1" src="${skinSrc(sk, true)}" class="${win ? '' : 'grey'}">
-    <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))} · ${WEARS[tgt.w].short}</span></div>
+    <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))}${sk.noWear ? '' : ' · ' + WEARS[tgt.w].short}</span></div>
     <div class="drop-price">${money(tgt.price)}</div>
     <div class="row-btns"><button class="btn btn-green" data-ok>${win ? 'Забрать' : 'Ещё попытка'}</button></div></div>`, 'preview-modal');
   m.querySelector('[data-ok]').onclick = () => { closeModal(); go('upgrade', null, false); };
@@ -4752,7 +4996,7 @@ async function doContract() {
   const m = modal(`<div class="preview r${sk.rarity}" style="--rc:${rc(sk.rarity)}"><div class="drop-title">Контракт подписан</div>
     <img data-sk="${esc(sk.id)}" data-big="1" src="${skinSrc(sk, true)}">
     <div class="drop-rar">${RARITIES[sk.rarity].name}${it.st ? ' · StatTrak™' : ''}</div>
-    <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))} · ${WEARS[it.w].short}</span></div>
+    <div class="drop-name"><b>${esc(skinTitle(sk))}</b><span>${esc(skinSub(sk))}${sk.noWear ? '' : ' · ' + WEARS[it.w].short}</span></div>
     <div class="drop-price">${money(it.p)} <em class="${ratio >= 1 ? 'pos' : 'neg'}">×${ratio.toFixed(2)}</em></div>
     <div class="row-btns"><button class="btn btn-sell" data-sell>Продать ${money(it.p)}</button><button class="btn btn-green" data-ok>Забрать</button></div></div>`, 'preview-modal');
   m.querySelector('[data-ok]').onclick = () => { closeModal(); go('contracts', null, false); };
@@ -4899,80 +5143,6 @@ async function runBattle(l, spectator) {
   res.querySelector('[data-inv]').onclick = () => go('inventory');
 }
 
-// =================== VIEW: MINI-GAMES ===================
-const MG = { bet: 0.5, bombs: 3, game: null, flipSide: 'ct', flipStreak: 0 };
-views.games = v => {
-  v.innerHTML = `
-  <div class="page-head"><h1>Мини-игры</h1><p>Ставки с баланса. Скины не нужны — только нервы.</p></div>
-  <div class="games">
-    <section class="game mines">
-      <div class="g-head">${ico('bomb')}<h2>Минёр</h2><small>Открывай ящики, не наткнись на C4</small></div>
-      <div class="mines-wrap">
-        <div class="mines-ctrl">
-          <label>Ставка, $<div class="bet-row"><input class="inp" type="number" id="mBet" min="0.05" step="0.05" value="${MG.bet}"><button data-bm="0.5">½</button><button data-bm="2">×2</button></div></label>
-          <label>Бомб: <b id="mBombsN">${MG.bombs}</b><input type="range" id="mBombs" min="1" max="20" value="${MG.bombs}"></label>
-          <div class="mines-info"><div><span>Множитель</span><b id="mMult">x1.00</b></div><div><span>Следующий</span><b id="mNext">—</b></div></div>
-          <button class="btn btn-green" id="mGo">Начать</button>
-        </div>
-        <div class="mines-grid" id="mGrid">${Array.from({ length: 25 }, (_, i) => `<button class="tile" data-t="${i}" disabled></button>`).join('')}</div>
-      </div>
-    </section>
-    <section class="game flip">
-      <div class="g-head">${ico('shield')}<h2>Контры или Терры</h2><small>Угадай сторону — x1.95</small></div>
-      <div class="coin3d" id="coin"><div class="face ct">CT</div><div class="face t">T</div></div>
-      <div class="seg" id="fSide"><button data-side="ct" class="on">Контры</button><button data-side="t">Терры</button></div>
-      <small class="mut">Ставка в $</small><div class="bet-row"><input class="inp" type="number" id="fBet" min="0.05" step="0.05" value="${MG.bet}"><button data-fm="0.5">½</button><button data-fm="2">×2</button></div>
-      <button class="btn btn-green" id="fGo">Подбросить</button>
-      <div class="flip-hist" id="fHist"></div>
-    </section>
-  </div>`;
-  const mUpd = () => { $('#mBombsN').textContent = MG.bombs; $('#mNext').textContent = 'x' + minesMult(MG.game ? MG.game.opened + 1 : 1).toFixed(2); };
-  $('#mBombs').addEventListener('input', e => { if (MG.game) return; MG.bombs = +e.target.value; sfx.tension(MG.bombs / 20); mUpd(); });
-  $('#mBet').addEventListener('input', e => MG.bet = Math.max(0.05, round2(+e.target.value || 0.05)));
-  $$('[data-bm]').forEach(b => b.onclick = () => { if (MG.game) return; MG.bet = Math.max(0.05, round2(MG.bet * +b.dataset.bm)); $('#mBet').value = MG.bet; sfx.click(); });
-  $('#mGo').addEventListener('click', minesGo);
-  $('#mGrid').addEventListener('click', e => { const t = e.target.closest('.tile'); if (t && MG.game) minesOpen(+t.dataset.t, t); });
-  mUpd();
-  $('#fSide').addEventListener('click', e => { const b = e.target.closest('[data-side]'); if (!b) return; MG.flipSide = b.dataset.side; $$('#fSide button').forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); });
-  $$('[data-fm]').forEach(b => b.onclick = () => { const i = $('#fBet'); i.value = Math.max(0.05, round2((+i.value || 0.05) * +b.dataset.fm)); sfx.click(); });
-  $('#fGo').addEventListener('click', flipGo);
-};
-function minesMult(k) { const N = 25, B = MG.game ? MG.game.bombs : MG.bombs; let p = 1; for (let i = 0; i < k; i++) p *= (N - B - i) / (N - i); return p > 0 ? 0.97 / p : 0; }
-function minesGo() {
-  if (MG.game) {
-    const g = MG.game; if (!g.opened) return; const mult = minesMult(g.opened); const win = round2(g.bet * mult);
-    earn(win); sfx.cash(); toast(`Минёр: забрал ${money(win)} (x${mult.toFixed(2)})`, 'gold'); if (mult >= 5) unlock('sapper');
-    minesReveal(); MG.game = null; $('#mGo').textContent = 'Начать'; return;
-  }
-  if (busy) return; const bet = MG.bet; if (!spend(bet)) return;
-  const set = new Set(); while (set.size < MG.bombs) set.add(Math.floor(Math.random() * 25));
-  MG.game = { bet, bombs: MG.bombs, set, opened: 0 }; S.mines++; quest('mines'); save();
-  $$('#mGrid .tile').forEach(t => { t.disabled = false; t.className = 'tile'; t.textContent = ''; });
-  $('#mGo').textContent = 'Забрать'; $('#mMult').textContent = 'x1.00'; $('#mNext').textContent = 'x' + minesMult(1).toFixed(2); sfx.click();
-}
-function minesOpen(i, el) {
-  const g = MG.game; if (el.classList.contains('open')) return;
-  if (g.set.has(i)) { el.classList.add('bomb'); el.textContent = 'C4'; sfx.boom(); document.body.classList.add('shake-screen'); setTimeout(() => document.body.classList.remove('shake-screen'), 500); toast('Бум! C4 взорвалась', 'err'); minesReveal(); MG.game = null; $('#mGo').textContent = 'Начать'; $('#mMult').textContent = 'x0'; return; }
-  el.classList.add('open'); el.disabled = true; g.opened++; sfx.tick(1 + g.opened * 0.06); sfx.coin();
-  $('#mMult').textContent = 'x' + minesMult(g.opened).toFixed(2); $('#mGo').innerHTML = `Забрать ${money(round2(g.bet * minesMult(g.opened)))}`; $('#mNext').textContent = 'x' + minesMult(g.opened + 1).toFixed(2);
-  if (g.opened >= 25 - g.bombs) minesGo();
-}
-function minesReveal() { const g = MG.game; if (!g) return; $$('#mGrid .tile').forEach((t, i) => { t.disabled = true; if (g.set.has(i) && !t.classList.contains('bomb')) { t.classList.add('bomb', 'dim'); t.textContent = 'C4'; } }); }
-async function flipGo() {
-  if (busy) return; const bet = Math.max(0.05, round2(+$('#fBet').value || 0.05)); if (!spend(bet)) return;
-  setBusy(true); S.flips++;
-  const res = Math.random() < 0.5 ? 'ct' : 't'; const coin = $('#coin');
-  const deg = (6 + Math.floor(Math.random() * 3)) * 360 + (res === 't' ? 180 : 0);
-  coin.style.transition = 'none'; coin.style.transform = 'rotateY(0)'; void coin.offsetWidth;
-  coin.style.transition = `transform ${S.fast ? 1.2 : 2.2}s cubic-bezier(.2,.8,.2,1)`; coin.style.transform = `rotateY(${deg}deg)`;
-  sfx.flip(); await sleep(S.fast ? 1250 : 2250); sfx.land();
-  const win = res === MG.flipSide;
-  if (win) { const w = round2(bet * 1.95); earn(w); sfx.win(3); toast(`${res === 'ct' ? 'Контры' : 'Терры'} победили! +${money(w)}`, 'gold'); MG.flipStreak++; if (MG.flipStreak >= 3) unlock('flip'); }
-  else { sfx.lose(); toast(`${res === 'ct' ? 'Контры' : 'Терры'} победили. Не угадал`); MG.flipStreak = 0; }
-  const h = $('#fHist'); h.insertAdjacentHTML('afterbegin', `<span class="${res}">${res.toUpperCase()}</span>`); while (h.children.length > 14) h.lastChild.remove();
-  save(); setBusy(false);
-}
-
 // =================== VIEW: REWARDS ===================
 const PROMOS = { RUSHB: 5, MADES: 7.77, EZ: 1.5, GLOBAL: 10, '1337': 13.37, CYKA: 3, NAVI: 4 };
 views.rewards = v => {
@@ -4983,8 +5153,8 @@ views.rewards = v => {
     <div class="rw-card">${ico('gift')}<h3>Бонус</h3><p>${money(bonusAmount())} каждые 10 минут. Чем выше звание, тем больше.</p><button class="btn btn-green" data-timer="bonus"></button></div>
     <div class="rw-card">${ico('crate')}<h3>Бесплатный кейс</h3><p>Раз в сутки — кейс «Студент» за счёт заведения.</p><button class="btn btn-green" data-timer="daily" data-free></button></div>
   </div>
-  <section><h2>Задания на сегодня</h2><div class="quests">${S.quests.list.map((q, i) => `<div class="quest ${q.done ? 'done' : ''}"><div><b>${esc(q.text)}</b><div class="xp"><i style="width:${q.have / q.need * 100}%"></i></div><small>${q.id === 'sell' ? moneyTxt(q.have) + ' / ' + moneyTxt(q.need) : q.have + ' / ' + q.need}</small></div><button class="btn ${q.claimed ? 'btn-dark' : 'btn-green'} btn-sm" data-q="${i}" ${!q.done || q.claimed ? 'disabled' : ''}>${q.claimed ? 'Получено' : money(q.reward)}</button></div>`).join('')}</div></section>
-  <section><h2>Достижения <small>${Object.keys(S.ach).length} из ${ACH.length}</small></h2><div class="achs">${ACH.map(a => `<div class="ach ${S.ach[a[0]] ? 'got' : ''}">${S.ach[a[0]] ? ico('trophy') : ico('lock')}<div><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>${a[3] ? `<em>+${moneyTxt(a[3])}</em>` : ''}</div>`).join('')}</div></section>`;
+  <section><h2>Задания на сегодня</h2><div class="quests">${S.quests.list.map((q, i) => `<div class="quest ${q.done ? 'done' : ''}"><div><b>${esc(curTxt(q.text))}</b><div class="xp"><i style="width:${q.have / q.need * 100}%"></i></div><small>${q.id === 'sell' ? moneyTxt(q.have) + ' / ' + moneyTxt(q.need) : q.have + ' / ' + q.need}</small></div><button class="btn ${q.claimed ? 'btn-dark' : 'btn-green'} btn-sm" data-q="${i}" ${!q.done || q.claimed ? 'disabled' : ''}>${q.claimed ? 'Получено' : money(q.reward)}</button></div>`).join('')}</div></section>
+  <section><h2>Достижения <small>${Object.keys(S.ach).length} из ${ACH.length}</small></h2><div class="achs">${ACH.map(a => `<div class="ach ${S.ach[a[0]] ? 'got' : ''}">${S.ach[a[0]] ? ico('trophy') : ico('lock')}<div><b>${esc(a[1])}</b><span>${esc(curTxt(a[2]))}</span></div>${a[3] ? `<em>+${moneyTxt(a[3])}</em>` : ''}</div>`).join('')}</div></section>`;
   tickTimers();
   v.addEventListener('click', e => {
     if (e.target.closest('[data-free]')) { freeCase(); return; }
@@ -5091,11 +5261,21 @@ function makeBackground() {
   const haze = g.createLinearGradient(0, 0, 0, H); haze.addColorStop(0, 'rgba(200,205,205,.25)'); haze.addColorStop(0.6, 'rgba(200,205,205,0)'); g.fillStyle = haze; g.fillRect(0, 0, W, H);
   document.documentElement.style.setProperty('--bgimg', `url(${c.toDataURL('image/jpeg', 0.8)})`);
 }
+// blurred CS2 map screenshots (official Steam store images) behind every page, crossfading on navigation
+const MAP_CDN = 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/';
+const MAPS = ['ss_2254a50f27951fb9028bc00b93a7f2ed7aac1e13', 'ss_54b9c26b028c84d5f8a5316f31ae6203953ed84d', 'ss_1b3b5fd437939a7ed00a2155269e78994cb998d3', 'ss_bb2af3e83ac0385ff2055f2ab9697cdd83e351b7', 'ss_fb8e5e2ae29ce64e2898315c66b5db08989e8f91', 'ss_0db84c628a798e38ca57d69abda119bee1358008', 'ss_18e9ea2715f0407ee05e206073927a648db60d73', 'ss_13bb35638c0267759276f511ee97064773b37a51'];
+const PAGE_MAP = { cases: 0, battles: 5, battle: 5, upgrade: 3, contracts: 6, rewards: 2, inventory: 4, admin: 7 };
+let bgCur = -1, bgFlip = false;
+function setBg(name, arg) {
+  const i = name === 'case' ? hashStr(String(arg)) % MAPS.length : (PAGE_MAP[name] ?? 0); if (i === bgCur) return; bgCur = i;
+  const url = MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image();
+  img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${url})`; on.classList.add('on'); off.classList.remove('on'); };
+  img.src = url;
+}
 function moreSheet() {
   sfx.tab();
   const m = modal(`<div class="more"><h2>Разделы</h2><div class="more-grid">
     <a data-g="contracts">${ico('contract')}<b>Контракты</b><span>10 скинов → 1</span></a>
-    <a data-g="games">${ico('games')}<b>Мини-игры</b><span>Минёр, флип</span></a>
     <a data-g="rewards">${ico('gift')}<b>Награды</b><span>Бонусы, задания</span></a>
     <a data-g="settings">${ico('gear')}<b>Настройки</b><span>Валюта, звук</span></a>
   </div></div>`, 'small sheet');
@@ -5103,11 +5283,11 @@ function moreSheet() {
 }
 function shell() {
   document.body.insertAdjacentHTML('afterbegin', `
-  <div class="bgfx"></div>
+  <div class="bgfx base"></div><div class="bgfx m1"></div><div class="bgfx m2"></div>
   <header class="top">
     <a class="logo" data-go="cases">${LOGO_HTML}</a>
     <nav class="nav">
-      <a data-go="cases">${ico('crate')}Кейсы</a><a data-go="battles">${ico('swords')}Батлы</a><a data-go="upgrade">${ico('upgrade')}Апгрейды</a><a data-go="contracts">${ico('contract')}Контракты</a><a data-go="games">${ico('games')}Мини-игры</a><a data-go="rewards">${ico('gift')}Награды</a>
+      <a data-go="cases">${ico('crate')}Кейсы</a><a data-go="battles">${ico('swords')}Батлы</a><a data-go="upgrade">${ico('upgrade')}Апгрейды</a><a data-go="contracts">${ico('contract')}Контракты</a><a data-go="rewards">${ico('gift')}Награды</a>
     </nav>
     <div class="top-r">
       <button class="bonus" id="bonusBtn" title="Бонус">${ico('gift')}<span></span></button>
@@ -5157,7 +5337,7 @@ async function boot() {
   makeBackground(); setP(0.2, 'Собираем 3D-кейсы…');
   try { await Promise.race([Promise.all([document.fonts.load('40px "Black Ops One"'), document.fonts.load('20px "Oswald"'), document.fonts.load('14px "Roboto"')]), sleep(2500)]); } catch (e) { }
   await sleep(20);
-  const FALLBACK = {}; CASES.forEach(c => { if (!c.official) { try { FALLBACK[c.id] = THUMBS[c.id] = iconURL(c.emblem, c.accent, 256); } catch (e) { THUMBS[c.id] = ''; } } });
+  const FALLBACK = {}; CASES.forEach(c => { if (!c.official) { try { FALLBACK[c.id] = THUMBS[c.id] = crate2D(c); } catch (e) { THUMBS[c.id] = ''; } } });
   setP(1, 'Готово');
   shell(); ensureQuests(); netConnect(); loadRates();
   if (GL) setTimeout(() => renderThumbsAsync(CASES.filter(c => !c.official).sort((a, b) => (LIMITED.includes(b.id) - LIMITED.includes(a.id)) || (b === dayCase()) - (a === dayCase())), (id, url) => {
