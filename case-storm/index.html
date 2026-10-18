@@ -872,6 +872,11 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 @media (max-width:900px){.up2{grid-template-columns:1fr 1fr;grid-template-rows:auto}.up-mid{grid-column:1/-1;order:-1}.up-bal,.up-quick{grid-column:1/-1}.up-go{grid-column:1/-1;height:58px}.up-quick{grid-template-columns:repeat(7,1fr);grid-auto-rows:44px}.up-lists{grid-template-columns:1fr}.up-body{min-height:200px}.up-lh{flex-wrap:wrap}}
 @media (max-width:600px){.up2{grid-template-columns:1fr}.up-from,.up-to{grid-column:1/-1}.up-stack{grid-template-columns:repeat(2,1fr)}}
 .up-lists .item-check{left:8px;right:auto;top:8px}.up-lists .item-tags{top:26px}
+.case-2d.art{width:min(460px,68%)}
+.cc-img img[src$=".webp"]{width:100%;height:100%;object-fit:contain;padding:6px 4px 0}
+/* maps clearly visible like on caser: lighter blur and overlay */
+.bgfx.m1,.bgfx.m2{filter:blur(7px) saturate(.9) brightness(.82);transform:scale(1.06)}
+.bgfx.m1::after,.bgfx.m2::after{background:linear-gradient(180deg,rgba(30,34,40,.18),rgba(30,34,40,.42) 60%,rgba(24,27,32,.72))}
 
 </style>
 </head>
@@ -3152,7 +3157,8 @@ const AUTHOR = [
   { id: 'katowice', name: 'Катовице 2014', price: 6000, emblem: 'crown', badge: 'circle', body: '#e8e2d2', accent: '#c9302c', mat: 'brushed', tier: 'Легенды', filter: sk => sk.sticker || maxP(sk) >= 2500, bands: [[0.4, 0.8, 5, 0.55], [0.8, 1.5, 4, 0.33], [1.5, 5, 4, 0.1], [5, 12, 2, 0.02]] },
   { id: 'million', name: 'Миллион', price: 12345.68, rubFixed: 1e6, emblem: 'crown', badge: 'hex', body: '#111214', accent: '#ffd700', mat: 'gold', tier: 'Легенды', filter: sk => sk.sticker || maxP(sk) >= 3000, bands: [[0.25, 0.62, 6, 0.6], [0.62, 1.25, 5, 0.3], [1.25, 3, 6, 0.09], [3, 10, 2, 0.012]] },
 ];
-for (const m of AUTHOR) buildAuthor(m);
+const ART = ['bomzh', 'student', 'silver', 'lottery', 'pistol', 'neon', 'cyber', 'fire', 'beast', 'fifty', 'ak', 'm4', 'awp', 'deagle', 'dragon', 'pink', 'red', 'gloves', 'knives'];
+for (const m of AUTHOR) { if (ART.includes(m.id)) m.art = 'cases/' + m.id + '.webp'; buildAuthor(m); }
 CASES.sort((a, b) => a.price - b.price);
 
 // ---------- rolling ----------
@@ -4513,7 +4519,7 @@ function go(name, arg, push = true, keepScroll = false) {
 function parseHash() { const h = (location.hash || '').slice(1).split('/'); const valid = ['cases', 'case', 'battles', 'upgrade', 'contracts', 'rewards', 'inventory', 'admin']; return valid.includes(h[0]) ? { name: h[0], arg: h[1] ? decodeURIComponent(h[1]) : null } : { name: 'cases', arg: null }; }
 window.addEventListener('popstate', e => { const s = e.state || parseHash(); if (!busy && s.name !== 'battle') go(s.name, s.arg, false); });
 
-const caseImg = c => c.official ? caseImgSrc(c.img) : (THUMBS[c.id] || '');
+const caseImg = c => c.official ? caseImgSrc(c.img) : (c.art || THUMBS[c.id] || '');
 function dayCase() { const pool = CASES.filter(c => !c.official && c.price >= 1 && c.price <= 15); return pool[Math.floor(Date.now() / 864e5) % pool.length]; }
 const casePrice = c => c === dayCase() ? round2(c.price * 0.8) : c.price;
 function syncFixedPrices() { for (const c of CASES) if (c.rubFixed) c.price = round2(c.rubFixed / CUR.RUB.rate); }
@@ -4608,7 +4614,7 @@ views.case = (v, id) => {
   <div class="case-top"><button class="btn btn-dark btn-sm" data-back>${ico('back')} Все кейсы</button><div class="odds">${Object.entries(groups).sort((a, b) => b[0] - a[0]).map(([r, p]) => `<span style="--rc:${rc(r)}"><i></i>${pct(p)}</span>`).join('')}</div></div>
   <div class="stage-wrap ${cs.official ? 'is-off' : 'is-own'}" id="stageWrap" style="--ac:${cs.accent || '#c9a76b'}">
     <div class="stage-bg"></div>
-    <div class="stage" id="stage">${cs.official ? `<div class="case-2d" id="case2d"><img src="${caseImg(cs)}" alt=""><div class="case-shadow"></div></div>` : ''}</div>
+    <div class="stage" id="stage">${cs.official || cs.art ? `<div class="case-2d${cs.art ? ' art' : ''}" id="case2d"><img src="${caseImg(cs)}" alt=""><div class="case-shadow"></div></div>` : ''}</div>
     <div class="flash" id="flash"></div>
     <div class="reels" id="reels"></div>
     <div class="stage-line"><span>${cs.official ? 'Официальный кейс CS2' : 'Авторский кейс'}</span></div>
@@ -4623,7 +4629,7 @@ views.case = (v, id) => {
   <section class="contents"><h2>Содержимое кейса <small>${cs.pool.length} предметов · цены Steam${cs.pool.some(p => p.ev >= 1700) ? " и CSFloat" : ""}</small></h2>
     <div class="item-grid">${cs.pool.slice().sort((a, b) => b.ev - a.ev).map(p => itemCard({ s: p.skin.id, w: p.wear ?? 2, p: p.ev }, { chance: pct(p.p), wear: p.wear != null })).join('')}</div>
   </section>`;
-  if (!cs.official) { try { if (!GL || window.__slowGL) throw new Error('no fast webgl'); stage = new CaseStage($('#stage')); stage.setCase(cs); } catch (e) { console.warn(e); $('#stage').innerHTML = `<div class="case-2d"><img src="${THUMBS[cs.id] || ''}"></div>`; } }
+  if (!cs.official && !cs.art) { try { if (!GL || window.__slowGL) throw new Error('no fast webgl'); stage = new CaseStage($('#stage')); stage.setCase(cs); } catch (e) { console.warn(e); $('#stage').innerHTML = `<div class="case-2d"><img src="${THUMBS[cs.id] || ''}"></div>`; } }
   const upd = () => { $('#openBtn').innerHTML = `Открыть за ${money(round2(casePrice(cs) * openCount))}`; };
   upd();
   $$('.seg button').forEach(b => b.addEventListener('click', () => { if (busy) return; openCount = +b.dataset.n; $$('.seg button').forEach(x => x.classList.toggle('on', x === b)); upd(); sfx.tab(); }));
@@ -4671,7 +4677,7 @@ async function openCase(cs, n, demo, free = false) {
   const built = won.map(w => buildReel(cs, w));
   reels.innerHTML = built.map(b => reelHTML(b.cards)).join('');
   sfx.latch(); sfx.rumble();
-  if (cs.official) { const c2 = $('#case2d'); c2.classList.add('shake'); await sleep(fast ? 350 : 800); sfx.open(); $('#flash').classList.add('go'); c2.classList.add('gone'); await sleep(250); }
+  if (cs.official || cs.art) { const c2 = $('#case2d'); c2.classList.add('shake'); await sleep(fast ? 350 : 800); sfx.open(); $('#flash').classList.add('go'); c2.classList.add('gone'); await sleep(250); }
   else { stage && stage.open('#ffffff', fast).then(() => sfx.open()); await sleep(fast ? 500 : 1250); $('#flash').classList.add('go'); await sleep(200); }
   $('#stageWrap').classList.add('rolling'); reels.classList.add('show'); sfx.whoosh();
   let lt = 0; const tick = k => { const t = performance.now(); if (t - lt > 45) { lt = t; sfx.tick(1 + k * 0.4); } };
@@ -5268,8 +5274,9 @@ const PAGE_MAP = { cases: 0, battles: 5, battle: 5, upgrade: 3, contracts: 6, re
 let bgCur = -1, bgFlip = false;
 function setBg(name, arg) {
   const i = name === 'case' ? hashStr(String(arg)) % MAPS.length : (PAGE_MAP[name] ?? 0); if (i === bgCur) return; bgCur = i;
-  const url = MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image();
-  img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${url})`; on.classList.add('on'); off.classList.remove('on'); };
+  const url = MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image(); let tried = false;
+  img.onerror = () => { if (!tried) { tried = true; img.src = url.replace('shared.fastly.', 'shared.akamai.'); } };
+  img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${img.src})`; on.classList.add('on'); off.classList.remove('on'); };
   img.src = url;
 }
 function moreSheet() {
@@ -5337,10 +5344,10 @@ async function boot() {
   makeBackground(); setP(0.2, 'Собираем 3D-кейсы…');
   try { await Promise.race([Promise.all([document.fonts.load('40px "Black Ops One"'), document.fonts.load('20px "Oswald"'), document.fonts.load('14px "Roboto"')]), sleep(2500)]); } catch (e) { }
   await sleep(20);
-  const FALLBACK = {}; CASES.forEach(c => { if (!c.official) { try { FALLBACK[c.id] = THUMBS[c.id] = crate2D(c); } catch (e) { THUMBS[c.id] = ''; } } });
+  const FALLBACK = {}; CASES.forEach(c => { if (!c.official && !c.art) { try { FALLBACK[c.id] = THUMBS[c.id] = crate2D(c); } catch (e) { THUMBS[c.id] = ''; } } });
   setP(1, 'Готово');
   shell(); ensureQuests(); netConnect(); loadRates();
-  if (GL) setTimeout(() => renderThumbsAsync(CASES.filter(c => !c.official).sort((a, b) => (LIMITED.includes(b.id) - LIMITED.includes(a.id)) || (b === dayCase()) - (a === dayCase())), (id, url) => {
+  if (GL) setTimeout(() => renderThumbsAsync(CASES.filter(c => !c.official && !c.art).sort((a, b) => (LIMITED.includes(b.id) - LIMITED.includes(a.id)) || (b === dayCase()) - (a === dayCase())), (id, url) => {
     const old = FALLBACK[id]; THUMBS[id] = url; $$('img').forEach(im => { if (im.getAttribute('src') === old) im.src = url; });
   }), 900);
   const ph = parseHash(); go(ph.name === 'battle' ? 'battles' : ph.name, ph.arg, false);
