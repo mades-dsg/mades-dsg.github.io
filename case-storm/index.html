@@ -5271,12 +5271,12 @@ function makeBackground() {
 const MAP_CDN = 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/';
 const MAPS = ['ss_2254a50f27951fb9028bc00b93a7f2ed7aac1e13', 'ss_54b9c26b028c84d5f8a5316f31ae6203953ed84d', 'ss_1b3b5fd437939a7ed00a2155269e78994cb998d3', 'ss_bb2af3e83ac0385ff2055f2ab9697cdd83e351b7', 'ss_fb8e5e2ae29ce64e2898315c66b5db08989e8f91', 'ss_0db84c628a798e38ca57d69abda119bee1358008', 'ss_18e9ea2715f0407ee05e206073927a648db60d73', 'ss_13bb35638c0267759276f511ee97064773b37a51'];
 const PAGE_MAP = { cases: 0, battles: 5, battle: 5, upgrade: 3, contracts: 6, rewards: 2, inventory: 4, admin: 7 };
-let bgCur = -1, bgFlip = false;
+let bgCur = -1, bgFlip = false, bgShown = false;
 function setBg(name, arg) {
   const i = name === 'case' ? hashStr(String(arg)) % MAPS.length : (PAGE_MAP[name] ?? 0); if (i === bgCur) return; bgCur = i;
   const url = MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image(); let tried = false;
   img.onerror = () => { if (!tried) { tried = true; img.src = url.replace('shared.fastly.', 'shared.akamai.'); } };
-  img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${img.src})`; on.classList.add('on'); off.classList.remove('on'); };
+  img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${img.src})`; if (!bgShown) { on.style.transition = 'none'; requestAnimationFrame(() => on.style.transition = ''); bgShown = true; } on.classList.add('on'); off.classList.remove('on'); };
   img.src = url;
 }
 function moreSheet() {
