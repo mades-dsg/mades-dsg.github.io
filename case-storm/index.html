@@ -4075,7 +4075,8 @@ function takeLoan() {
 
 // =================== NETWORK (real players) ===================
 const NET = { es: null, ok: false, online: 0, chat: [], feed: [], top: [], lobbies: [] };
-function netBase() { if (S.server) return S.server.replace(/\/+$/, ''); if (/^https?:$/.test(location.protocol)) return location.origin; return ''; }
+const DEFAULT_SERVER = 'https://case-storm.onrender.com';
+function netBase() { if (S.server) return S.server.replace(/\/+$/, ''); if (/^https?:$/.test(location.protocol) && /(^localhost$|^127\.|onrender\.com$)/.test(location.hostname)) return location.origin; return DEFAULT_SERVER; }
 function netConnect() {
   if (NET.es) { NET.es.close(); NET.es = null; }
   const base = netBase(); if (!base) { setNet(false); return; }
@@ -4886,7 +4887,7 @@ function settingsModal() {
     <label class="set-row"><span>Валюта</span><div class="seg" id="setCur">${Object.keys(CUR).map(k => `<button data-cur="${k}" class="${S.cur === k ? 'on' : ''}">${CUR[k].sym} ${k}</button>`).join('')}</div></label>
     <label class="set-row"><span>Громкость</span><input type="range" id="setVol" min="0" max="1" step="0.05" value="${S.vol ?? 0.55}"></label>
     <label class="set-row"><span>Ник</span><input class="inp" id="setName" maxlength="16" value="${esc(S.name)}"></label>
-    <label class="set-row col"><span>Адрес сервера (для чата, онлайна и батлов)</span><input class="inp" id="setSrv" placeholder="https://мой-сервер.onrender.com" value="${esc(S.server)}"><small class="mut">Если сайт открыт с самого сервера — оставь пустым. Сейчас: ${NET.ok ? 'подключено' : 'нет подключения'}.</small></label>
+    <label class="set-row col"><span>Адрес сервера (для чата, онлайна и батлов)</span><input class="inp" id="setSrv" placeholder="https://мой-сервер.onrender.com" value="${esc(S.server)}"><small class="mut">Пусто — общий сервер CASE STORM. Сейчас: ${NET.ok ? 'подключено' : 'нет подключения'}.</small></label>
     <div class="set-note">Цены — Steam Community Market на ${PRICE_DATE}. Курс: 1 $ = ${CUR.RUB.rate.toFixed(1)} ₽ = ${CUR.EUR.rate.toFixed(2)} €. Баланс виртуальный: пополнить его деньгами или вывести скины нельзя.</div>
     <div class="row-btns"><button class="btn btn-green" id="setSave">Сохранить</button><button class="btn btn-dark" id="setReset">Сбросить прогресс</button></div></div>`, 'small');
   $('#setCur', m).addEventListener('click', e => { const b = e.target.closest('[data-cur]'); if (!b) return; $$('#setCur button', m).forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); });
