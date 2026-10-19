@@ -901,6 +901,33 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 .flash{display:none!important}
 /* ===== v6: Train background a little brighter so it reads ===== */
 html{background:#2f343b}body{background:transparent!important}
+/* ===== v7: lighter, more colourful ===== */
+:root{--panel:rgba(66,72,82,.84);--panel2:rgba(78,84,95,.9);--solid:#3d434c;--solid2:#474e58;--line:rgba(255,255,255,.1);--line2:rgba(255,255,255,.16);--mut:#b9c0c8;--teal:#3fbcff;--brass:#ffc04d}
+html{background:#3e4550}
+.bgfx.m1,.bgfx.m2{filter:blur(6px) saturate(1.15) brightness(.98)}
+.bgfx.m1::after,.bgfx.m2::after{background:linear-gradient(180deg,rgba(40,46,56,.05),rgba(40,46,56,.28) 60%,rgba(34,38,46,.55))}
+.top{background:linear-gradient(180deg,rgba(58,65,76,.95),rgba(48,54,64,.93))}
+.side{background:rgba(54,60,70,.88);backdrop-filter:blur(8px)}
+.fd-img{background:linear-gradient(180deg,#6c7178,#4c5158)}
+.cc{box-shadow:0 8px 22px rgba(0,0,0,.25)}
+.cc-img,.cc.own .cc-img{background:linear-gradient(180deg,#5c6066 0%,#82868b 55%,#b3b6b9 100%)}
+.cc-info{background:#4a4f57}
+.cc:hover{box-shadow:0 18px 34px rgba(0,0,0,.35),0 0 0 2px color-mix(in srgb,var(--ac) 80%,transparent),0 0 30px color-mix(in srgb,var(--ac) 35%,transparent)}
+.cc-price .mn{color:#7ff0a8}
+.hs{background:radial-gradient(60% 120% at 78% 50%,color-mix(in srgb,var(--ac,#4cb6ff) 60%,transparent),transparent 70%),repeating-linear-gradient(115deg,rgba(255,255,255,.04) 0 2px,transparent 2px 22px),linear-gradient(110deg,#343b46 0%,#3f4754 55%,#4b5462 100%)}
+.st-card,.rw-card,.up-pan,.lobby,.profile,.pf-promo,.adm-card{background:rgba(66,72,82,.82)}
+.item{background:linear-gradient(180deg,#45484d,#62666b)}
+.btn-dark{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+.btn-dark:hover:not(:disabled){background:rgba(255,255,255,.14)}
+.cs-wallet b{color:#8dffb7}
+.sec-h{display:flex;align-items:center;gap:12px}
+.sec-h::before{content:'';width:5px;height:28px;border-radius:2px;background:var(--tc,#c9cfd6);box-shadow:0 0 14px var(--tc,#c9cfd6)}
+.csec.tl{--tc:#ff5252}.csec.t0{--tc:#c9d2dc}.csec.t1{--tc:#4fa8ff}.csec.t2{--tc:#b46bff}.csec.t3{--tc:#ffc04d}.csec.t4{--tc:#ff7a3d}.csec.t5{--tc:#ffe27a}
+.csec .sec-h{color:color-mix(in srgb,var(--tc,#fff) 35%,#fff)}
+.band{background:linear-gradient(180deg,rgba(30,96,72,.9),rgba(24,70,54,.86))}
+.band .cc-info{background:#2d5a4b}
+.top .nav a.on{color:#5cc8ff}
+.page-head h1{color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.35)}
 
 </style>
 </head>
@@ -4583,8 +4610,8 @@ views.cases = v => {
     let html = '';
     if (caseSort === 'default') {
       const lim = LIMITED.map(id => CASE_BY_ID[id]).filter(match);
-      if (lim.length) html += `<section class="csec"><h2 class="sec-h">Операция «Шторм» <small>${ico('timer')} до конца недели</small></h2><div class="case-grid">${lim.map(caseCard).join('')}</div></section>`;
-      for (const t of tiers) { const list = CASES.filter(c => !c.official && !LIMITED.includes(c.id) && AUTHOR.find(a => a.id === c.id).tier === t && match(c)); if (list.length) html += `<section class="csec"><h2 class="sec-h">${esc(t)}</h2><div class="case-grid">${list.map(caseCard).join('')}</div></section>`; }
+      if (lim.length) html += `<section class="csec tl"><h2 class="sec-h">Операция «Шторм» <small>${ico('timer')} до конца недели</small></h2><div class="case-grid">${lim.map(caseCard).join('')}</div></section>`;
+      for (const [ti, t] of tiers.entries()) { const list = CASES.filter(c => !c.official && !LIMITED.includes(c.id) && AUTHOR.find(a => a.id === c.id).tier === t && match(c)); if (list.length) html += `<section class="csec t${ti}"><h2 class="sec-h">${esc(t)}</h2><div class="case-grid">${list.map(caseCard).join('')}</div></section>`; }
       const off = CASES.filter(c => c.official && match(c)).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       if (off.length) html += `<section class="csec band"><div class="band-h"><h2>Официальные кейсы CS2</h2><span class="band-tag">VALVE</span></div><p class="band-sub">${off.length} кейсов · состав и шансы как в игре</p><div class="case-grid">${off.map(caseCard).join('')}</div></section>`;
     } else {
