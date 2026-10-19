@@ -4513,8 +4513,10 @@ function netConnect() {
 }
 function setNet(ok) { NET.ok = ok; document.body.classList.toggle('net-off', !ok); renderOnline(); const cs = $('#chatState'); if (cs) cs.style.display = ok ? 'none' : ''; }
 async function post(path, body) {
-  try { const r = await fetch(netBase() + '/api/' + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return [r.status, await r.json().catch(() => ({}))]; }
+  try { const r = await fetch(netBase() + '/api/' + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); return _postFix([r.status, await r.json().catch(() => ({}))]); }
   catch (e) { return [0, { error: 'Нет связи с сервером' }]; }
+}
+function _postFix(r) { if (r[0] === 404 && r[1] && r[1].error === 'no') r[1].error = 'На сервере старая версия: в Render нажми Manual Deploy → Deploy latest commit'; return r;
 }
 function bnNetHTML() { return `<b>${NET.ok ? fmtNum(NET.online, 0) + ' онлайн' : 'Офлайн-режим'}</b><span>${NET.ok ? 'батлы и чат с живыми людьми' : 'батлы и чат — на сервере'}</span>`; }
 function renderOnline() { $$('.onl-w').forEach(e => e.style.display = NET.ok ? '' : 'none'); const bn = $('#bnNet'); if (bn) bn.innerHTML = bnNetHTML(); const o = $('#onl'); if (o) o.textContent = NET.ok ? fmtNum(NET.online, 0) : 'офлайн'; const d = $('.online'); if (d) d.classList.toggle('off', !NET.ok); }
