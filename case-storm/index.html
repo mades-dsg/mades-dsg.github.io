@@ -928,6 +928,19 @@ html{background:#3e4550}
 .band .cc-info{background:#2d5a4b}
 .top .nav a.on{color:#5cc8ff}
 .page-head h1{color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.35)}
+/* ===== v8: bigger case cards ===== */
+.case-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.cc-img{height:205px;display:flex;align-items:center;justify-content:center}
+.cc-img img{width:100%;height:100%;object-fit:contain}
+.cc-img img[src$=".webp"]{padding:4px 2px 0;transform-origin:50% 60%}
+.cc-info{padding:12px 16px 14px}
+.cc-info b{font-size:17px}
+.cc-price{font-size:20px}
+.tag{font-size:14px;padding:4px 10px}
+.v-cases{max-width:1360px}
+@media (max-width:600px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cc-img{height:130px}.cc-info{padding:9px 10px 10px}.cc-info b{font-size:14px}.cc-price{font-size:16px}}
+.lk-seg{display:grid;grid-template-columns:repeat(5,1fr);width:100%;margin:10px 0}.lk-seg button{height:auto;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px}.lk-seg small{font-size:11px;color:var(--mut)}.adm-p em{font-style:normal;font-size:11px}.adm-card .btn-green{width:100%;margin-top:12px}
+.cc-info .cc-price{font-size:19px}.cc-info .cc-price s{font-size:14px}.case-grid{grid-template-columns:repeat(auto-fill,minmax(218px,1fr))}@media (max-width:600px){.cc-info .cc-price{font-size:15px}}
 
 </style>
 </head>
@@ -4285,6 +4298,16 @@ const PID_ABC = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 function makePid(cid) { let a = hashStr(cid), b = hashStr(cid + '#storm'), out = ''; for (let i = 0; i < 8; i++) { const v = i < 4 ? a : b; out += PID_ABC[(v >>> ((i % 4) * 5)) & 31]; } return 'CS-' + out; }
 if (!S.pid) S.pid = makePid(S.cid);
 if (!S.giftsGot) S.giftsGot = {};
+if (!(S.luck > 0)) S.luck = 1;
+// admin-set luck factor: >1 shifts drops towards expensive items, <1 towards cheap ones (battles stay fair)
+function luckyRoll(cs) {
+  const L = S.luck || 1; if (Math.abs(L - 1) < 0.01) return rollCase(cs);
+  const a = Math.log(L) / Math.log(4); const ref = cs.price || 1;
+  let tot = 0; const pool = cs.pool.map(p => { const w = p.p * Math.pow(Math.max(0.01, p.ev) / ref, a); tot += w; return { ...p, w }; });
+  pool.forEach(p => p.p = p.w / tot);
+  return rollCase({ ...cs, pool });
+}
+const luckChance = ch => Math.min(0.97, ch * (S.luck || 1));
 S.loan = 0; delete S.ach.loan;
 S.inv = S.inv.filter(it => SKIN[it.s]); if (S.best && !SKIN[S.best.s]) S.best = null;
 if (S.rates) setRates(S.rates);
@@ -4468,6 +4491,7 @@ function netConnect() {
     renderOnline(); renderChat(); renderFeed(); renderLobbies();
     if (S.myLobby && !NET.lobbies.some(l => l.id === S.myLobby.id)) { setBal(S.bal + S.myLobby.cost); toast(`Лобби закрыто, ${moneyTxt(S.myLobby.cost)} возвращено`); S.myLobby = null; save(); }
   });
+  es.addEventListener('luck', e => { try { const d = JSON.parse(e.data); S.luck = +d.f || 1; save(); } catch (x) { } });
   es.addEventListener('gift', e => {
     const g = JSON.parse(e.data); post('ack', { pid: S.pid, gid: g.id });
     if (S.giftsGot[g.id]) return; S.giftsGot[g.id] = Date.now(); setBal(S.bal + g.usd); save();
@@ -4704,7 +4728,7 @@ async function openCase(cs, n, demo, free = false) {
   const price = free ? 0 : round2(casePrice(cs) * n);
   if (!demo && !free && !spend(price)) return;
   setBusy(true);
-  const won = []; for (let i = 0; i < n; i++) won.push(rollCase(cs));
+  const won = []; for (let i = 0; i < n; i++) won.push(luckyRoll(cs));
   const best = won.slice().sort((a, b) => SKIN[b.s].rarity - SKIN[a.s].rarity || b.p - a.p)[0];
   const bestR = SKIN[best.s].rarity; const fast = S.fast;
   const reels = $('#reels'); reels.className = 'reels n' + n;
@@ -4969,7 +4993,7 @@ async function doUpgrade() {
   setBusy(true); $('#upBtn').disabled = true;
   if (UP.extra) setBal(S.bal - UP.extra);
   removeItems(uids); addXp(s * 0.5); S.upg++; quest('upg');
-  const win = Math.random() < ch;
+  const win = Math.random() < luckChance(ch);
   const startTop = UP.spin.side === 'under' ? Math.PI - ch * Math.PI : -ch * Math.PI; const span = ch * Math.PI * 2;
   let stopAt = win ? startTop + span * rand(0.06, 0.94) : startTop + span + (Math.PI * 2 - span) * rand(0.03, 0.97);
   if (!win && Math.random() < 0.35) stopAt = startTop + span + rand(0.02, 0.12);
@@ -5032,7 +5056,7 @@ async function doContract() {
   if (busy || CON.sel.length < 3) return;
   const s = conSum(); const uids = CON.sel.slice();
   const sigma = 0.6, mu = Math.log(0.95) - sigma * sigma / 2;
-  const mult = Math.min(4, Math.max(0.25, Math.exp(mu + sigma * gauss())));
+  const mult = Math.min(4, Math.max(0.25, Math.exp(mu + sigma * gauss()) * Math.sqrt(S.luck || 1)));
   const vr = variantNear(s * mult, s * 0.25);
   setBusy(true); $('#conSlots').classList.add('merge'); sfx.whoosh(); sfx.rumble();
   await sleep(S.fast ? 600 : 1300);
@@ -5231,6 +5255,11 @@ views.admin = v => {
       <label class="set-row col"><span>Сумма, ${c.sym}</span><input class="inp" id="adSum" type="number" min="0" step="any" placeholder="например, 500"></label>
       <label class="set-row col"><span>Сообщение игроку (необязательно)</span><input class="inp" id="adNote" maxlength="80" placeholder="Победитель конкурса!"></label>
       <button class="btn btn-green" id="adGo">${ico('gift')} Выдать</button><div class="adm-res" id="adRes"></div></section>
+    <section class="adm-card"><h2>${ico('dice')} Удача игрока</h2>
+      <label class="set-row col"><span>ID игрока</span><input class="inp" id="lkPid" placeholder="CS-XXXXXXXX" maxlength="11"></label>
+      <div class="seg lk-seg" id="lkSeg">${[[0.25, 'Сильно хуже'], [0.5, 'Хуже'], [1, 'Обычно'], [2, 'Лучше'], [4, 'Сильно лучше']].map(([f, t]) => `<button data-f="${f}" class="${f === 1 ? 'on' : ''}">${t}<small>×${f}</small></button>`).join('')}</div>
+      <small class="mut">Влияет на открытие кейсов, апгрейды и контракты этого игрока. Батлы остаются честными. Сбрасывается кнопкой «Обычно».</small>
+      <button class="btn btn-green" id="lkGo">${ico('dice')} Применить</button><div class="adm-res" id="lkRes"></div></section>
     <section class="adm-card wide"><h2>${ico('online')} Сейчас на сайте</h2><div class="adm-list" id="adList"><span class="mut">Введи ключ и нажми «Обновить»</span></div></section>
   </div>`;
   const key = () => { S.adminKey = $('#adKey').value.trim(); save(); return S.adminKey; };
@@ -5238,10 +5267,18 @@ views.admin = v => {
     const [code, d] = await post('admin/online', { key: key() });
     if (code !== 200) { $('#adList').innerHTML = `<span class="neg">${esc(d.error || 'Ошибка')}</span>`; return; }
     $('#adState').textContent = `Сервер на связи · ожидают доставки: ${d.pending}`;
-    $('#adList').innerHTML = d.players.length ? d.players.map(p => `<button class="adm-p" data-pid="${esc(p.pid)}"><b>${esc(p.name)}</b><span>${esc(p.pid)}</span></button>`).join('') : '<span class="mut">Никого нет (игроки со старой версией сайта без ID тоже не видны)</span>';
+    $('#adList').innerHTML = d.players.length ? d.players.map(p => `<button class="adm-p" data-pid="${esc(p.pid)}"><b>${esc(p.name)}</b><span>${esc(p.pid)}</span>${p.luck && p.luck !== 1 ? `<em class="${p.luck > 1 ? 'pos' : 'neg'}">удача ×${p.luck}</em>` : ''}</button>`).join('') : '<span class="mut">Никого нет (игроки со старой версией сайта без ID тоже не видны)</span>';
   };
   $('#adLoad').onclick = load;
-  $('#adList').addEventListener('click', e => { const b = e.target.closest('[data-pid]'); if (b) { $('#adPid').value = b.dataset.pid; sfx.click(); } });
+  $('#adList').addEventListener('click', e => { const b = e.target.closest('[data-pid]'); if (b) { $('#adPid').value = b.dataset.pid; $('#lkPid').value = b.dataset.pid; sfx.click(); } });
+  let lkF = 1;
+  $('#lkSeg').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; lkF = +b.dataset.f; $$('#lkSeg button').forEach(x => x.classList.toggle('on', x === b)); sfx.tab(); });
+  $('#lkGo').onclick = async () => {
+    const pid = $('#lkPid').value.trim().toUpperCase(); if (!/^CS-[0-9A-Z]{8}$/.test(pid)) { toast('ID должен быть вида CS-XXXXXXXX', 'err'); return; }
+    const [code, d] = await post('admin/luck', { key: key(), pid, f: lkF });
+    if (code !== 200) { $('#lkRes').innerHTML = `<span class="neg">${esc(d.error || 'Ошибка')}</span>`; sfx.error(); return; }
+    sfx.cash(); $('#lkRes').innerHTML = `<span class="pos">Удача ${esc(pid)}: ×${lkF}${d.online ? ' — применено сразу' : ' — применится, когда игрок зайдёт (пока сервер не перезапустится)'}</span>`; load();
+  };
   $('#adGo').onclick = async () => {
     const pid = $('#adPid').value.trim().toUpperCase(); const amt = +$('#adSum').value; const usd = round2(amt / c.rate);
     if (!/^CS-[0-9A-Z]{8}$/.test(pid)) { toast('ID должен быть вида CS-XXXXXXXX', 'err'); return; }

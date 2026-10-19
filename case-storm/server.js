@@ -19,6 +19,7 @@ const lastMsg = new Map();          // clientId -> ts (rate limit)
 const MODES = { '1v1': 2, '1v1v1': 3, '1v1v1v1': 4, '2v2': 4 };
 const ADMIN_KEY = process.env.ADMIN_KEY || '';
 const pending = new Map();          // pid -> [gift] (virtual balance gifts waiting for delivery)
+const luck = new Map();             // pid -> luck factor set by the admin (1 = normal)
 let badKeyAt = 0, badKeys = 0;
 const PID_RE = /^CS-[0-9A-Z]{8}$/;
 function keyOk(k) {
@@ -85,7 +86,7 @@ const api = {
     if (badKeys > 10 && Date.now() - badKeyAt < 60000) return badKey();
     if (!keyOk(b.key)) return badKey();
     const seen = new Map(); for (const c of clients.values()) if (c.pid) seen.set(c.pid, c.name || 'Игрок');
-    return [200, { players: [...seen].map(([pid, name]) => ({ pid, name })), pending: pending.size }];
+    return [200, { players: [...seen].map(([pid, name]) => ({ pid, name, luck: luck.get(pid) || 1 })), pending: pending.size }];
   },
   async 'admin/gift'(b) {
     if (badKeys > 10 && Date.now() - badKeyAt < 60000) return badKey();
@@ -96,6 +97,16 @@ const api = {
     const g = { id: crypto.randomUUID(), usd, note, t: Date.now() };
     const list = pending.get(pid) || []; list.push(g); pending.set(pid, list.slice(-20));
     const online = sendToPid(pid, 'gift', g);
+    return [200, { ok: 1, online: online > 0 }];
+  },
+  async 'admin/luck'(b) {
+    if (badKeys > 10 && Date.now() - badKeyAt < 60000) return badKey();
+    if (!keyOk(b.key)) return badKey();
+    const pid = clean(b.pid, 12).toUpperCase(); const f = Math.round((+b.f || 1) * 100) / 100;
+    if (!PID_RE.test(pid)) return [400, { error: 'ID должен быть вида CS-XXXXXXXX' }];
+    if (!(f >= 0.1 && f <= 10)) return [400, { error: 'Множитель от 0.1 до 10' }];
+    if (f === 1) luck.delete(pid); else luck.set(pid, f);
+    const online = sendToPid(pid, 'luck', { f, id: crypto.randomUUID() });
     return [200, { ok: 1, online: online > 0 }];
   },
   async leave(b) {
@@ -134,6 +145,7 @@ const server = http.createServer(async (req, res) => {
     clients.set(res, c);
     send(res, 'hello', { online: online(), chat: chat.slice(-40), feed: feed.slice(0, 30), top, lobbies: lobbyList() });
     for (const g of (pending.get(c.pid) || [])) send(res, 'gift', g);
+    if (luck.has(c.pid)) send(res, 'luck', { f: luck.get(c.pid) });
     broadcast('online', online());
     req.on('close', () => {
       clients.delete(res);
