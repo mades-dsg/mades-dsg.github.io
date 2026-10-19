@@ -151,8 +151,8 @@ const server = http.createServer(async (req, res) => {
     const fn = api[url.pathname.slice(5)]; if (!fn) return json(res, 404, { error: 'no' });
     const [code, out] = await fn(await body(req)); return json(res, code, out);
   }
-  const st = url.pathname.match(/^\/cases\/([a-z0-9_-]+)\.webp$/);
-  if (st) { const f = path.join(ROOT, 'cases', st[1] + '.webp'); if (fs.existsSync(f)) { res.writeHead(200, { 'Content-Type': 'image/webp', 'Cache-Control': 'public, max-age=86400', 'Access-Control-Allow-Origin': '*' }); return fs.createReadStream(f).pipe(res); } }
+  const st = url.pathname.match(/^\/(cases|assets)\/([a-z0-9_-]+)\.(webp|png|ico)$/);
+  if (st) { const f = path.join(ROOT, st[1], st[2] + '.' + st[3]); if (fs.existsSync(f)) { res.writeHead(200, { 'Content-Type': { webp: 'image/webp', png: 'image/png', ico: 'image/x-icon' }[st[3]], 'Cache-Control': 'public, max-age=86400', 'Access-Control-Allow-Origin': '*' }); return fs.createReadStream(f).pipe(res); } }
   if (url.pathname === '/' || url.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); return fs.createReadStream(PAGE).pipe(res);
   }

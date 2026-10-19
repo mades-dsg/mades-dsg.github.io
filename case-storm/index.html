@@ -877,12 +877,36 @@ h1,h2,h3{font-family:var(--fc);font-weight:600;letter-spacing:.3px}
 /* maps clearly visible like on caser: lighter blur and overlay */
 .bgfx.m1,.bgfx.m2{filter:blur(7px) saturate(.9) brightness(.82);transform:scale(1.06)}
 .bgfx.m1::after,.bgfx.m2::after{background:linear-gradient(180deg,rgba(30,34,40,.18),rgba(30,34,40,.42) 60%,rgba(24,27,32,.72))}
+/* ===== v6: owner logo ===== */
+.logo .logo-mk,.logo .logo-word{display:none}
+.logo-img{height:30px;width:auto;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.logo-ico{display:none;width:32px;height:32px}
+.logo:hover .logo-img{filter:drop-shadow(0 0 10px rgba(240,184,74,.35)) drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.up-logo .logo-img{height:34px}.up-logo .logo-ico{display:none!important}
+#loader .ld-logo .logo-big{width:min(420px,78vw);height:auto;animation:float 2.6s ease-in-out infinite;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6))}
+@media (max-width:1200px){.logo-img{height:24px}}
+@media (max-width:600px){.top .logo .logo-img{display:none}.top .logo .logo-ico{display:block}}
+/* ===== v6: realistic 2D opening (no explosion) ===== */
+.case-2d{--k:1;perspective:900px}
+.case-2d .c2-body,.case-2d .c2-lid{position:relative;z-index:1;width:100%;display:block;filter:drop-shadow(0 22px 22px rgba(0,0,0,.6))}
+.case-2d .c2-body{clip-path:inset(36% 0 0 0)}
+.case-2d .c2-lid{position:absolute;left:0;top:0;z-index:2;clip-path:inset(0 0 64% 0);transform-origin:50% 36%;transition:transform calc(.8s*var(--k)) cubic-bezier(.3,.7,.25,1),opacity calc(.7s*var(--k)) ease calc(.15s*var(--k))}
+.case-2d .c2-glow{position:absolute;left:12%;right:12%;top:28%;height:18%;z-index:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,190,.95),rgba(255,210,120,.45) 45%,rgba(255,200,100,0) 75%);opacity:0;filter:blur(6px);transition:opacity calc(.6s*var(--k)) ease,transform calc(.9s*var(--k)) ease}
+.case-2d.arm{animation:none;transform:translate(-50%,-54%) scale(1.05);transition:transform calc(.3s*var(--k)) ease-out}
+.case-2d.rattle{animation:rattle calc(.46s*var(--k)) linear}
+@keyframes rattle{10%,50%,90%{transform:translate(calc(-50% - 2px),-54%) scale(1.05) rotate(-.6deg)}30%,70%{transform:translate(calc(-50% + 2px),-54%) scale(1.05) rotate(.6deg)}}
+.case-2d.open .c2-lid{transform:translateY(-34%) rotateX(38deg) rotateZ(-3deg);opacity:0}
+.case-2d.open .c2-glow{opacity:1;transform:translateY(-40%) scaleY(2.2)}
+.case-2d.gone{opacity:0;transform:translate(-50%,-40%) scale(.92);transition:opacity calc(.38s*var(--k)) ease,transform calc(.38s*var(--k)) ease}
+.flash{display:none!important}
+/* ===== v6: Train background a little brighter so it reads ===== */
+html{background:#2f343b}body{background:transparent!important}
 
 </style>
 </head>
 <body>
 <div id="loader">
-  <div class="ld-logo">CASE<b>STORM</b></div>
+  <div class="ld-logo"><img class="logo-big" src="assets/logo_main.webp" alt="CASE STORM"></div>
   <div class="ld-bar"><i id="ldBar"></i></div>
   <div class="ld-txt" id="ldTxt">Загрузка…</div>
 </div>
@@ -3599,35 +3623,18 @@ function ico(name, cls = '') { return `<svg class="ico ${cls}" viewBox="0 0 24 2
 return{get ico(){return ico;}};})();
 
 const __m_logo=(function(){
-// CASE STORM logo: a tilted rifle cartridge with a lightning bolt stamped into the brass.
-const LOGO_MARK = `<svg class="logo-svg" viewBox="0 0 64 64" aria-hidden="true">
-<defs>
-  <linearGradient id="lgBrass" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#7a4f12"/><stop offset=".28" stop-color="#f7d27a"/><stop offset=".5" stop-color="#ffefb8"/><stop offset=".72" stop-color="#d9a33b"/><stop offset="1" stop-color="#6e4510"/></linearGradient>
-  <linearGradient id="lgTip" x1="0" x2="1"><stop offset="0" stop-color="#6b2a12"/><stop offset=".35" stop-color="#ff9a5a"/><stop offset=".55" stop-color="#ffd2ae"/><stop offset=".8" stop-color="#c25424"/><stop offset="1" stop-color="#5a200c"/></linearGradient>
-  <linearGradient id="lgRim" x1="0" x2="1"><stop offset="0" stop-color="#5a3a0c"/><stop offset=".45" stop-color="#e8bb5c"/><stop offset="1" stop-color="#4d300a"/></linearGradient>
-  <filter id="lgGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<g transform="rotate(38 32 32)">
-  <ellipse cx="32" cy="60" rx="9" ry="2.2" fill="rgba(0,0,0,.35)"/>
-  <path d="M26.5 22 C26.5 10 30 3 32 1.5 C34 3 37.5 10 37.5 22 Z" fill="url(#lgTip)"/>
-  <path d="M30.6 6 C29.7 10 29.4 15 29.4 21" stroke="rgba(255,255,255,.55)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-  <path d="M26.5 22 h11 l1.6 4 v27 h-14.2 v-27 z" fill="url(#lgBrass)"/>
-  <rect x="24.2" y="53" width="15.6" height="2.4" fill="#3b2608"/>
-  <rect x="23.4" y="55.4" width="17.2" height="4.6" rx=".8" fill="url(#lgRim)"/>
-  <rect x="26.5" y="21.4" width="11" height="1.6" fill="#5a3a0c" opacity=".6"/>
-  <path d="M33.6 29 l-5.2 9.4 h3.6 l-1.8 8.6 l6.4-11 h-3.8 l2.2-7 z" fill="#2fd1b0" filter="url(#lgGlow)"/>
-</g>
-</svg>`;
-const LOGO_HTML = `<span class="logo-mk">${LOGO_MARK}</span><span class="logo-word"><b>CASE</b><i>STORM</i></span>`;
+// CASE STORM logo: artwork by the site owner (assets/), cartridge mark + metallic wordmark.
+const LOGO_MARK = '<img class="logo-ico" src="assets/icon_64.png" alt="" width="32" height="32">';
+const LOGO_HTML = '<img class="logo-img" src="assets/logo_h.webp" alt="CASE STORM" height="30"><img class="logo-ico" src="assets/icon_64.png" alt="CASE STORM" width="32" height="32">';
+const LOGO_BIG = '<img class="logo-big" src="assets/logo_main.webp" alt="CASE STORM">';
 function setFavicon() {
   try {
-    const l = document.createElement('link'); l.rel = 'icon'; l.type = 'image/svg+xml';
-    l.href = 'data:image/svg+xml,' + encodeURIComponent(LOGO_MARK.replace('class="logo-svg" ', 'xmlns="http://www.w3.org/2000/svg" '));
-    document.head.appendChild(l);
+    const add = (rel, href, sizes) => { const l = document.createElement('link'); l.rel = rel; l.href = href; if (sizes) l.sizes = sizes; document.head.appendChild(l); };
+    add('icon', 'assets/favicon.ico'); add('icon', 'assets/icon_32.png', '32x32'); add('apple-touch-icon', 'assets/icon_192.png', '192x192');
   } catch (e) { }
 }
 
-return{get LOGO_MARK(){return LOGO_MARK;},get LOGO_HTML(){return LOGO_HTML;},get setFavicon(){return setFavicon;}};})();
+return{get LOGO_MARK(){return LOGO_MARK;},get LOGO_HTML(){return LOGO_HTML;},get LOGO_BIG(){return LOGO_BIG;},get setFavicon(){return setFavicon;}};})();
 
 const __m_case3d=(function(){
 // ===== CASE STORM — 3D cases (Three.js) =====
@@ -4042,7 +4049,7 @@ class CaseStage {
   reveal(colorHex) {
     const c = new THREE.Color(colorHex); this.openColor = c; this.beamMat.color.copy(c); this.inLight.color.copy(c); this.pMat.color.copy(c);
     if (this.model) this.model.userData.innerMat.color.copy(c).multiplyScalar(1.4);
-    this._burst(1.6);
+    // no burst: calm, realistic reveal
   }
   _burst(power = 1) {
     for (let i = 0; i < this.N; i++) {
@@ -4087,7 +4094,7 @@ class CaseStage {
           const k = Math.min(1, (this.openT - T1) / (T2 - T1)); const e = 1 - Math.pow(1 - k, 3); const back = e + Math.sin(k * Math.PI) * 0.08;
           u.lidPivot.rotation.x = -back * 1.95;
           this.beamMat.opacity = e * 0.55; this.inLight.intensity = 6 + e * 26; u.innerMat.color.copy(this.openColor).multiplyScalar(0.3 + e * 1.1);
-          if (!this._burstDone) { this._burstDone = true; this._burst(1); }
+          this._burstDone = true;
           if (k >= 1) { this.state = 'open'; this._burstDone = false; this._openRes && this._openRes(); this._openRes = null; }
         }
       } else if (this.state === 'open') {
@@ -4229,7 +4236,7 @@ const { sfx, setMuted, setVolume } = __m_audio;
 const { iconURL } = __m_art;
 const { ico } = __m_icons;
 const { PRICE_DATE } = __m_prices;
-const { LOGO_HTML, LOGO_MARK, setFavicon } = __m_logo;
+const { LOGO_HTML, LOGO_MARK, LOGO_BIG, setFavicon } = __m_logo;
 
 window.__SKIN = SKIN;
 window.addEventListener('error', e => { try { const t = document.getElementById('toasts'); if (t && e.message) toast('Ошибка: ' + esc(e.message).slice(0, 160), 'err'); } catch (x) { } });
@@ -4614,7 +4621,7 @@ views.case = (v, id) => {
   <div class="case-top"><button class="btn btn-dark btn-sm" data-back>${ico('back')} Все кейсы</button><div class="odds">${Object.entries(groups).sort((a, b) => b[0] - a[0]).map(([r, p]) => `<span style="--rc:${rc(r)}"><i></i>${pct(p)}</span>`).join('')}</div></div>
   <div class="stage-wrap ${cs.official ? 'is-off' : 'is-own'}" id="stageWrap" style="--ac:${cs.accent || '#c9a76b'}">
     <div class="stage-bg"></div>
-    <div class="stage" id="stage">${cs.official || cs.art ? `<div class="case-2d${cs.art ? ' art' : ''}" id="case2d"><img src="${caseImg(cs)}" alt=""><div class="case-shadow"></div></div>` : ''}</div>
+    <div class="stage" id="stage">${cs.official || cs.art ? `<div class="case-2d${cs.art ? ' art' : ''}" id="case2d"><i class="c2-glow"></i><img class="c2-body" src="${caseImg(cs)}" alt=""><img class="c2-lid" src="${caseImg(cs)}" alt=""><div class="case-shadow"></div></div>` : ''}</div>
     <div class="flash" id="flash"></div>
     <div class="reels" id="reels"></div>
     <div class="stage-line"><span>${cs.official ? 'Официальный кейс CS2' : 'Авторский кейс'}</span></div>
@@ -4677,8 +4684,15 @@ async function openCase(cs, n, demo, free = false) {
   const built = won.map(w => buildReel(cs, w));
   reels.innerHTML = built.map(b => reelHTML(b.cards)).join('');
   sfx.latch(); sfx.rumble();
-  if (cs.official || cs.art) { const c2 = $('#case2d'); c2.classList.add('shake'); await sleep(fast ? 350 : 800); sfx.open(); $('#flash').classList.add('go'); c2.classList.add('gone'); await sleep(250); }
-  else { stage && stage.open('#ffffff', fast).then(() => sfx.open()); await sleep(fast ? 500 : 1250); $('#flash').classList.add('go'); await sleep(200); }
+  if (cs.official || cs.art) {
+    // realistic open: lift, unlatch, small rattle, lid slides up and away, warm light from inside, case drops out
+    const c2 = $('#case2d'); const k = fast ? 0.45 : 1; c2.style.setProperty('--k', k);
+    c2.classList.add('arm'); await sleep(320 * k);
+    c2.classList.add('rattle'); await sleep(460 * k);
+    sfx.open(); c2.classList.add('open'); await sleep(820 * k);
+    c2.classList.add('gone'); await sleep(380 * k);
+  }
+  else { stage && stage.open('#ffffff', fast).then(() => sfx.open()); await sleep(fast ? 500 : 1250); }
   $('#stageWrap').classList.add('rolling'); reels.classList.add('show'); sfx.whoosh();
   let lt = 0; const tick = k => { const t = performance.now(); if (t - lt > 45) { lt = t; sfx.tick(1 + k * 0.4); } };
   const dur = fast ? 2300 : 6300;
@@ -4738,7 +4752,7 @@ function afterDrop() {
   const r = $('#reels'); if (r) r.classList.remove('show');
   const w = $('#stageWrap'); if (w) w.classList.remove('rolling');
   const f = $('#flash'); if (f) f.classList.remove('go');
-  const c2 = $('#case2d'); if (c2) c2.classList.remove('shake', 'gone');
+  const c2 = $('#case2d'); if (c2) c2.classList.remove('shake', 'gone', 'arm', 'rattle', 'open');
   stage && stage.reset();
 }
 function skinPreview(sk) {
@@ -5265,16 +5279,16 @@ function makeBackground() {
   // gravel noise + haze
   const img = g.getImageData(0, 0, W, H); for (let i = 0; i < img.data.length; i += 4) { const n = (rnd() - 0.5) * 22; img.data[i] += n; img.data[i + 1] += n; img.data[i + 2] += n; } g.putImageData(img, 0, 0);
   const haze = g.createLinearGradient(0, 0, 0, H); haze.addColorStop(0, 'rgba(200,205,205,.25)'); haze.addColorStop(0.6, 'rgba(200,205,205,0)'); g.fillStyle = haze; g.fillRect(0, 0, W, H);
-  document.documentElement.style.setProperty('--bgimg', `url(${c.toDataURL('image/jpeg', 0.8)})`);
+  document.documentElement.style.setProperty('--bgimg', `url(assets/train.webp), url(${c.toDataURL('image/jpeg', 0.8)})`);
 }
 // blurred CS2 map screenshots (official Steam store images) behind every page, crossfading on navigation
 const MAP_CDN = 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/';
 const MAPS = ['ss_2254a50f27951fb9028bc00b93a7f2ed7aac1e13', 'ss_54b9c26b028c84d5f8a5316f31ae6203953ed84d', 'ss_1b3b5fd437939a7ed00a2155269e78994cb998d3', 'ss_bb2af3e83ac0385ff2055f2ab9697cdd83e351b7', 'ss_fb8e5e2ae29ce64e2898315c66b5db08989e8f91', 'ss_0db84c628a798e38ca57d69abda119bee1358008', 'ss_18e9ea2715f0407ee05e206073927a648db60d73', 'ss_13bb35638c0267759276f511ee97064773b37a51'];
-const PAGE_MAP = { cases: 0, battles: 5, battle: 5, upgrade: 3, contracts: 6, rewards: 2, inventory: 4, admin: 7 };
+const PAGE_MAP = { cases: 'train', battles: 'train', battle: 'train', upgrade: 'train', contracts: 6, rewards: 2, inventory: 4, admin: 7 };
 let bgCur = -1, bgFlip = false, bgShown = false;
 function setBg(name, arg) {
   const i = name === 'case' ? hashStr(String(arg)) % MAPS.length : (PAGE_MAP[name] ?? 0); if (i === bgCur) return; bgCur = i;
-  const url = MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image(); let tried = false;
+  const url = i === 'train' ? 'assets/train.webp' : MAP_CDN + MAPS[i] + '.600x338.jpg'; const img = new Image(); let tried = false;
   img.onerror = () => { if (!tried) { tried = true; img.src = url.replace('shared.fastly.', 'shared.akamai.'); } };
   img.onload = () => { if (bgCur !== i) return; bgFlip = !bgFlip; const on = $(bgFlip ? '.bgfx.m1' : '.bgfx.m2'), off = $(bgFlip ? '.bgfx.m2' : '.bgfx.m1'); if (!on) return; on.style.backgroundImage = `url(${img.src})`; if (!bgShown) { on.style.transition = 'none'; requestAnimationFrame(() => on.style.transition = ''); bgShown = true; } on.classList.add('on'); off.classList.remove('on'); };
   img.src = url;
@@ -5339,7 +5353,7 @@ function shell() {
 
 async function boot() {
   const ld = $('#loader'); const bar = $('#ldBar'); const st = $('#ldTxt');
-  setFavicon(); const ll = $('.ld-logo'); if (ll) ll.innerHTML = LOGO_HTML;
+  setFavicon(); const ll = $('.ld-logo'); if (ll) ll.innerHTML = LOGO_BIG;
   const setP = (p, t) => { bar.style.width = (p * 100).toFixed(0) + '%'; if (t) st.textContent = t; };
   makeBackground(); setP(0.2, 'Собираем 3D-кейсы…');
   try { await Promise.race([Promise.all([document.fonts.load('40px "Black Ops One"'), document.fonts.load('20px "Oswald"'), document.fonts.load('14px "Roboto"')]), sleep(2500)]); } catch (e) { }
